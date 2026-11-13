@@ -6,6 +6,14 @@ type HeroDeviceArtworkProps = {
 export function HeroDeviceArtwork({ dark, rtl }: HeroDeviceArtworkProps) {
   return (
     <div className={`hero-device-stage contact-device-art ${dark ? 'is-dark' : ''}`} role="img" aria-label={rtl ? 'تصميم توضيحي لصفحة تواصل على حاسوب وهاتف' : 'Contact page preview on a laptop and phone'}>
+      <svg className="contact-art-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path className="signal-track" d="M3 21H16L22 27H34" />
+        <path className="signal-pulse signal-pulse-one" d="M3 21H16L22 27H34" />
+        <path className="signal-track" d="M97 76H84L78 70H65" />
+        <path className="signal-pulse signal-pulse-two" d="M97 76H84L78 70H65" />
+        <path className="signal-track" d="M5 84H17L23 78H31" />
+        <path className="signal-pulse signal-pulse-three" d="M5 84H17L23 78H31" />
+      </svg>
       <div className="contact-laptop">
         <div className="contact-laptop-screen">
           <div className="contact-browser-bar"><span/><span/><span/><i>{rtl ? 'speracode.com/contact' : 'speracode.com/contact'}</i></div>

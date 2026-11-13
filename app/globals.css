@@ -297,9 +297,15 @@ html[lang="ar"] body{line-height:1.9}.portfolio-image img{width:100%;height:100%
 @media(prefers-reduced-motion:reduce){.contact-device-art,.contact-laptop,.contact-phone{animation:none}}
 .contact-hero::before{display:none}
 
-.home-hero-art{position:relative;isolation:isolate;width:100%;min-width:0;aspect-ratio:1.42;overflow:hidden;border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:28px;background:var(--surface);box-shadow:var(--shadow)}
-.home-hero-image{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;animation:home-hero-arrive .8s cubic-bezier(.2,.75,.25,1) both}
-@keyframes home-hero-arrive{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:scale(1)}}
+.home-hero-art{position:relative;isolation:isolate;width:100%;min-width:0;aspect-ratio:1.42;overflow:hidden;border-radius:28px;background:var(--surface)}
+.home-hero-image{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;animation:home-hero-motion 16s ease-in-out infinite alternate}
+.home-hero-lines,.contact-art-lines{position:absolute;inset:0;z-index:4;width:100%;height:100%;overflow:visible;pointer-events:none}
+.home-hero-lines .signal-track,.contact-art-lines .signal-track{fill:none;stroke:color-mix(in srgb,var(--cyan) 45%,transparent);stroke-width:.34;stroke-linecap:round;stroke-linejoin:round;opacity:.2}
+.home-hero-lines .signal-pulse,.contact-art-lines .signal-pulse{fill:none;stroke:var(--cyan);stroke-width:.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:5 160;stroke-dashoffset:0;filter:drop-shadow(0 0 1.4px color-mix(in srgb,var(--cyan) 70%,transparent));animation:signal-line-flow 6s linear infinite}
+.home-hero-lines .signal-pulse-two,.contact-art-lines .signal-pulse-two{animation-delay:-2s;stroke:var(--blue)}
+.home-hero-lines .signal-pulse-three,.contact-art-lines .signal-pulse-three{animation-delay:-4s}
+@keyframes signal-line-flow{to{stroke-dashoffset:-165}}
+@keyframes home-hero-motion{from{transform:scale(1)}to{transform:scale(1.035)}}
 .contact-device-art.is-dark .contact-laptop-screen{border-color:#526584;background:linear-gradient(135deg,#17243b,#0c1425)}
 .contact-device-art.is-dark .contact-browser-bar{color:#aab8d0}
 .contact-device-art.is-dark .contact-browser-bar>span{background:#71819d}
@@ -318,5 +324,7 @@ html[lang="ar"] body{line-height:1.9}.portfolio-image img{width:100%;height:100%
 .contact-device-art.is-dark .phone-status span,.contact-device-art.is-dark .contact-phone-screen>p{color:#aab8d0}
 .contact-device-art.is-dark .phone-message{background:#172946;color:#c9dcff}
 .contact-device-art.is-dark .phone-send{border-color:#2a3b59;color:#9aa9c3}
+.contact-device-art{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+.contact-hero-visual .hero-art::before,.contact-hero-visual .hero-art::after{display:none}
 @media(max-width:760px){.home-hero-art{width:100%;aspect-ratio:1.38;border-radius:22px}}
-@media(prefers-reduced-motion:reduce){.home-hero-image{animation:none}}
+@media(prefers-reduced-motion:reduce){.home-hero-image,.home-hero-lines .signal-pulse,.contact-art-lines .signal-pulse{animation:none}}
