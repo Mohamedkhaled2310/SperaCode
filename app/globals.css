@@ -73,8 +73,17 @@ html[lang="ar"] body{line-height:1.9}html[lang="ar"] h1,html[lang="ar"] h2{lette
 .contact-nav-actions{display:flex;align-items:center;gap:10px}
 .contact-site[dir="ltr"] .locale-button{font-family:'Cairo',sans-serif;font-weight:700}
 .hero-glow,.art-orbit{display:none!important}
-.hero-art{background:transparent}
-.hero-image{width:min(100%,590px);filter:none}
+.hero-art{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto auto;align-items:center;gap:12px 10px;min-width:0;min-height:0;overflow:hidden;background:transparent;animation:none!important;transform:none!important}
+.hero-image{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;grid-column:1/-1;grid-row:2;justify-self:center;display:block;width:min(100%,380px);max-width:100%;height:auto;z-index:1;object-fit:contain;margin-inline:auto;transform:none!important;filter:none!important;mix-blend-mode:normal!important;animation:none!important;will-change:auto;opacity:1!important}
+.art-label,.art-status{position:relative;inset:auto!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;opacity:1!important;animation:none!important}
+.art-label{width:max-content;max-width:100%;min-width:0;padding:9px 10px;border-color:var(--border);background:var(--bg);box-shadow:var(--shadow);color:var(--muted)}
+.label-menu{grid-column:1;grid-row:1;justify-self:start}
+.label-ai{grid-column:2;grid-row:1;justify-self:end}
+.art-label b{color:var(--ink)}
+.art-status{grid-column:1/-1;grid-row:3;justify-self:center;padding:5px 8px;border-radius:8px;background:var(--bg);color:var(--ink)}
+.qr-chip{background:var(--bg);border-color:var(--border);color:var(--ink);backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.locale-button{width:auto;min-width:54px;padding-inline:8px;font-family:'Cairo',sans-serif;white-space:nowrap}
+@media(max-width:760px){.hero-art{gap:10px 8px;margin-block-start:12px}.hero-image{width:min(100%,340px)}.art-label{padding:8px}.art-label svg{width:20px;height:20px}.art-label b{font-size:8px}.art-status{font-size:10px}}
 .section-heading h2,.tech-inner h2,.home-contact-cta h2,.portfolio-intro h2,.portfolio-cta-card h2,.projects-hero h1,.contact-site h1,.contact-site h2{font-weight:800}
 .qr-panel{background:var(--surface);color:var(--ink);border:1px solid var(--border);box-shadow:var(--shadow)}
 .qr-panel:before,.qr-panel:after{display:none}
