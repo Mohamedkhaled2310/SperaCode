@@ -3,9 +3,9 @@ import ProjectsGallery from './projects-gallery'
 
 export const metadata: Metadata = {
   title: 'أعمالنا ومشاريعنا',
-  description: 'استكشف نماذج أعمال SperaCode في المواقع الإلكترونية وتطبيقات الجوال والذكاء الاصطناعي والمنيو الرقمي.',
+  description: 'استكشف مشاريع SperaCode في المواقع الإلكترونية والمنصات الرقمية وأنظمة الأعمال، مع روابط مباشرة إلى المواقع والديموهات.',
   alternates: { canonical: '/projects' },
-  openGraph: { title: 'أعمال SperaCode', description: 'مشاريع رقمية وتجارب تقنية من SperaCode.', url: 'https://speracode.com/projects', type: 'website' },
+  openGraph: { title: 'أعمال SperaCode', description: 'مجموعة من المواقع والمنصات وأنظمة الأعمال التي يمكنك استكشافها عبر روابط مباشرة.', url: 'https://speracode.com/projects', type: 'website' },
 }
 
 export default function ProjectsPage() {
