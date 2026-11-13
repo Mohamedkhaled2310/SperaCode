@@ -42,3 +42,24 @@ button { color:inherit; font:inherit; }
 @media(max-width:420px){.container{width:calc(100% - 30px)}.hero-actions .button{padding-inline:14px;font-size:12px}.hero-art{min-height:270px}.services-grid{grid-template-columns:1fr}.service-card{min-height:0}.service-card p{max-width:320px}.reasons-grid{grid-template-columns:1fr}.reason-card{min-height:160px}.footer-grid{gap:24px 12px}.brand-name{font-size:19px}}
 html[lang="ar"] body{line-height:1.9}html[lang="ar"] h1,html[lang="ar"] h2{letter-spacing:0}.dark .service-card,.dark .reason-card,.dark .project-card{box-shadow:none}.dark .service-card:hover,.dark .project-card:hover{box-shadow:0 0 0 1px var(--border),0 20px 60px -20px #2865eb66}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Keep the QR feature section in the active theme instead of forcing a dark panel in light mode. */
+.site:not(.theme-dark) .qr-panel{background:linear-gradient(125deg,#f5f8ff,#eaf2ff 62%,#e4f7fc);color:#0a1120;box-shadow:0 24px 70px -44px rgba(40,101,235,.45)}
+.site:not(.theme-dark) .qr-panel:before{opacity:.28;background-image:radial-gradient(#2865eb 1px,transparent 1px)}
+.site:not(.theme-dark) .qr-panel .eyebrow-light{border-color:#2865eb24;background:#fff9;color:#52617b}
+.site:not(.theme-dark) .qr-copy>p,.site:not(.theme-dark) .benefit-list li{color:#52617b}
+.site:not(.theme-dark) .benefit-list svg{color:#078da9}
+.site:not(.theme-dark) .button-ghost{border-color:#2865eb40;background:#fff8;color:#0a1120}
+.site.theme-dark .final-panel{background:linear-gradient(120deg,#1a45a6,#125b9a 55%,#087e91);box-shadow:0 24px 70px -45px rgba(34,201,232,.5)}
+.hero-art{animation:hero-art-enter .8s cubic-bezier(.16,1,.3,1) both}
+.hero-image{left:50%;inset-inline-start:auto;z-index:0;animation:float 8s .75s ease-in-out infinite;will-change:transform}
+.art-orbit{z-index:-1;animation:orbit-drift 22s linear infinite}
+.orbit-two{animation-direction:reverse;animation-duration:28s}
+.art-label{animation:label-arrive .65s .25s cubic-bezier(.16,1,.3,1) both}
+.label-ai{animation-delay:.4s}
+@keyframes hero-art-enter{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes label-arrive{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes orbit-drift{from{rotate:0deg}to{rotate:360deg}}
+[data-reveal],.carousel-shell[data-reveal],.portfolio-card[data-reveal],.portfolio-intro[data-reveal],.portfolio-cta-card[data-reveal]{transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);transform:translateY(18px)}
+@media(max-width:760px){.hero-art{min-height:300px;margin-block-start:10px}.hero-image{width:min(100%,440px)}.art-orbit{inset:12% 8%}.label-menu{inset-inline-start:0}.label-ai{inset-inline-end:0}}
+@media(prefers-reduced-motion:reduce){.hero-art,.hero-image,.art-orbit,.art-label{animation:none!important;will-change:auto}}
