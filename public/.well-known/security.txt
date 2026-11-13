@@ -1,0 +1,3 @@
+Contact: mailto:info@speracode.com
+Canonical: https://speracode.com/.well-known/security.txt
+Preferred-Languages: en, ar
