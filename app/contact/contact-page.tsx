@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
-import { ArrowLeft, ArrowRight, ArrowUpLeft, ArrowUpRight, Check, Clock3, Mail, MessageCircle, Moon, Send, Sun } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpLeft, ArrowUpRight, Check, Clock3, Mail, Menu, MessageCircle, Moon, Send, Sun, X } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { PageHeroVisual } from '../page-hero-visual'
 
@@ -49,6 +49,7 @@ export default function ContactPage() {
   const [locale, setLocale] = useState<Locale>('ar')
   const [dark, setDark] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const t = content[locale]
   const rtl = locale === 'ar'
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(rtl ? 'مرحبًا SperaCode، أود مناقشة مشروع.' : 'Hello SperaCode, I would like to discuss a project.')}`
@@ -106,14 +107,24 @@ export default function ContactPage() {
           <SperaLogo />
           <nav aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
             <Link href="/">{t.home}</Link>
-            <Link href="/projects">{t.work}</Link>
             <Link href="/#services">{t.services}</Link>
+            <Link href="/projects">{t.work}</Link>
+            <Link href="/#about">{rtl ? 'من نحن' : 'About'}</Link>
+            <Link href="/contact">{t.page}</Link>
           </nav>
           <div className="contact-nav-actions">
             <button type="button" className="icon-button locale-button" onClick={toggleLocale} aria-label={t.language}>{rtl ? 'EN' : 'عربي'}</button>
             <button type="button" className="icon-button" onClick={toggleTheme} aria-label={dark ? t.themeLight : t.themeDark}>{dark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}</button>
+            <button type="button" className="icon-button contact-menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? (rtl ? 'إغلاق القائمة' : 'Close menu') : (rtl ? 'فتح القائمة' : 'Open menu')}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
           </div>
         </div>
+        {menuOpen && <nav className="mobile-nav contact-mobile-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
+          <Link onClick={() => setMenuOpen(false)} href="/">{t.home}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href="/#services">{t.services}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href="/projects">{t.work}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href="/#about">{rtl ? 'من نحن' : 'About'}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href="/contact">{t.page}<ArrowUpRight aria-hidden="true" /></Link>
+        </nav>}
       </header>
 
       <main id="contact-main" className="contact-main">
