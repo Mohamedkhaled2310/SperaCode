@@ -41,6 +41,7 @@ SperaCode is a software house delivering end-to-end digital solutions for busine
 - AI solutions: https://speracode.com/#services
 - UI/UX design: https://speracode.com/#services
 - Maintenance: https://speracode.com/#services
+- Portfolio: https://speracode.com/projects
 - Contact: https://speracode.com/#contact
 
 ## Portfolio status
