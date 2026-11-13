@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpLeft, ArrowUpRight, Check, Clock3, Mail, MessageCircle, Moon, Send, Sun } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
+import { PageHeroVisual } from '../page-hero-visual'
 
 type Locale = 'ar' | 'en'
 
@@ -121,14 +122,20 @@ export default function ContactPage() {
             <span className="contact-kicker"><span className="contact-kicker-mark" />{t.kicker}</span>
             <h1>{t.title}</h1>
             <p>{t.intro}</p>
+            <div className="contact-hero-actions">
+              <a className="button button-primary" href="#contact-form">{rtl ? 'احكِ لنا عن مشروعك' : 'Tell us about your project'}{rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}</a>
+              <a className="button button-secondary" href={whatsappUrl} target="_blank" rel="noreferrer">{rtl ? 'محادثة واتساب' : 'Chat on WhatsApp'}<MessageCircle aria-hidden="true" /></a>
+            </div>
+            <div className="contact-hero-trust" aria-label={rtl ? 'مميزات العمل معنا' : 'Why work with us'}>
+              <span><Check aria-hidden="true" />{rtl ? 'تسعير واضح' : 'Clear pricing'}</span>
+              <span><Check aria-hidden="true" />{rtl ? 'دعم بعد الإطلاق' : 'Post-launch support'}</span>
+              <span><Check aria-hidden="true" />{rtl ? 'التزام بالمواعيد' : 'On-time delivery'}</span>
+            </div>
           </div>
-          <div className="contact-hero-aside" aria-hidden="true">
-            <span>SPERACODE</span>
-            <span>01 — 03</span>
-          </div>
+          <div className="contact-hero-visual"><PageHeroVisual dark={dark} rtl={rtl} /></div>
         </section>
 
-        <section className="contact-workspace container" aria-label={t.page}>
+        <section id="contact-form" className="contact-workspace container" aria-label={t.page}>
           <div className="contact-form-card">
             <div className="contact-card-heading">
               <span className="contact-card-icon"><Send aria-hidden="true" /></span>
