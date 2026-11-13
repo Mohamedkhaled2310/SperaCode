@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: { default: 'SperaCode | Software House in Egypt', template: '%s | SperaCode' },
   description: 'SperaCode is a software house delivering websites, mobile applications, digital menus, AI solutions, and UI/UX design.',
   alternates: { canonical: '/', languages: { 'ar-EG': '/?lang=ar', en: '/?lang=en', 'x-default': '/' } },
-  openGraph: { title: 'SperaCode — Digital products that drive growth', description: 'Websites, apps, QR menus, AI, and design from concept to launch.', url: 'https://speracode.com', siteName: 'SperaCode', type: 'website', images: ['/hero-visual.png'] },
+  openGraph: { title: 'SperaCode — Digital products that drive growth', description: 'Websites, apps, QR menus, AI, and design from concept to launch.', url: 'https://speracode.com', siteName: 'SperaCode', type: 'website', images: ['/hero-isolated-alpha.png'] },
   robots: { index: true, follow: true },
   icons: { icon: '/icon.svg', apple: '/apple-icon.png' },
 }
