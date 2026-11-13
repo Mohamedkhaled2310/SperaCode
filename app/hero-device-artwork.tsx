@@ -45,7 +45,12 @@ function LaptopDashboard({ palette }: { palette: Palette }) {
     { label: 'Clients', value: '45', detail: 'served' },
     { label: 'Experience', value: '6+', detail: 'years' },
   ]
-  const services = ['Websites', 'Mobile apps', 'AI & design']
+  const chartPoints = [
+    { x: 150, y: 326, label: 'Websites' },
+    { x: 295, y: 283, label: 'Mobile' },
+    { x: 438, y: 302, label: 'UX / UI' },
+    { x: 585, y: 237, label: 'AI' },
+  ]
 
   return (
     <>
@@ -87,23 +92,23 @@ function LaptopDashboard({ palette }: { palette: Palette }) {
         )
       })}
       <rect x="108" y="176" width="516" height="216" rx="9" fill={palette.card} stroke={palette.border} />
-      <text x="124" y="198" fill={palette.ink} fontFamily="Montserrat,Arial,sans-serif" fontSize="10" fontWeight="700">What we build</text>
-      <text x="124" y="212" fill={palette.muted} fontFamily="Montserrat,Arial,sans-serif" fontSize="7">Digital experiences for growing teams</text>
-      {services.map((service, index) => {
-        const x = 124 + index * 164
-        return (
-          <g key={service}>
-            <rect x={x} y="226" width="152" height="146" rx="8" fill={palette.background} stroke={palette.border} />
-            <rect x={x + 12} y="240" width="25" height="25" rx="7" fill={palette.accentSoft} />
-            <circle cx={x + 24.5} cy="252.5" r="5" fill={index === 1 ? palette.cyan : palette.accent} />
-            <text x={x + 12} y="288" fill={palette.ink} fontFamily="Montserrat,Arial,sans-serif" fontSize="8" fontWeight="700">{service}</text>
-            <text x={x + 12} y="303" fill={palette.muted} fontFamily="Montserrat,Arial,sans-serif" fontSize="6.5">Made for your business</text>
-            <rect x={x + 12} y="327" width="128" height="5" rx="2.5" fill={palette.border} />
-            <rect x={x + 12} y="327" width={index === 0 ? 92 : index === 1 ? 108 : 76} height="5" rx="2.5" fill={index === 1 ? palette.cyan : palette.accent} />
-            <text x={x + 12} y="353" fill={palette.muted} fontFamily="Montserrat,Arial,sans-serif" fontSize="6">Explore service</text>
-          </g>
-        )
-      })}
+      <text x="124" y="198" fill={palette.ink} fontFamily="Montserrat,Arial,sans-serif" fontSize="11" fontWeight="700">SperaCode solutions</text>
+      <text x="124" y="212" fill={palette.muted} fontFamily="Montserrat,Arial,sans-serif" fontSize="7">Websites · mobile apps · product design</text>
+      <rect x="519" y="186" width="88" height="18" rx="9" fill={palette.accentSoft} />
+      <circle cx="531" cy="195" r="3" fill={palette.cyan} />
+      <text x="540" y="198" fill={palette.accent} fontFamily="Montserrat,Arial,sans-serif" fontSize="6.5" fontWeight="700">OUR EXPERTISE</text>
+      <line x1="132" y1="242" x2="607" y2="242" stroke={palette.border} strokeWidth="1" />
+      <line x1="132" y1="274" x2="607" y2="274" stroke={palette.border} strokeWidth="1" />
+      <line x1="132" y1="306" x2="607" y2="306" stroke={palette.border} strokeWidth="1" />
+      <line x1="132" y1="338" x2="607" y2="338" stroke={palette.border} strokeWidth="1" />
+      <path d="M150 326 C198 309 246 286 295 283 C345 279 389 309 438 302 C488 295 535 253 585 237" fill="none" stroke={palette.accent} strokeWidth="3" strokeLinecap="round" />
+      <path d="M150 326 C198 309 246 286 295 283 C345 279 389 309 438 302 C488 295 535 253 585 237 L585 338 L150 338 Z" fill={palette.accent} opacity=".08" />
+      {chartPoints.map((point, index) => (
+        <g key={point.label}>
+          <circle cx={point.x} cy={point.y} r="5" fill={palette.card} stroke={index === 1 ? palette.cyan : palette.accent} strokeWidth="2.5" />
+          <text x={point.x} y="359" textAnchor="middle" fill={palette.muted} fontFamily="Montserrat,Arial,sans-serif" fontSize="6.5">{point.label}</text>
+        </g>
+      ))}
     </>
   )
 }
@@ -190,14 +195,14 @@ export function HeroDeviceArtwork({ dark, rtl }: { dark: boolean; rtl: boolean }
           </clipPath>
         </defs>
         <g clipPath={`url(#${laptopClip})`}>
-          <svg x={laptop.x} y={laptop.y} width={laptop.width} height={laptop.height} viewBox="0 0 640 410" preserveAspectRatio="none">
+          <g transform={`translate(${laptop.x} ${laptop.y}) scale(${laptop.width / 640} ${laptop.height / 410})`}>
             <LaptopDashboard palette={palette} />
-          </svg>
+          </g>
         </g>
         <g clipPath={`url(#${phoneClip})`}>
-          <svg x={phone.x} y={phone.y} width={phone.width} height={phone.height} viewBox="0 0 180 440" preserveAspectRatio="none">
+          <g transform={`translate(${phone.x} ${phone.y}) scale(${phone.width / 180} ${phone.height / 440})`}>
             <MobileDashboard palette={palette} />
-          </svg>
+          </g>
         </g>
       </svg>
     </div>
