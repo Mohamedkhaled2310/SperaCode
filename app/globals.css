@@ -296,3 +296,27 @@ html[lang="ar"] body{line-height:1.9}.portfolio-image img{width:100%;height:100%
 @media(max-width:760px){.contact-device-art{width:min(100%,380px);height:310px}.contact-laptop{inset-block-start:28px;width:91%}.contact-page-preview{min-height:215px}.preview-content{gap:10px;padding:20px 13px}.preview-copy h3{font-size:19px}.contact-phone{width:105px;height:205px;inset-block-end:8px}.preview-form{padding:9px}}
 @media(prefers-reduced-motion:reduce){.contact-device-art,.contact-laptop,.contact-phone{animation:none}}
 .contact-hero::before{display:none}
+
+.home-hero-art{position:relative;isolation:isolate;width:100%;min-width:0;aspect-ratio:1.42;overflow:hidden;border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:28px;background:var(--surface);box-shadow:var(--shadow)}
+.home-hero-image{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;animation:home-hero-arrive .8s cubic-bezier(.2,.75,.25,1) both}
+@keyframes home-hero-arrive{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:scale(1)}}
+.contact-device-art.is-dark .contact-laptop-screen{border-color:#526584;background:linear-gradient(135deg,#17243b,#0c1425)}
+.contact-device-art.is-dark .contact-browser-bar{color:#aab8d0}
+.contact-device-art.is-dark .contact-browser-bar>span{background:#71819d}
+.contact-device-art.is-dark .contact-page-preview{background:#0b1426;color:#f2f6ff}
+.contact-device-art.is-dark .preview-nav{border-color:#263652;background:#101c31}
+.contact-device-art.is-dark .preview-nav b,.contact-device-art.is-dark .preview-copy small,.contact-device-art.is-dark .contact-phone-screen>small{color:#60a5fa}
+.contact-device-art.is-dark .preview-nav span,.contact-device-art.is-dark .preview-copy p,.contact-device-art.is-dark .preview-contact-line{color:#aab8d0}
+.contact-device-art.is-dark .preview-copy h3,.contact-device-art.is-dark .preview-form-title{color:#f2f6ff}
+.contact-device-art.is-dark .preview-form{border-color:#2a3b59;background:#111e34;box-shadow:0 8px 22px #0005}
+.contact-device-art.is-dark .preview-form-row{color:#b8c5dc}
+.contact-device-art.is-dark .preview-form-field{border-color:#30415f;background:#0b1426}
+.contact-device-art.is-dark .contact-phone{border-color:#60708c;background:#111c30}
+.contact-device-art.is-dark .contact-phone-notch{background:#070d1a}
+.contact-device-art.is-dark .contact-phone-screen{background:#0b1426;color:#f2f6ff}
+.contact-device-art.is-dark .phone-brand{border-color:#263652}
+.contact-device-art.is-dark .phone-status span,.contact-device-art.is-dark .contact-phone-screen>p{color:#aab8d0}
+.contact-device-art.is-dark .phone-message{background:#172946;color:#c9dcff}
+.contact-device-art.is-dark .phone-send{border-color:#2a3b59;color:#9aa9c3}
+@media(max-width:760px){.home-hero-art{width:100%;aspect-ratio:1.38;border-radius:22px}}
+@media(prefers-reduced-motion:reduce){.home-hero-image{animation:none}}
