@@ -329,3 +329,16 @@ html[lang="ar"] body{line-height:1.9}.portfolio-image img{width:100%;height:100%
 .contact-hero-visual .hero-art::before,.contact-hero-visual .hero-art::after{display:none}
 @media(max-width:760px){.home-hero-art{width:100%;aspect-ratio:1.6078;border:0;border-radius:0;background:transparent}}
 @media(prefers-reduced-motion:reduce){.home-hero-image,.contact-art-lines .signal-pulse{animation:none}}
+
+body::before{content:"";position:fixed;z-index:0;inset:0;pointer-events:none;background:radial-gradient(ellipse at 14% 18%,color-mix(in srgb,var(--blue) 10%,transparent),transparent 38%),radial-gradient(ellipse at 86% 34%,color-mix(in srgb,var(--cyan) 9%,transparent),transparent 36%),radial-gradient(ellipse at 58% 92%,color-mix(in srgb,var(--blue) 7%,transparent),transparent 42%);animation:ambient-drift 28s ease-in-out infinite alternate;will-change:transform;}
+.site{position:relative;z-index:1;background:transparent;}
+.contact-site{background:transparent;}
+@keyframes ambient-drift{from{transform:translate3d(-1.2%,-.8%,0) scale(1)}to{transform:translate3d(1.2%,.8%,0) scale(1.025)}}
+.site button:not(:disabled),.site .button{transition:transform .22s cubic-bezier(.22,.61,.36,1),box-shadow .22s ease,filter .22s ease,border-color .22s ease,background-color .22s ease;}
+.site button:not(:disabled):hover,.site .button:hover{transform:translateY(-2px);}
+.site button:not(:disabled):active,.site .button:active{transform:translateY(0) scale(.97);}
+.contact-field select{appearance:none;cursor:pointer;padding-inline-end:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235b6478' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:16px;}
+.dark .contact-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239aa7c2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");}
+.contact-field select:dir(rtl){background-position:left 14px center;padding-inline-start:40px;padding-inline-end:14px;}
+.contact-field input:focus-visible,.contact-field select:focus-visible,.contact-field textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 22%,transparent);outline-offset:1px;}
+@media(prefers-reduced-motion:reduce){body::before{animation:none;will-change:auto}.site button:not(:disabled),.site .button{transition:none}}

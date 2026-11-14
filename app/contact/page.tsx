@@ -3,8 +3,8 @@ import ContactPage from './contact-page'
 
 export const metadata: Metadata = {
   title: 'تواصل معنا',
-  description: 'تواصل مع SperaCode لمناقشة مشروعك القادم. أرسل تفاصيل احتياجك أو راسل فريقنا عبر البريد الإلكتروني وواتساب.',
-  alternates: { canonical: '/contact' },
+  description: 'تواصل مع SperaCode لمناقشة مشروعك القادم. أرسل تفاصيل احتياجك عبر واتساب أو البريد الإلكتروني، واحصل على الخطوة المناسبة لحلك الرقمي.',
+  alternates: { canonical: '/contact', languages: { 'ar-EG': '/contact?lang=ar', en: '/contact?lang=en', 'x-default': '/contact' } },
   openGraph: {
     title: 'تواصل مع SperaCode',
     description: 'شاركنا فكرتك، وسنساعدك على تحديد الخطوة المناسبة لمشروعك الرقمي.',
