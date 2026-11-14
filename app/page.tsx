@@ -76,7 +76,7 @@ export default function HomePage() {
     const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
       if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target) }
     }), { threshold: 0.12 })
-    document.querySelectorAll('.section:not(.hero), .service-card, .project-card, .tech-section, .final-panel, .footer-grid').forEach((element) => { element.setAttribute('data-reveal', ''); revealObserver.observe(element) })
+    document.querySelectorAll('[data-reveal], .section:not(.hero), .service-card, .project-card, .tech-section, .final-panel, .footer-grid').forEach((element) => { element.setAttribute('data-reveal', ''); revealObserver.observe(element) })
     const carouselTimer = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? null : window.setInterval(() => {
       if (!document.hidden) {
         setFounderIndex((index) => (index + 1) % founders.length)
