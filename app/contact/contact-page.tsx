@@ -100,7 +100,7 @@ export default function ContactPage() {
       <a className="skip-link" href="#contact-main">{rtl ? 'انتقل إلى المحتوى' : 'Skip to content'}</a>
       <header className="navbar contact-navbar">
         <div className="container contact-nav-inner">
-          <SperaLogo />
+          <SperaLogo rtl={rtl} />
           <nav aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
             <Link href="/">{t.home}</Link>
             <Link href="/#services">{t.services}</Link>
@@ -189,7 +189,7 @@ export default function ContactPage() {
         </section>
       </main>
 
-      <footer className="contact-footer"><div className="container contact-footer-inner"><div><SperaLogo footer /><p>{t.footer}</p></div><Link className="contact-back-link" href="/">{t.back}{rtl ? <ArrowRight aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}</Link></div></footer>
+      <footer className="contact-footer"><div className="container contact-footer-inner"><div><SperaLogo footer rtl={rtl} /><p>{t.footer}</p></div><Link className="contact-back-link" href="/">{t.back}{rtl ? <ArrowRight aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}</Link></div></footer>
     </div>
   )
 }
