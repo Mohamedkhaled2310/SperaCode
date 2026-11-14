@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const logoUrl = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20261113-WA0008-qPYgbSVCeybCycfUuR1jQ4Ng5J5AJa.jpg'
+const logoUrl = '/speracode-mark.png'
 
 export function SperaLogo({ footer = false, rtl }: { footer?: boolean; rtl: boolean }) {
   return (
