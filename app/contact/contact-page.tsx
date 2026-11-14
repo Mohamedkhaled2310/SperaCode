@@ -15,7 +15,7 @@ const content = {
     home: 'الرئيسية', work: 'أعمالنا', services: 'خدماتنا', page: 'تواصل معنا',
     kicker: 'خلّينا نبدأ من هنا', title: 'احكِ لنا عن فكرتك.', intro: 'سواء كانت لديك فكرة واضحة أو ما زلت تستكشف الخيارات، شاركنا ما تحتاجه وسنساعدك في تحديد الخطوة المناسبة.',
     formTitle: 'أرسل تفاصيل مشروعك', formIntro: 'املأ النموذج وسيفتح لك واتساب برسالة جاهزة للمراجعة والإرسال.',
-    name: 'الاسم', nameHint: 'كيف يمكننا مناداتك؟', email: 'البريد الإلكتروني (اختياري)', emailHint: 'name@example.com', phone: 'رقم الهاتف / واتساب (اختياري)', phoneHint: '+20', company: 'الشركة (اختياري)', companyHint: 'اسم شركتك أو مشروعك',
+    name: 'الاسم', nameHint: 'كيف يمكننا مناداتك؟', phone: 'رقم الهاتف (اختياري)', phoneHint: '+20', company: 'الشركة (اختياري)', companyHint: 'اسم شركتك أو مشروعك',
     service: 'ما الخدمة التي تبحث عنها؟', serviceOptions: ['اختر الخدمة', 'موقع إلكتروني', 'تطبيق جوال', 'منيو رقمي QR', 'حل ذكاء اصطناعي', 'تصميم UI/UX', 'نظام أو برنامج مخصص', 'أخرى'],
     timeline: 'موعد الإطلاق المتوقع (اختياري)', timelineOptions: ['اختر موعدًا', 'في أقرب وقت', 'خلال شهر', 'خلال 1–3 أشهر', 'ما زلت أستكشف'],
     message: 'حدثنا أكثر عن مشروعك', messageHint: 'ما الهدف الذي تريد تحقيقه؟ ومن سيستخدم المنتج؟ أي تفاصيل تساعدنا على فهم احتياجك مرحب بها.',
@@ -31,7 +31,7 @@ const content = {
     home: 'Home', work: 'Our work', services: 'Services', page: 'Contact',
     kicker: 'A good place to start', title: 'Tell us what you have in mind.', intro: 'Whether you have a detailed brief or are still exploring, share what you need and we will help you find the right next step.',
     formTitle: 'Tell us about your project', formIntro: 'Complete the form and WhatsApp will open with a ready-to-review message.',
-    name: 'Your name', nameHint: 'What should we call you?', email: 'Email address (optional)', emailHint: 'name@example.com', phone: 'Phone / WhatsApp (optional)', phoneHint: '+20', company: 'Company (optional)', companyHint: 'Your company or project',
+    name: 'Your name', nameHint: 'What should we call you?', phone: 'Phone number (optional)', phoneHint: '+20', company: 'Company (optional)', companyHint: 'Your company or project',
     service: 'What do you need help with?', serviceOptions: ['Choose a service', 'Website', 'Mobile app', 'QR digital menu', 'AI solution', 'UI/UX design', 'Custom software', 'Something else'],
     timeline: 'Target launch (optional)', timelineOptions: ['Select a timeframe', 'As soon as possible', 'Within a month', 'In 1–3 months', 'Still exploring'],
     message: 'A little more about your project', messageHint: 'What are you hoping to achieve? Who will use it? Any context that helps us understand your needs is welcome.',
@@ -84,7 +84,6 @@ export default function ContactPage() {
     const form = new FormData(event.currentTarget)
     const fields = [
       `${t.name}: ${form.get('name')}`,
-      `${t.email}: ${form.get('email') || '—'}`,
       `${t.phone}: ${form.get('phone') || '—'}`,
       `${t.company}: ${form.get('company') || '—'}`,
       `${t.service}: ${form.get('service')}`,
@@ -154,7 +153,6 @@ export default function ContactPage() {
             <form className="contact-form" onSubmit={sendToWhatsApp}>
               <div className="contact-fields-grid">
                 <label className="contact-field"><span>{t.name} <b aria-hidden="true">*</b></span><input autoComplete="name" name="name" placeholder={t.nameHint} required /></label>
-                <label className="contact-field"><span>{t.email}</span><input autoComplete="email" name="email" type="email" placeholder={t.emailHint} /></label>
                 <label className="contact-field"><span>{t.company}</span><input autoComplete="organization" name="company" placeholder={t.companyHint} /></label>
                 <label className="contact-field"><span>{t.phone}</span><input autoComplete="tel" dir="ltr" inputMode="tel" name="phone" placeholder={t.phoneHint} /></label>
                 <label className="contact-field"><span>{t.service} <b aria-hidden="true">*</b></span><select key={locale} name="service" defaultValue="" required>{t.serviceOptions.map((item, index) => <option value={index === 0 ? '' : item} key={item} disabled={index === 0}>{item}</option>)}</select></label>
