@@ -360,3 +360,18 @@ body::before{content:"";position:fixed;z-index:0;inset:0;pointer-events:none;bac
 .contact-field select:dir(rtl){background-position:left 14px center;padding-inline-start:40px;padding-inline-end:14px;}
 .contact-field input:focus-visible,.contact-field select:focus-visible,.contact-field textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 22%,transparent);outline-offset:1px;}
 @media(prefers-reduced-motion:reduce){body::before{animation:none;will-change:auto}.site button:not(:disabled),.site .button{transition:none}}
+
+/* Lightweight polish: one static hero image with a barely-noticeable CSS drift. */
+.navbar{background:color-mix(in srgb,var(--bg) 90%,transparent);box-shadow:0 4px 24px #09122608;}
+.nav-inner{min-height:82px;}
+.desktop-nav a{padding:10px 2px;border-radius:6px;transition:color .2s,transform .2s;}
+.desktop-nav a:hover{transform:translateY(-1px);}
+.desktop-nav a::after{content:'';position:absolute;inset-inline:50%;inset-block-end:1px;height:2px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:inset-inline .22s ease;}
+.desktop-nav a:hover::after,.desktop-nav a:focus-visible::after{inset-inline:0;}
+.nav-cta{border-radius:999px;padding-inline:18px;box-shadow:0 8px 22px #2865eb26;}
+.home-hero-image{animation:home-hero-motion 26s ease-in-out infinite alternate;}
+@keyframes home-hero-motion{from{transform:scale(1.005)}to{transform:scale(1.035)}}
+.project-cover img{transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .4s;}
+.project-card:hover .project-cover img,.project-cover:focus-visible img{transform:scale(1.035);filter:saturate(1.05);}
+@media(max-width:760px){.nav-inner{min-height:68px}.nav-cta{min-height:40px;padding-inline:12px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.home-hero-image{animation:none;transform:none}.project-cover img{transition:none}}
