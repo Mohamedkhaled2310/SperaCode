@@ -1,4 +1,4 @@
-import { Mail, MessageCircle } from 'lucide-react'
+import { Clock3, MessageCircle } from 'lucide-react'
 import { HeroDeviceArtwork } from './hero-device-artwork'
 
 type PageHeroVisualProps = {
@@ -11,7 +11,7 @@ export function PageHeroVisual({ dark, rtl, className = '' }: PageHeroVisualProp
   return (
     <div className={`hero-art ${className}`.trim()}>
       <div className="art-label label-menu">
-        <Mail aria-hidden="true" />
+        <MessageCircle aria-hidden="true" />
         <span>
           {rtl ? 'نموذج تواصل' : 'Contact form'}
           <br />
@@ -19,7 +19,7 @@ export function PageHeroVisual({ dark, rtl, className = '' }: PageHeroVisualProp
         </span>
       </div>
       <div className="art-label label-ai">
-        <MessageCircle aria-hidden="true" />
+        <Clock3 aria-hidden="true" />
         <span>
           {rtl ? 'فريقنا جاهز' : 'Our team is here'}
           <br />

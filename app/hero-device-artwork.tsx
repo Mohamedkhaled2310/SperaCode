@@ -21,7 +21,7 @@ export function HeroDeviceArtwork({ dark, rtl }: HeroDeviceArtworkProps) {
             <div className="preview-nav"><b>SperaCode</b><span>{rtl ? 'الرئيسية　 خدماتنا　 أعمالنا' : 'Home　 Services　 Work'}</span><button>{rtl ? 'ابدأ مشروعك' : 'Let’s talk'}</button></div>
             <div className="preview-content">
               <div className="preview-copy"><small>{rtl ? 'نحن هنا لمساعدتك' : 'LET’S BUILD SOMETHING'}</small><h3>{rtl ? <>خلّينا نبدأ<br/>من فكرتك.</> : <>Tell us about<br/>your next idea.</>}</h3><p>{rtl ? 'شاركنا التفاصيل وسنساعدك في اختيار الخطوة المناسبة.' : 'Share a few details and we’ll help you find the right next step.'}</p><div className="preview-contact-line"><i/> {rtl ? 'نرد عليك خلال يوم عمل' : 'We usually reply within one day'}</div></div>
-              <div className="preview-form"><div className="preview-form-title">{rtl ? 'أخبرنا عن مشروعك' : 'Tell us about your project'}</div><div className="preview-form-row"><span>{rtl ? 'الاسم' : 'Your name'}</span><span>{rtl ? 'البريد الإلكتروني' : 'Email address'}</span></div><div className="preview-form-field"/><div className="preview-form-field wide"/><button>{rtl ? 'إرسال الرسالة　 ↗' : 'Send a message　 ↗'}</button></div>
+              <div className="preview-form"><div className="preview-form-title">{rtl ? 'أخبرنا عن مشروعك' : 'Tell us about your project'}</div><div className="preview-form-row"><span>{rtl ? 'الاسم' : 'Your name'}</span><span>{rtl ? 'رقم الهاتف' : 'Phone number'}</span></div><div className="preview-form-field"/><div className="preview-form-field wide"/><button>{rtl ? 'إرسال الرسالة　 ↗' : 'Send a message　 ↗'}</button></div>
             </div>
           </div>
         </div>

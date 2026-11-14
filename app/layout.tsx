@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 }
 export const viewport: Viewport = { colorScheme: 'light dark', themeColor: [{ media: '(prefers-color-scheme: light)', color: '#FFFFFF' }, { media: '(prefers-color-scheme: dark)', color: '#070D1A' }] }
 const organization = {
-  '@context': 'https://schema.org', '@type': ['Organization', 'ProfessionalService'], '@id': 'https://speracode.com/#organization', name: 'SperaCode', alternateName: 'سبيرا كود', url: 'https://speracode.com', email: 'info@speracode.com', logo: 'https://speracode.com/icon.svg',
+  '@context': 'https://schema.org', '@type': ['Organization', 'ProfessionalService'], '@id': 'https://speracode.com/#organization', name: 'SperaCode', alternateName: 'سبيرا كود', url: 'https://speracode.com', logo: 'https://speracode.com/icon.svg',
   description: 'SperaCode is a software house delivering end-to-end digital solutions: websites, mobile applications, digital QR menus, AI solutions, and UI/UX design.',
   areaServed: [{ '@type': 'Country', name: 'Egypt' }, { '@type': 'AdministrativeArea', name: 'Arab League countries' }], address: { '@type': 'PostalAddress', addressCountry: 'EG' },
-  contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: 'info@speracode.com', availableLanguage: ['Arabic', 'English'] },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'sales', url: 'https://speracode.com/contact', availableLanguage: ['Arabic', 'English'] },
   knowsAbout: ['Web development', 'Mobile applications', 'QR menu', 'Artificial intelligence', 'UI/UX design'], additionalProperty: [{ '@type': 'PropertyValue', name: 'Projects delivered', value: '50+' }, { '@type': 'PropertyValue', name: 'Clients served', value: '45' }, { '@type': 'PropertyValue', name: 'Years of experience', value: '6+' }],
 }
 const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': 'https://speracode.com/#website', name: 'SperaCode', url: 'https://speracode.com', inLanguage: ['ar-EG', 'en'], publisher: { '@id': 'https://speracode.com/#organization' } }

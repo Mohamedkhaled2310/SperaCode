@@ -2,13 +2,11 @@
 
 import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
-import { ArrowLeft, ArrowRight, ArrowUpLeft, ArrowUpRight, Check, Clock3, Mail, Menu, MessageCircle, Moon, Send, Sun, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpLeft, ArrowUpRight, Check, Clock3, Menu, MessageCircle, Moon, Send, Sun, X } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { PageHeroVisual } from '../page-hero-visual'
 
 type Locale = 'ar' | 'en'
-
-const emailAddress = 'info@speracode.com'
 
 const content = {
   ar: {
@@ -21,7 +19,7 @@ const content = {
     message: 'حدثنا أكثر عن مشروعك', messageHint: 'ما الهدف الذي تريد تحقيقه؟ ومن سيستخدم المنتج؟ أي تفاصيل تساعدنا على فهم احتياجك مرحب بها.',
     send: 'إرسال عبر واتساب', privacy: 'لن تُحفظ بياناتك على الموقع؛ سيفتح واتساب برسالة جاهزة لتراجعها وتختار المحادثة ثم ترسلها.',
     sent: 'فتحنا واتساب برسالتك جاهزة. اختر المحادثة، راجع التفاصيل، ثم أرسلها إلى فريق SperaCode.',
-    direct: 'تواصل بالطريقة التي تناسبك', directText: 'يمكنك مراسلتنا مباشرة أو بدء محادثة على واتساب.', emailLabel: 'راسلنا عبر البريد', emailCta: 'info@speracode.com', whatsappLabel: 'ابدأ محادثة واتساب', whatsappCta: 'افتح واتساب واختر المحادثة',
+    direct: 'تواصل بالطريقة التي تناسبك', directText: 'راسلنا مباشرة على واتساب أو أرسل تفاصيل مشروعك من النموذج.', whatsappLabel: 'ابدأ محادثة واتساب', whatsappCta: 'افتح واتساب واختر المحادثة',
     note: 'لمساعدتنا على الرد بشكل أدق', stepsTitle: 'ماذا يحدث بعد إرسال رسالتك؟', steps: [['نراجع احتياجك', 'نطّلع على فكرتك والتفاصيل التي شاركتها.'], ['نقترح الخطوة التالية', 'نرتب معك محادثة قصيرة لفهم الأولويات.'], ['تستلم تصورًا واضحًا', 'نناقش النطاق والخيارات المناسبة قبل البدء.']],
     faqTitle: 'قبل أن تراسلنا', faqs: [['هل يجب أن أكون متأكدًا من فكرتي؟', 'ليس بالضرورة. يمكننا مساعدتك على ترتيب الفكرة وتحويلها إلى نطاق عمل واضح.'], ['هل تقدمون عرض سعر قبل البدء؟', 'نعم، نراجع المتطلبات أولًا ثم نشاركك تصورًا مكتوبًا للنطاق والتكلفة قبل بدء التنفيذ.'], ['هل يمكنني التواصل حتى لو لم أكن في مصر؟', 'نعم، نعمل عن بُعد ونتابع التواصل والاجتماعات عبر الإنترنت.']],
     footer: 'نحوّل الأفكار إلى تجارب رقمية مدروسة.', back: 'العودة للرئيسية', themeDark: 'التبديل إلى الوضع الداكن', themeLight: 'التبديل إلى الوضع الفاتح', language: 'Switch to English',
@@ -37,7 +35,7 @@ const content = {
     message: 'A little more about your project', messageHint: 'What are you hoping to achieve? Who will use it? Any context that helps us understand your needs is welcome.',
     send: 'Send via WhatsApp', privacy: 'Your details are not stored on this site. WhatsApp opens with a ready-to-review message; choose a chat and send it yourself.',
     sent: 'WhatsApp opened with your message. Choose a chat, review the details, and send it to the SperaCode team.',
-    direct: 'Reach us your way', directText: 'Send us an email or start a conversation on WhatsApp.', emailLabel: 'Email our team', emailCta: 'info@speracode.com', whatsappLabel: 'Start a WhatsApp chat', whatsappCta: 'Open WhatsApp and choose a chat',
+    direct: 'Reach us your way', directText: 'Message us on WhatsApp or send your project details using the form.', whatsappLabel: 'Start a WhatsApp chat', whatsappCta: 'Open WhatsApp and choose a chat',
     note: 'A little context goes a long way', stepsTitle: 'What happens next?', steps: [['We review your brief', 'We read your idea and the details you shared.'], ['We suggest a next step', 'We arrange a short conversation to understand your priorities.'], ['We outline the options', 'We discuss scope and a suitable approach before work begins.']],
     faqTitle: 'A few quick answers', faqs: [['Do I need a complete brief?', 'Not at all. We can help shape the idea and turn it into a clear scope of work.'], ['Will I get a quote before work starts?', 'Yes. We review the requirements and share a written scope and estimate before implementation.'], ['Can I contact you from outside Egypt?', 'Absolutely. We work remotely and hold meetings online.']],
     footer: 'Thoughtful digital experiences, built around your goals.', back: 'Back to home', themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', language: 'التبديل إلى العربية',
@@ -170,11 +168,6 @@ export default function ContactPage() {
               <span className="contact-eyebrow">{rtl ? 'تواصل مباشر' : 'DIRECT CONTACT'}</span>
               <h2>{t.direct}</h2>
               <p>{t.directText}</p>
-              <a className="contact-channel contact-channel-email" href={`mailto:${emailAddress}`}>
-                <span className="contact-channel-icon"><Mail aria-hidden="true" /></span>
-                <span><small>{t.emailLabel}</small><strong dir="ltr">{t.emailCta}</strong></span>
-                {rtl ? <ArrowUpLeft aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
-              </a>
               <a className="contact-channel contact-channel-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
                 <span className="contact-channel-icon"><MessageCircle aria-hidden="true" /></span>
                 <span><small>{t.whatsappLabel}</small><strong>{t.whatsappCta}</strong></span>
