@@ -375,3 +375,11 @@ body::before{content:"";position:fixed;z-index:0;inset:0;pointer-events:none;bac
 .project-card:hover .project-cover img,.project-cover:focus-visible img{transform:scale(1.035);filter:saturate(1.05);}
 @media(max-width:760px){.nav-inner{min-height:68px}.nav-cta{min-height:40px;padding-inline:12px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.home-hero-image{animation:none;transform:none}.project-cover img{transition:none}}
+.device-motion-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
+.device-motion-lines path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;}
+.device-line-track{stroke:color-mix(in srgb,var(--blue) 20%,transparent);stroke-width:1.2;}
+.device-line-flow{stroke:url(#device-line-gradient);stroke-width:2;stroke-dasharray:12 88;stroke-dashoffset:0;opacity:.78;animation:device-line-travel 8s linear infinite;}
+.phone-line-track{stroke:color-mix(in srgb,var(--cyan) 25%,transparent);}
+.phone-line-flow{animation-duration:6s;animation-delay:-2s;opacity:.9;}
+@keyframes device-line-travel{to{stroke-dashoffset:-100}}
+@media(prefers-reduced-motion:reduce){.device-line-flow{animation:none;stroke-dasharray:0;}}
