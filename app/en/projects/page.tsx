@@ -1,33 +1,63 @@
 import type { Metadata } from 'next'
 import ProjectsGallery from '../../projects/projects-gallery'
-import { createPortfolioPageSchema, serializeStructuredData } from '../../seo-data'
-import { SITE_URL } from '../../site-config'
+import { createBreadcrumbSchema, createPortfolioPageSchema, serializeStructuredData } from '../../seo-data'
+import { SITE_NAME, SITE_NAME_AR, SITE_URL } from '../../site-config'
 
-const description = 'Explore SperaCode websites, digital platforms, and business systems, with project descriptions and direct links to the live sites or demos.'
+const description = 'Explore SperaCode portfolio of web platforms, e-commerce storefronts, and enterprise systems, with live links and technology architectures.'
 
 export const metadata: Metadata = {
-  title: 'Selected Projects and Portfolio',
+  title: 'Portfolio & Selected Work | Digital Platforms & Websites',
   description,
-  alternates: SITE_URL ? {
+  alternates: {
     canonical: '/en/projects',
-    languages: { 'ar-EG': '/projects', en: '/en/projects', 'x-default': '/projects' },
-  } : undefined,
+    languages: {
+      'ar-EG': '/projects',
+      en: '/en/projects',
+      'x-default': '/projects',
+    },
+  },
   openGraph: {
-    title: 'SperaCode selected work',
+    title: `${SITE_NAME} — Selected Work & Engineering Portfolio`,
     description,
-    url: SITE_URL ? `${SITE_URL}/en/projects` : undefined,
-    siteName: 'SperaCode',
+    url: `${SITE_URL}/en/projects`,
+    siteName: `${SITE_NAME} (${SITE_NAME_AR})`,
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['ar_EG'],
-    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'SperaCode logo' }] : undefined,
+    images: [
+      {
+        url: '/home-hero-dark.png',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} Portfolio`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} — Selected Work`,
+    description,
+    images: ['/home-hero-dark.png'],
   },
 }
 
 export default function EnglishProjectsRoute() {
+  const portfolioSchema = createPortfolioPageSchema('en')
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: '/en' },
+    { name: 'Portfolio', url: '/en/projects' },
+  ])
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(createPortfolioPageSchema('en')) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(portfolioSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(breadcrumbSchema) }}
+      />
       <ProjectsGallery initialLocale="en" />
     </>
   )

@@ -1,33 +1,63 @@
 import type { Metadata } from 'next'
 import ContactPage from '../../contact/contact-page'
-import { createContactPageSchema, serializeStructuredData } from '../../seo-data'
-import { SITE_URL } from '../../site-config'
+import { createBreadcrumbSchema, createContactPageSchema, serializeStructuredData } from '../../seo-data'
+import { SITE_NAME, SITE_NAME_AR, SITE_URL } from '../../site-config'
 
-const description = 'Tell SperaCode about your website, app, QR menu, AI, or custom software project. The inquiry form prepares a WhatsApp message for you to review and send.'
+const description = 'Contact SperaCode to discuss your web application, mobile app, digital QR menu, or AI automation project. Receive a complimentary technical consultation and proposal.'
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact Us | Start Your Project Consultation',
   description,
-  alternates: SITE_URL ? {
+  alternates: {
     canonical: '/en/contact',
-    languages: { 'ar-EG': '/contact', en: '/en/contact', 'x-default': '/contact' },
-  } : undefined,
+    languages: {
+      'ar-EG': '/contact',
+      en: '/en/contact',
+      'x-default': '/contact',
+    },
+  },
   openGraph: {
-    title: 'Contact',
+    title: `Contact ${SITE_NAME} — Start Your Project`,
     description,
-    url: SITE_URL ? `${SITE_URL}/en/contact` : undefined,
-    siteName: 'SperaCode',
+    url: `${SITE_URL}/en/contact`,
+    siteName: `${SITE_NAME} (${SITE_NAME_AR})`,
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['ar_EG'],
-    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'SperaCode logo' }] : undefined,
+    images: [
+      {
+        url: '/home-hero-dark.png',
+        width: 1200,
+        height: 630,
+        alt: `Contact ${SITE_NAME}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Contact ${SITE_NAME} — Free Consultation`,
+    description,
+    images: ['/home-hero-dark.png'],
   },
 }
 
 export default function EnglishContactRoute() {
+  const contactSchema = createContactPageSchema('en')
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: '/en' },
+    { name: 'Contact', url: '/en/contact' },
+  ])
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(createContactPageSchema('en')) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(contactSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(breadcrumbSchema) }}
+      />
       <ContactPage initialLocale="en" />
     </>
   )

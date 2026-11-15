@@ -3,7 +3,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, Menu, Moon, Sun, X } from 'lucide-react'
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
+  Check,
+  Menu,
+  Moon,
+  Search,
+  Sun,
+  X,
+} from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { PageHeroVisual } from '../page-hero-visual'
@@ -11,22 +23,42 @@ import { projects } from './project-data'
 
 type Locale = 'ar' | 'en'
 const categories = ['All', 'Websites', 'Platforms', 'Business systems'] as const
-const categoryLabels = { ar: ['الكل', 'مواقع إلكترونية', 'منصات رقمية', 'أنظمة أعمال'], en: [...categories] }
+const categoryLabels = {
+  ar: ['الكل', 'مواقع إلكترونية', 'منصات رقمية', 'أنظمة أعمال'],
+  en: ['All', 'Websites', 'Platforms', 'Business systems'],
+}
 
 export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocale?: Locale }) {
   const [active, setActive] = useState<string>('All')
+  const [searchQuery, setSearchQuery] = useState('')
   const [locale] = useState<Locale>(initialLocale)
   const [dark, setDark] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [showBackToTop, setShowBackToTop] = useState(false)
+
   const rtl = locale === 'ar'
   const basePath = rtl ? '' : '/en'
   const homeHref = basePath || '/'
   const servicesHref = `${homeHref}#services`
-  const aboutHref = `${homeHref}#about`
+  const aboutHref = `${homeHref}#why`
   const projectsHref = `${basePath}/projects`
   const contactHref = `${basePath}/contact`
-  const filtered = useMemo(() => projects.filter((project) => active === 'All' || project.category === active), [active])
+
+  const filtered = useMemo(() => {
+    return projects.filter((project) => {
+      const matchesCategory = active === 'All' || project.category === active
+      if (!matchesCategory) return false
+
+      if (!searchQuery.trim()) return true
+      const query = searchQuery.toLowerCase().trim()
+      const titleMatch = project.title.toLowerCase().includes(query)
+      const descMatch = (rtl ? project.arDescription : project.description).toLowerCase().includes(query)
+      const tagsMatch = project.tags.some((tag) => tag.toLowerCase().includes(query))
+      return titleMatch || descMatch || tagsMatch
+    })
+  }, [active, searchQuery, rtl])
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('speracode-theme')
@@ -35,13 +67,38 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
     document.documentElement.lang = initialLocale
     document.documentElement.dir = initialLocale === 'ar' ? 'rtl' : 'ltr'
     document.documentElement.classList.toggle('dark', nextDark)
-    const onScroll = () => setScrolled(window.scrollY > 16)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target) }
-    }), { threshold: 0.12 })
-    document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element))
-    return () => { window.removeEventListener('scroll', onScroll); observer.disconnect() }
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setScrolled(scrollY > 20)
+      setShowBackToTop(scrollY > 400)
+
+      const winScroll = document.documentElement.scrollTop
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+      const scrolledPct = height > 0 ? (winScroll / height) * 100 : 0
+      setScrollProgress(scrolledPct)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el))
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
+    }
   }, [initialLocale])
 
   function toggleLocale() {
@@ -55,19 +112,484 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
     document.documentElement.classList.toggle('dark', next)
   }
 
-  const labels = rtl
-    ? { home: 'الرئيسية', services: 'خدماتنا', work: 'أعمالنا', about: 'من نحن', contact: 'اتصل بنا', start: 'ابدأ مشروعك', breadcrumb: 'الرئيسية', heroTop: 'SPERACODE / أعمالنا', heroTitle: <>أفكار تتحوّل إلى<br/><em>تجارب رقمية</em></>, heroDesc: 'اكتشف مواقع ومنصات وأنظمة أعمال صممناها لتجمع بين هدف واضح وتنفيذ متقن.', explore: 'استكشف المشاريع', count: 'مشروعًا', categories: 'تصنيفات', links: 'روابط مباشرة', intro: 'مختاراتنا', heading: 'المشاريع السابقة', introText: 'شاهد لقطات حقيقية من مواقعنا، وافتح كل مشروع لاستكشاف التجربة كاملة.', projectCount: 'مشاريع', open: 'افتح الموقع', note: 'الصور تعرض لقطات فعلية من واجهات المشاريع. قد تتطلب بعض الأنظمة تسجيل الدخول للوصول إلى الديمو.', next: 'خطوتك القادمة', cta: 'هل لديك فكرة لمشروع؟', ctaText: 'ابدأ محادثة معنا، ودعنا نبني تجربة رقمية تناسب أهدافك.', footer: 'نحوّل الأفكار إلى تجارب رقمية مدروسة.', back: 'العودة للرئيسية', switch: 'English', themeDark: 'تفعيل الوضع الداكن', themeLight: 'تفعيل الوضع الفاتح' }
-    : { home: 'Home', services: 'Services', work: 'Our work', about: 'About', contact: 'Contact', start: 'Start a project', breadcrumb: 'Home', heroTop: 'SPERACODE / PORTFOLIO', heroTitle: <>Ideas made into<br/><em>digital experiences</em></>, heroDesc: 'Explore websites, platforms, and business systems designed around clear goals and thoughtful execution.', explore: 'Explore projects', count: 'projects', categories: 'categories', links: 'direct links', intro: 'Selected work', heading: 'Projects we have delivered', introText: 'See real screenshots from our websites, then open each project to explore the full experience.', projectCount: 'projects', open: 'Visit website', note: 'Images show real interface captures from each project. Some systems may require signing in to access the demo.', next: 'What’s next', cta: 'Have a project in mind?', ctaText: 'Tell us what you are planning and we will help shape the right digital experience.', footer: 'Thoughtful digital experiences, built around your goals.', back: 'Back to home', switch: 'عربي', themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode' }
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
-  return <div className={`site projects-page ${dark ? 'theme-dark' : ''}`} dir={rtl ? 'rtl' : 'ltr'}>
-    <a className="skip-link" href="#main">{rtl ? 'انتقل إلى المحتوى' : 'Skip to content'}</a>
-    <header className={`navbar${scrolled ? ' scrolled' : ''}`}><div className="container nav-inner"><SperaLogo rtl={rtl} homeHref={homeHref}/><nav className="desktop-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}><Link href={homeHref}>{labels.home}</Link><Link href={servicesHref}>{labels.services}</Link><Link href={projectsHref} aria-current="page">{labels.work}</Link><Link href={aboutHref}>{labels.about}</Link><Link href={contactHref}>{labels.contact}</Link></nav><div className="nav-actions"><button type="button" className="icon-button locale-button" onClick={toggleLocale} aria-label={rtl ? 'Switch to English' : 'التبديل إلى العربية'}>{labels.switch}</button><button type="button" className="icon-button" onClick={toggleTheme} aria-label={dark ? labels.themeLight : labels.themeDark} aria-pressed={dark}>{dark ? <Sun/> : <Moon/>}</button><Link className="button button-primary nav-cta" href={contactHref}>{labels.start}<ArrowUpRight/></Link><button type="button" className="icon-button projects-menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? (rtl ? 'إغلاق القائمة' : 'Close menu') : (rtl ? 'فتح القائمة' : 'Open menu')}>{menuOpen ? <X/> : <Menu/>}</button></div></div>{menuOpen && <nav className="mobile-nav projects-mobile-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}><Link onClick={() => setMenuOpen(false)} href={homeHref}>{labels.home}<ArrowUpRight/></Link><Link onClick={() => setMenuOpen(false)} href={servicesHref}>{labels.services}<ArrowUpRight/></Link><Link onClick={() => setMenuOpen(false)} href={projectsHref}>{labels.work}<ArrowUpRight/></Link><Link onClick={() => setMenuOpen(false)} href={aboutHref}>{labels.about}<ArrowUpRight/></Link><Link onClick={() => setMenuOpen(false)} href={contactHref}>{labels.contact}<ArrowUpRight/></Link><button className="button button-secondary" onClick={toggleLocale}>{labels.switch}</button></nav>}</header>
-    <main id="main">
-      <section className="projects-hero"><div className="container projects-hero-inner"><div className="projects-hero-layout"><div className="projects-hero-copy"><Link className="breadcrumb" href={homeHref}>{labels.breadcrumb} <ArrowLeft aria-hidden="true"/> {labels.work}</Link><span className="section-kicker">{labels.heroTop}</span><h1>{labels.heroTitle}</h1><p>{labels.heroDesc}</p><div className="projects-hero-actions"><Link className="button button-primary" href={contactHref}>{labels.start}<ArrowUpRight aria-hidden="true"/></Link><a className="button button-secondary" href="#gallery">{labels.explore}<ArrowDown aria-hidden="true"/></a></div><div className="projects-hero-stats"><span><b>{String(projects.length).padStart(2, '0')}</b> {labels.count}</span><span><b>{String(categories.length - 1).padStart(2, '0')}</b> {labels.categories}</span><span><b>01</b> {labels.links}</span></div></div><div className="projects-hero-visual"><PageHeroVisual dark={dark} rtl={rtl}/></div></div></div></section>
-      <section className="section projects-gallery-section" id="gallery"><div className="container"><div className="portfolio-intro" data-reveal><div><span className="section-kicker">{labels.intro}</span><h2>{labels.heading}</h2><p>{labels.introText}</p></div><span className="portfolio-count">{String(filtered.length).padStart(2, '0')} <span>{labels.projectCount}</span></span></div><div className="portfolio-filters" role="group" aria-label={rtl ? 'تصفية المشاريع' : 'Filter projects'}>{categories.map((category, index) => { const label = categoryLabels[locale][index]; return <button type="button" className={active === category ? 'portfolio-filter active' : 'portfolio-filter'} key={category} onClick={() => setActive(category)} aria-pressed={active === category}>{label}</button> })}</div><div className="portfolio-grid">{filtered.map((project, index) => <article className="portfolio-card" data-reveal key={project.title} style={{'--reveal-delay': `${Math.min(index, 4) * 75}ms`} as React.CSSProperties}><a className="portfolio-image" href={project.demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`${labels.open}: ${project.title}`}><Image src={project.image} alt={rtl ? project.imageAlt : project.imageAltEn} width={1200} height={800} sizes="(max-width: 760px) 100vw, 1100px"/><span className="portfolio-image-overlay"><span>{labels.open}<ArrowUpRight aria-hidden="true"/></span></span><span className="portfolio-type">{rtl ? project.arCategory : project.category}</span></a><div className="portfolio-card-content"><div className="portfolio-card-heading"><span className="portfolio-index">{String(index + 1).padStart(2, '0')}</span><h3>{project.title}</h3><ArrowUpRight aria-hidden="true"/></div><p>{rtl ? project.arDescription : project.description}</p><div className="portfolio-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><a className="portfolio-demo-link" href={project.demoUrl} target="_blank" rel="noopener noreferrer">{labels.open}<ArrowUpRight aria-hidden="true"/></a></div></article>)}</div><div className="portfolio-note"><Check aria-hidden="true"/><span>{labels.note}</span></div></div></section>
-      <CustomerReviews rtl={rtl}/>
-      <section className="portfolio-cta"><div className="container"><div className="portfolio-cta-card" data-reveal><span className="section-kicker">{labels.next}</span><h2>{labels.cta}</h2><p>{labels.ctaText}</p><Link className="button button-primary" href={contactHref}>{labels.start}<ArrowUpRight/></Link></div></div></section>
-    </main>
-    <footer className="footer projects-footer"><div className="container"><div className="footer-grid"><div><SperaLogo footer rtl={rtl} homeHref={homeHref}/><p>{labels.footer}</p></div><nav aria-label={rtl ? 'روابط الموقع' : 'Site links'}><Link href={homeHref}>{labels.home}</Link><Link href={servicesHref}>{labels.services}</Link><Link href={projectsHref}>{labels.work}</Link><Link href={contactHref}>{labels.contact}</Link></nav><div className="footer-bottom"><span>© {new Date().getFullYear()} SperaCode</span><Link href={contactHref}>{labels.contact}</Link></div></div></div></footer>
-  </div>
+  const labels = rtl
+    ? {
+        home: 'الرئيسية',
+        services: 'خدماتنا',
+        work: 'أعمالنا',
+        about: 'لماذا نحن',
+        contact: 'اتصل بنا',
+        start: 'ابدأ مشروعك',
+        breadcrumb: 'الرئيسية',
+        heroTop: 'SPERACODE / سابقة الأعمال',
+        heroTitle: (
+          <>
+            أفكار تتحوّل إلى
+            <br />
+            <em>تجارب رقمية رائدة</em>
+          </>
+        ),
+        heroDesc:
+          'استكشف نماذج حقيقية من المواقع والمنصات وتطبيقات الويب وأنظمة إدارة الأعمال التي صممناها وطورناها لعملائنا في مصر والخليج.',
+        explore: 'استعرض المشاريع',
+        count: 'مشروعًا منجزًا',
+        categories: 'تصنيفات رئيسية',
+        links: 'روابط وصول حية',
+        intro: 'المعرض الكامل',
+        heading: 'مشاريع تم تسليمها بنجاح',
+        introText: 'شاهد تصاميم حقيقية من واجهات الأنظمة والمواقع، مع إمكانية زيارة وتجربة النسخة الحية لكل مشروع.',
+        projectCount: 'مشاريع مطابقة',
+        open: 'زيارة الموقع الحي',
+        searchPlaceholder: 'ابحث باسم المشروع أو المجال (مثال: مقاولات، تعليم، متجر)...',
+        note: 'جميع الصور تمثل واجهات حقيقية من مشاريع تم تسليمها لعملائنا. قد تتطلب بعض الأنظمة الإدارية تسجيل دخول.',
+        next: 'مشروعك التالي معنا',
+        cta: 'هل لديك فكرة أو متطلب مشابه؟',
+        ctaText: 'شاركنا متطلباتك، وسنساعدك في بناء حل رقمي فائق الجودة يخدم أهدافك بدقة.',
+        footer: 'نبتكر برمجيات وحلولًا رقمية متقدمة تصنع الفارق لأعمالك.',
+        back: 'العودة للرئيسية',
+        switch: 'English',
+        themeDark: 'تفعيل الوضع الداكن',
+        themeLight: 'تفعيل الوضع الفاتح',
+      }
+    : {
+        home: 'Home',
+        services: 'Services',
+        work: 'Our work',
+        about: 'About',
+        contact: 'Contact',
+        start: 'Start a project',
+        breadcrumb: 'Home',
+        heroTop: 'SPERACODE / PORTFOLIO',
+        heroTitle: (
+          <>
+            Vision turned into
+            <br />
+            <em>impactful digital experiences</em>
+          </>
+        ),
+        heroDesc:
+          'Explore selected web applications, enterprise platforms, and digital products engineered by SperaCode for market-leading enterprises.',
+        explore: 'Explore gallery',
+        count: 'delivered projects',
+        categories: 'core categories',
+        links: 'live direct demos',
+        intro: 'Portfolio Showcase',
+        heading: 'Commercial projects delivered',
+        introText: 'View authentic interface captures and explore the live websites and demo deployments.',
+        projectCount: 'matching projects',
+        open: 'Visit live project',
+        searchPlaceholder: 'Search by project name or technology (e.g., e-commerce, portal, React)...',
+        note: 'Screenshots depict real commercial deployments. Internal dashboards may require authentication.',
+        next: 'Your Next Milestone',
+        cta: 'Ready to build something exceptional?',
+        ctaText: 'Tell us about your upcoming project and let our engineering team shape the optimal software solution.',
+        footer: 'Engineering resilient, scalable digital products for forward-thinking organizations.',
+        back: 'Back to home',
+        switch: 'عربي',
+        themeDark: 'Switch to dark mode',
+        themeLight: 'Switch to light mode',
+      }
+
+  return (
+    <div className={`site projects-page ${dark ? 'theme-dark' : ''}`} dir={rtl ? 'rtl' : 'ltr'}>
+      <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
+
+      <a className="skip-link" href="#main">
+        {rtl ? 'انتقل إلى المحتوى الرئيسي' : 'Skip to main content'}
+      </a>
+
+      {/* Header */}
+      <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <div className="container nav-inner">
+          <SperaLogo rtl={rtl} homeHref={homeHref} />
+
+          <nav className="desktop-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
+            <Link href={homeHref}>{labels.home}</Link>
+            <Link href={servicesHref}>{labels.services}</Link>
+            <Link href={projectsHref} aria-current="page">
+              {labels.work}
+            </Link>
+            <Link href={aboutHref}>{labels.about}</Link>
+            <Link href={contactHref}>{labels.contact}</Link>
+          </nav>
+
+          <div className="nav-actions">
+            <button
+              type="button"
+              className="icon-button locale-button"
+              onClick={toggleLocale}
+              aria-label={rtl ? 'Switch to English' : 'التبديل إلى العربية'}
+            >
+              {labels.switch}
+            </button>
+            <button
+              type="button"
+              className="icon-button"
+              onClick={toggleTheme}
+              aria-label={dark ? labels.themeLight : labels.themeDark}
+              aria-pressed={dark}
+            >
+              {dark ? <Sun /> : <Moon />}
+            </button>
+            <Link className="button button-primary nav-cta" href={contactHref}>
+              {labels.start}
+              <ArrowUpRight />
+            </Link>
+            <button
+              type="button"
+              className="icon-button mobile-menu-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {menuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
+        </div>
+
+        {menuOpen && (
+          <nav className="mobile-nav" aria-label="Mobile navigation">
+            <Link onClick={() => setMenuOpen(false)} href={homeHref}>
+              {labels.home}
+              <ArrowUpRight />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={servicesHref}>
+              {labels.services}
+              <ArrowUpRight />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={projectsHref}>
+              {labels.work}
+              <ArrowUpRight />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={aboutHref}>
+              {labels.about}
+              <ArrowUpRight />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={contactHref}>
+              {labels.contact}
+              <ArrowUpRight />
+            </Link>
+            <button className="button button-secondary" style={{ marginTop: '14px' }} onClick={toggleLocale}>
+              {labels.switch}
+            </button>
+          </nav>
+        )}
+      </header>
+
+      <main id="main">
+        {/* Projects Hero */}
+        <section className="projects-hero">
+          <div className="container projects-hero-inner">
+            <div className="projects-hero-layout">
+              <div className="projects-hero-copy">
+                <Link className="breadcrumb" href={homeHref}>
+                  {labels.breadcrumb} {rtl ? <ArrowLeft size={14} /> : <ArrowRight size={14} />} {labels.work}
+                </Link>
+
+                <span className="section-kicker">{labels.heroTop}</span>
+                <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.2rem)', fontWeight: 800, margin: '14px 0', lineHeight: 1.15 }}>
+                  {labels.heroTitle}
+                </h1>
+                <p style={{ color: 'var(--muted)', fontSize: '16px', lineHeight: 1.85, maxWidth: '580px' }}>
+                  {labels.heroDesc}
+                </p>
+
+                <div className="hero-actions">
+                  <Link className="button button-primary" href={contactHref}>
+                    {labels.start}
+                    <ArrowUpRight aria-hidden="true" />
+                  </Link>
+                  <a className="button button-secondary" href="#gallery">
+                    {labels.explore}
+                    <ArrowDown aria-hidden="true" />
+                  </a>
+                </div>
+
+                <div className="projects-hero-stats">
+                  <span>
+                    <b>{String(projects.length).padStart(2, '0')}+</b> {labels.count}
+                  </span>
+                  <span>
+                    <b>03</b> {labels.categories}
+                  </span>
+                  <span>
+                    <b>100%</b> {labels.links}
+                  </span>
+                </div>
+              </div>
+
+              <div className="projects-hero-visual">
+                <PageHeroVisual dark={dark} rtl={rtl} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Gallery Section */}
+        <section className="section" id="gallery">
+          <div className="container">
+            <div className="portfolio-intro" data-reveal>
+              <div>
+                <span className="section-kicker">{labels.intro}</span>
+                <h2>{labels.heading}</h2>
+                <p>{labels.introText}</p>
+              </div>
+              <span className="portfolio-count">
+                {String(filtered.length).padStart(2, '0')} <span>{labels.projectCount}</span>
+              </span>
+            </div>
+
+            {/* Search and Filters Bar */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '16px',
+                marginBottom: '28px',
+              }}
+            >
+              <div className="portfolio-filters" role="group" aria-label="Filter categories">
+                {categories.map((category, index) => {
+                  const label = categoryLabels[locale][index]
+                  const categoryCount =
+                    category === 'All'
+                      ? projects.length
+                      : projects.filter((p) => p.category === category).length
+
+                  return (
+                    <button
+                      type="button"
+                      className={`portfolio-filter ${active === category ? 'active' : ''}`}
+                      key={category}
+                      onClick={() => setActive(category)}
+                      aria-pressed={active === category}
+                    >
+                      {label} ({categoryCount})
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Instant Search Bar */}
+              <div
+                style={{
+                  position: 'relative',
+                  width: 'min(100%, 320px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Search
+                  size={16}
+                  style={{
+                    position: 'absolute',
+                    insetInlineStart: '14px',
+                    color: 'var(--muted)',
+                    pointerEvents: 'none',
+                  }}
+                />
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={labels.searchPlaceholder}
+                  style={{
+                    width: '100%',
+                    height: '42px',
+                    paddingInlineStart: '40px',
+                    paddingInlineEnd: '14px',
+                    border: '1px solid var(--border)',
+                    borderRadius: '999px',
+                    background: 'var(--surface-card)',
+                    color: 'var(--ink)',
+                    fontSize: '13px',
+                    outline: 'none',
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Portfolio Grid */}
+            <div className="projects-grid">
+              {filtered.map((project, index) => (
+                <article
+                  className="portfolio-card"
+                  data-reveal
+                  key={project.title}
+                  style={{ '--reveal-delay': `${(index % 3) * 80}ms` } as React.CSSProperties}
+                >
+                  <a
+                    className="portfolio-image"
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${labels.open}: ${project.title}`}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={rtl ? project.imageAlt : project.imageAltEn}
+                      width={1000}
+                      height={650}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1050px) 50vw, 380px"
+                      loading="lazy"
+                    />
+                    <span className="portfolio-image-overlay">
+                      <span>
+                        {labels.open}
+                        <ArrowUpRight aria-hidden="true" />
+                      </span>
+                    </span>
+                    <span className="portfolio-type">
+                      {rtl ? project.arCategory : project.category}
+                    </span>
+                  </a>
+
+                  <div className="portfolio-card-content">
+                    <div className="portfolio-card-heading">
+                      <span className="portfolio-index">{String(index + 1).padStart(2, '0')}</span>
+                      <h3>{project.title}</h3>
+                      <ArrowUpRight aria-hidden="true" style={{ color: 'var(--blue)' }} />
+                    </div>
+
+                    <p>{rtl ? project.arDescription : project.description}</p>
+
+                    <div className="portfolio-tags">
+                      {project.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+
+                    <a
+                      className="portfolio-demo-link"
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {labels.open}
+                      <ArrowUpRight aria-hidden="true" />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                justifyContent: 'center',
+                marginTop: '36px',
+                color: 'var(--muted)',
+                fontSize: '13px',
+              }}
+            >
+              <Check size={16} style={{ color: 'var(--cyan)' }} />
+              <span>{labels.note}</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Customer Reviews on Projects Page */}
+        <CustomerReviews rtl={rtl} />
+
+        {/* Bottom CTA Card */}
+        <section className="section" style={{ paddingTop: '0' }}>
+          <div className="container">
+            <div className="portfolio-cta-card" data-reveal>
+              <span className="section-kicker">{labels.next}</span>
+              <h2>{labels.cta}</h2>
+              <p>{labels.ctaText}</p>
+              <Link className="button button-primary" href={contactHref}>
+                {labels.start}
+                <ArrowUpRight />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <SperaLogo footer rtl={rtl} homeHref={homeHref} />
+              <p>{labels.footer}</p>
+            </div>
+
+            <div className="footer-col-nav">
+              <h4>{rtl ? 'التنقل' : 'Navigation'}</h4>
+              <Link href={homeHref}>{labels.home}</Link>
+              <Link href={servicesHref}>{labels.services}</Link>
+              <Link href={projectsHref}>{labels.work}</Link>
+              <Link href={contactHref}>{labels.contact}</Link>
+            </div>
+
+            <div className="footer-col-services">
+              <h4>{rtl ? 'تواصل معنا' : 'Get in touch'}</h4>
+              <Link href={contactHref}>
+                {rtl ? 'طلب عرض سعر واستشارة' : 'Request a Proposal'}
+              </Link>
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  rtl ? 'مرحبًا SperaCode' : 'Hello SperaCode'
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {rtl ? 'محادثة مباشرة على واتساب' : 'Direct WhatsApp'}
+              </a>
+            </div>
+
+            <div className="footer-col-contact">
+              <h4>{rtl ? 'التخصيص' : 'Preferences'}</h4>
+              <div className="footer-toggles">
+                <button onClick={toggleLocale}>{labels.switch}</button>
+                <button onClick={toggleTheme}>{dark ? <Sun /> : <Moon />}</button>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <span>© {new Date().getFullYear()} SperaCode.</span>
+            <a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToTop() }}>
+              {rtl ? 'العودة للأعلى ↑' : 'Back to top ↑'}
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating Action Buttons */}
+      <a
+        className="whatsapp-float"
+        href={`https://wa.me/?text=${encodeURIComponent(
+          rtl ? 'مرحبًا SperaCode، استعرضت سابقة أعمالكم وأود استشارتكم.' : 'Hello SperaCode, I reviewed your work and would like to consult with you.'
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={rtl ? 'تواصل معنا عبر واتساب' : 'Contact on WhatsApp'}
+      >
+        <img
+          className="whatsapp-mark"
+          src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/whatsapp/default.svg"
+          alt=""
+        />
+      </a>
+
+      <button
+        type="button"
+        className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label={rtl ? 'العودة إلى أعلى الصفحة' : 'Back to top'}
+      >
+        <ArrowUp />
+      </button>
+    </div>
+  )
 }

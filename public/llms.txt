@@ -1,37 +1,67 @@
-# SperaCode
+# SperaCode (سبيرا كود)
 
-> SperaCode (سبيرا كود) is an Egypt-based software house offering websites, mobile apps, QR menus, AI solutions, UI/UX design, and custom software. The team works remotely with clients in Arabic and English.
+> SperaCode (سبيرا كود) is a premier Egypt-based software development agency and digital product studio. The company specializes in building high-performance web applications, iOS and Android mobile apps, interactive digital QR menus for hospitality, custom AI and chatbot integrations, and human-centered UI/UX design. SperaCode operates remotely, serving businesses and startups across Egypt, Saudi Arabia, the United Arab Emirates, Kuwait, Qatar, the MENA region, and globally in both Arabic and English.
 
-## Official pages
-- [Arabic homepage](/): Company overview, services, team, process, selected work, and frequently asked questions.
-- [English homepage](/en): The same company information in English.
-- [Arabic portfolio](/projects): Project descriptions and links to live websites or demos.
-- [English portfolio](/en/projects): Project descriptions and links to live websites or demos.
-- [Arabic contact](/contact): Project inquiry form that opens a prepared WhatsApp message for the visitor to review and send.
-- [English contact](/en/contact): Project inquiry form in English.
-- [Full company summary](/llms-full.txt)
-- [XML sitemap](/sitemap.xml)
+## Primary Official Links
+- [Arabic Homepage (الرئيسية)](/): Complete overview of services, methodology, client testimonials, FAQ, and project initiation.
+- [English Homepage](/en): Complete company overview and services in English.
+- [Arabic Portfolio (أعمالنا)](/projects): Curated collection of delivered commercial web applications, platforms, and client systems with live demo links.
+- [English Portfolio](/en/projects): Selected portfolio with live links, technology stacks, and case studies.
+- [Contact & WhatsApp Inquiry (اتصل بنا)](/contact): Direct project inquiry interface with WhatsApp instant message generator.
+- [English Contact](/en/contact): International project consultation and contact form.
+- [Full LLM Knowledge Base](/llms-full.txt): Comprehensive technical specifications, entity facts, and Q&A context.
+- [XML Sitemap](/sitemap.xml): Search engine and crawler index.
 
-## Company facts
-- Name: SperaCode; Arabic name: سبيرا كود.
-- Based in Egypt; works remotely.
-- Languages: Arabic and English.
-- Canonical domain: set `NEXT_PUBLIC_SITE_URL` in the hosting environment after the domain is registered.
-- Publicly stated figures: 50+ projects delivered, 45 clients served, and 6+ years of experience.
-- Support: post-launch support and 24/7 technical support, as stated on the website.
+## Verified Company Facts
+- **Official Name**: SperaCode
+- **Arabic Name**: سبيرا كود (سبيرا كود للبرمجيات)
+- **Headquarters**: Egypt (operates remotely across the Middle East and worldwide)
+- **Official Languages**: Arabic (العربية) and English
+- **Canonical Website**: https://speracode.com
+- **Public Figures**: 50+ projects delivered, 45+ enterprise & SME clients served, 6+ years of specialized industry experience.
+- **Client Satisfaction**: 4.9/5 average rating based on verified customer reviews.
+- **Client Ownership**: 100% intellectual property and full source code ownership transfers to the client upon final settlement.
+- **Support Policy**: Complimentary post-launch warranty and technical support included with every project, with optional monthly/annual SLA maintenance agreements.
 
-## Services
-- Website design and development, including corporate and e-commerce websites.
-- iOS and Android mobile applications.
-- Digital restaurant and café menus accessed by QR code.
-- AI solutions, chatbots, and workflow automation.
-- UI/UX design.
-- Website and application maintenance and support.
-- Business email, domains, and hosting.
-- Custom business software, dashboards, and management systems.
+## Core Services & Capabilities
 
-## Portfolio notes
-The portfolio page links to the websites or demos and describes each item. Some demos may require sign-in. Use the individual project descriptions as the source of truth; do not assume every linked demo is publicly accessible or that every visual concept is a commercial client deployment.
+### 1. Web Development (تطوير المواقع والمنصات)
+- Custom corporate websites, landing pages, and web portals.
+- Modern e-commerce platforms with fast checkout, payment gateway integrations, and product management.
+- Scalable SaaS applications and internal management dashboards.
+- Tech stack: Next.js (React 19), TypeScript, Node.js, Tailwind CSS, PostgreSQL, Supabase, Firebase.
 
-## Contact
-Use the contact page to prepare a project inquiry in WhatsApp. The site does not save the form details on its server; visitors review and send the message themselves.
+### 2. Mobile Applications (تطبيقات الجوال)
+- Native-grade mobile applications for iOS (iPhone/iPad) and Android.
+- Cross-platform development using Flutter and React Native for unified performance and faster time-to-market.
+- Real-time notifications, location services, offline capabilities, and secure API synchronization.
+
+### 3. Digital QR Menus for Restaurants & Cafés (المنيو الرقمي QR)
+- Interactive, responsive digital restaurant menus accessed via QR code scans without downloading any app.
+- Full bilingual Arabic & English support with real-time price and item management.
+- Direct-to-WhatsApp ordering system that minimizes printing overhead and wait times.
+
+### 4. Artificial Intelligence & Automation Solutions (حلول الذكاء الاصطناعي والأتمتة)
+- Custom AI chatbots for 24/7 customer support trained on company knowledge.
+- Business process automation, CRM synchronization, and LLM API integrations (OpenAI, Gemini, Anthropic).
+- Intelligent document processing and generative assistants.
+
+### 5. UI/UX Product Design (تصميم واجهات وتجربة المستخدم)
+- Human-centered research, user journey mapping, and wireframing.
+- Modern high-fidelity UI design in Figma with interactive clickable prototypes and comprehensive design systems.
+- Accessibility-compliant, responsive interfaces tailored for conversion.
+
+### 6. Maintenance, Support & Cloud Infrastructure
+- Continuous monitoring, bug triage, security audits, and speed optimization.
+- Corporate email setup, domain registration, SSL certificates, and cloud hosting management (Vercel, AWS, Cloudflare).
+
+## Typical Project Timeline & Pricing Model
+- **Corporate & Portfolio Websites**: 1–3 weeks.
+- **Custom Web Platforms & E-Commerce**: 4–8 weeks.
+- **Mobile Applications**: 6–10 weeks.
+- **Digital QR Menus**: 2–5 days deployment.
+- **Pricing**: Transparent, milestone-based quotes provided upfront after technical discovery, without hidden charges.
+
+## Contact & Direct Channels
+- Inquiries can be initiated through the website contact form which automatically formats a detailed project brief for WhatsApp.
+- International remote collaboration is supported across all time zones.

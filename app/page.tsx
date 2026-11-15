@@ -1,39 +1,62 @@
 import type { Metadata } from 'next'
 import HomePage from './home-page'
-import { createFaqPageSchema, serializeStructuredData } from './seo-data'
-import { SITE_URL } from './site-config'
+import { createBreadcrumbSchema, createFaqPageSchema, serializeStructuredData } from './seo-data'
+import { SITE_NAME, SITE_NAME_AR, SITE_URL } from './site-config'
 
-const description = 'SperaCode شركة برمجيات في مصر تطوّر المواقع وتطبيقات الجوال والمنيو الرقمي وحلول الذكاء الاصطناعي وتصميم UI/UX، من الفكرة إلى الإطلاق.'
+const description = 'SperaCode (سبيرا كود) شركة برمجيات مصرية متخصصة في تطوير المواقع والمنصات وتطبيقات الجوال والمنيو الرقمي QR وحلول الذكاء الاصطناعي وتصميم UI/UX.'
 
 export const metadata: Metadata = {
-  title: 'شركة برمجيات في مصر',
+  title: 'شركة برمجيات في مصر | تطوير مواقع وتطبيقات جوال وذكاء اصطناعي',
   description,
-  alternates: SITE_URL ? {
+  alternates: {
     canonical: '/',
-    languages: { 'ar-EG': '/', en: '/en', 'x-default': '/' },
-  } : undefined,
+    languages: {
+      'ar-EG': '/',
+      en: '/en',
+      'x-default': '/',
+    },
+  },
   openGraph: {
-    title: 'SperaCode — حلول رقمية لنمو أعمالك',
+    title: `${SITE_NAME} — حلول برمجية متطورة لنمو أعمالك`,
     description,
     url: SITE_URL,
-    siteName: 'SperaCode',
+    siteName: `${SITE_NAME} (${SITE_NAME_AR})`,
     type: 'website',
     locale: 'ar_EG',
     alternateLocale: ['en_US'],
-    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'شعار SperaCode — سبيرا كود' }] : undefined,
+    images: [
+      {
+        url: '/home-hero-dark.png',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — سبيرا كود`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SperaCode — شركة برمجيات في مصر',
+    title: `${SITE_NAME} — شركة برمجيات رائدة في مصر`,
     description,
-    images: SITE_URL ? ['/speracode-mark.png'] : undefined,
+    images: ['/home-hero-dark.png'],
   },
 }
 
 export default function ArabicHomeRoute() {
+  const faqSchema = createFaqPageSchema('ar')
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'الرئيسية', url: '/' },
+  ])
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(createFaqPageSchema('ar')) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(breadcrumbSchema) }}
+      />
       <HomePage initialLocale="ar" />
     </>
   )
