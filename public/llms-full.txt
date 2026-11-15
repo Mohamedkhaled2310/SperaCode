@@ -3,13 +3,13 @@
 ## Company overview
 SperaCode (سبيرا كود) is a software house based in Egypt. It designs, develops, launches, and supports digital products for businesses. The team works remotely and publishes information in Arabic and English.
 
-- Official website: https://lumina-seven-pearl-99.vercel.app/
-- Arabic homepage: https://lumina-seven-pearl-99.vercel.app/
-- English homepage: https://lumina-seven-pearl-99.vercel.app/en
-- Arabic portfolio: https://lumina-seven-pearl-99.vercel.app/projects
-- English portfolio: https://lumina-seven-pearl-99.vercel.app/en/projects
-- Contact: https://lumina-seven-pearl-99.vercel.app/contact
-- English contact: https://lumina-seven-pearl-99.vercel.app/en/contact
+- Canonical domain: configured through `NEXT_PUBLIC_SITE_URL` during deployment.
+- Arabic homepage: /
+- English homepage: /en
+- Arabic portfolio: /projects
+- English portfolio: /en/projects
+- Contact: /contact
+- English contact: /en/contact
 
 ## Public company facts
 - Name: SperaCode

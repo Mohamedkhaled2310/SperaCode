@@ -8,19 +8,19 @@ const description = 'Explore SperaCode websites, digital platforms, and business
 export const metadata: Metadata = {
   title: 'Selected Projects and Portfolio',
   description,
-  alternates: {
+  alternates: SITE_URL ? {
     canonical: '/en/projects',
     languages: { 'ar-EG': '/projects', en: '/en/projects', 'x-default': '/projects' },
-  },
+  } : undefined,
   openGraph: {
     title: 'SperaCode selected work',
     description,
-    url: `${SITE_URL}/en/projects`,
+    url: SITE_URL ? `${SITE_URL}/en/projects` : undefined,
     siteName: 'SperaCode',
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['ar_EG'],
-    images: [{ url: '/hero-devices-light.png', alt: 'Selected SperaCode digital projects' }],
+    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'SperaCode logo' }] : undefined,
   },
 }
 

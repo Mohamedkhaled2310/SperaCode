@@ -8,19 +8,19 @@ const description = 'Tell SperaCode about your website, app, QR menu, AI, or cus
 export const metadata: Metadata = {
   title: 'Contact',
   description,
-  alternates: {
+  alternates: SITE_URL ? {
     canonical: '/en/contact',
     languages: { 'ar-EG': '/contact', en: '/en/contact', 'x-default': '/contact' },
-  },
+  } : undefined,
   openGraph: {
     title: 'Contact',
     description,
-    url: `${SITE_URL}/en/contact`,
+    url: SITE_URL ? `${SITE_URL}/en/contact` : undefined,
     siteName: 'SperaCode',
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['ar_EG'],
-    images: [{ url: '/hero-devices-light.png', alt: 'Contact SperaCode about a digital project' }],
+    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'SperaCode logo' }] : undefined,
   },
 }
 

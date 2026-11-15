@@ -10,6 +10,8 @@ const languageAlternates = (arPath: string, enPath: string) => ({
 })
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (!SITE_URL) return []
+
   const lastModified = new Date()
 
   return [

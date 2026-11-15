@@ -1,6 +1,7 @@
 # SEO launch checklist
 
-- [ ] Verify ownership in Google Search Console and Bing Webmaster Tools; submit `https://lumina-seven-pearl-99.vercel.app/sitemap.xml`. If a custom domain is connected later, update the canonical host and resubmit its sitemap.
+- [ ] Set `NEXT_PUBLIC_SITE_URL` to the canonical HTTPS domain before launch. Then verify ownership in Google Search Console and Bing Webmaster Tools and submit the generated sitemap.
+- [ ] Confirm the canonical host, social image preview, sitemap, robots rules, and GEO references use the registered domain.
 - [ ] Complete Google Business Profile with the Software company category, services, photos, and regular posts.
 - [ ] Keep business name, address, and contact details consistent anywhere the company is listed.
 - [ ] Create and maintain company profiles on LinkedIn, Facebook, Instagram, and GitHub.

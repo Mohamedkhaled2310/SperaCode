@@ -3,15 +3,15 @@ import HomePage from './home-page'
 import { createFaqPageSchema, serializeStructuredData } from './seo-data'
 import { SITE_URL } from './site-config'
 
-const description = 'شركة SperaCode المصرية لتطوير المواقع وتطبيقات الجوال والمنيو الرقمي وحلول الذكاء الاصطناعي وتصميم UI/UX، من الفكرة حتى الإطلاق والدعم.'
+const description = 'SperaCode شركة برمجيات في مصر تطوّر المواقع وتطبيقات الجوال والمنيو الرقمي وحلول الذكاء الاصطناعي وتصميم UI/UX، من الفكرة إلى الإطلاق.'
 
 export const metadata: Metadata = {
   title: 'شركة برمجيات في مصر',
   description,
-  alternates: {
+  alternates: SITE_URL ? {
     canonical: '/',
     languages: { 'ar-EG': '/', en: '/en', 'x-default': '/' },
-  },
+  } : undefined,
   openGraph: {
     title: 'SperaCode — حلول رقمية لنمو أعمالك',
     description,
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ar_EG',
     alternateLocale: ['en_US'],
-    images: [{ url: '/hero-devices-light.png', alt: 'حلول SperaCode الرقمية على الحاسوب والهاتف' }],
+    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'شعار SperaCode — سبيرا كود' }] : undefined,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'SperaCode — شركة برمجيات في مصر',
     description,
-    images: ['/hero-devices-light.png'],
+    images: SITE_URL ? ['/speracode-mark.png'] : undefined,
   },
 }
 

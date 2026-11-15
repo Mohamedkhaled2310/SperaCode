@@ -8,25 +8,25 @@ const description = 'SperaCode is an Egypt-based software house delivering websi
 export const metadata: Metadata = {
   title: 'Software Development Company in Egypt',
   description,
-  alternates: {
+  alternates: SITE_URL ? {
     canonical: '/en',
     languages: { 'ar-EG': '/', en: '/en', 'x-default': '/' },
-  },
+  } : undefined,
   openGraph: {
     title: 'SperaCode — Digital products that drive business growth',
     description,
-    url: `${SITE_URL}/en`,
+    url: SITE_URL ? `${SITE_URL}/en` : undefined,
     siteName: 'SperaCode',
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['ar_EG'],
-    images: [{ url: '/hero-devices-light.png', alt: 'SperaCode digital solutions on desktop and mobile' }],
+    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'SperaCode logo' }] : undefined,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'SperaCode — Software development in Egypt',
     description,
-    images: ['/hero-devices-light.png'],
+    images: SITE_URL ? ['/speracode-mark.png'] : undefined,
   },
 }
 

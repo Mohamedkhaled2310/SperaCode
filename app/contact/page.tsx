@@ -8,19 +8,19 @@ const description = 'تواصل مع SperaCode لمناقشة مشروع موق�
 export const metadata: Metadata = {
   title: 'تواصل معنا',
   description,
-  alternates: {
+  alternates: SITE_URL ? {
     canonical: '/contact',
     languages: { 'ar-EG': '/contact', en: '/en/contact', 'x-default': '/contact' },
-  },
+  } : undefined,
   openGraph: {
     title: 'تواصل مع SperaCode',
     description,
-    url: `${SITE_URL}/contact`,
+    url: SITE_URL ? `${SITE_URL}/contact` : undefined,
     siteName: 'SperaCode',
     type: 'website',
     locale: 'ar_EG',
     alternateLocale: ['en_US'],
-    images: [{ url: '/hero-devices-light.png', alt: 'تواصل مع SperaCode لمناقشة مشروع رقمي' }],
+    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'شعار SperaCode — سبيرا كود' }] : undefined,
   },
 }
 

@@ -1,18 +1,17 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import { SITE_URL } from './site-config'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: SITE_URL ? new URL(SITE_URL) : undefined,
   title: { default: 'SperaCode | شركة برمجيات في مصر', template: '%s | SperaCode' },
-  description: 'شركة SperaCode المصرية لتطوير المواقع وتطبيقات الجوال والمنيو الرقمي وحلول الذكاء الاصطناعي وتصميم UI/UX، باللغة العربية والإنجليزية.',
+  description: 'SperaCode شركة برمجيات في مصر تطوّر المواقع وتطبيقات الجوال والمنيو الرقمي وحلول الذكاء الاصطناعي وتصميم UI/UX، من الفكرة إلى الإطلاق.',
   applicationName: 'SperaCode',
   creator: 'SperaCode',
   publisher: 'SperaCode',
   keywords: ['شركة برمجيات في مصر', 'تطوير مواقع إلكترونية', 'تطبيقات جوال', 'منيو QR للمطاعم', 'حلول الذكاء الاصطناعي', 'تصميم UI/UX', 'software development company Egypt', 'web development Egypt'],
-  alternates: { canonical: '/', languages: { 'ar-EG': '/', en: '/en', 'x-default': '/' } },
+  alternates: SITE_URL ? { canonical: '/', languages: { 'ar-EG': '/', en: '/en', 'x-default': '/' } } : undefined,
   openGraph: {
     title: 'SperaCode — حلول رقمية لنمو أعمالك',
     description: 'مواقع وتطبيقات ومنيو QR وذكاء اصطناعي وتصميم من الفكرة حتى الإطلاق.',
@@ -21,9 +20,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ar_EG',
     alternateLocale: ['en_US'],
-    images: [{ url: '/hero-devices-light.png', alt: 'حلول SperaCode الرقمية على الحاسوب والهاتف' }],
+    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'شعار SperaCode — سبيرا كود' }] : undefined,
   },
-  twitter: { card: 'summary_large_image', title: 'SperaCode — حلول رقمية لنمو أعمالك', description: 'شركة برمجيات في مصر لتطوير المواقع والتطبيقات وحلول الأعمال الرقمية.', images: ['/hero-devices-light.png'] },
+  twitter: { card: 'summary_large_image', title: 'SperaCode — حلول رقمية لنمو أعمالك', description: 'شركة برمجيات في مصر لتطوير المواقع والتطبيقات وحلول الأعمال الرقمية.', images: SITE_URL ? ['/speracode-mark.png'] : undefined },
   robots: {
     index: true,
     follow: true,
@@ -35,15 +34,17 @@ export const viewport: Viewport = { colorScheme: 'light dark', themeColor: [{ me
 const organization = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'ProfessionalService'],
-  '@id': `${SITE_URL}/#organization`,
+  ...(SITE_URL ? {
+    '@id': `${SITE_URL}/#organization`,
+    url: SITE_URL,
+    logo: `${SITE_URL}/speracode-mark.png`,
+    image: `${SITE_URL}/hero-devices-light.png`,
+  } : {}),
   name: 'SperaCode',
   alternateName: 'سبيرا كود',
-  url: SITE_URL,
-  logo: `${SITE_URL}/speracode-mark.png`,
-  image: `${SITE_URL}/hero-devices-light.png`,
   description: 'SperaCode (سبيرا كود) is an Egypt-based software house delivering websites, mobile applications, digital QR menus, AI solutions, and UI/UX design.',
   areaServed: { '@type': 'Country', name: 'Egypt' },
-  contactPoint: { '@type': 'ContactPoint', contactType: 'sales', url: `${SITE_URL}/contact`, availableLanguage: ['Arabic', 'English'] },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'sales', ...(SITE_URL ? { url: `${SITE_URL}/contact` } : {}), availableLanguage: ['Arabic', 'English'] },
   knowsAbout: ['Web development', 'Mobile applications', 'Digital QR menus', 'Artificial intelligence', 'UI/UX design', 'Custom business software'],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -65,7 +66,7 @@ const organization = {
     { '@type': 'PropertyValue', name: 'Years of experience', value: '6+' },
   ],
 }
-const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${SITE_URL}/#website`, name: 'SperaCode', url: SITE_URL, inLanguage: ['ar-EG', 'en'], publisher: { '@id': `${SITE_URL}/#organization` } }
+const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'SperaCode', inLanguage: ['ar-EG', 'en'], ...(SITE_URL ? { '@id': `${SITE_URL}/#website`, url: SITE_URL, publisher: { '@id': `${SITE_URL}/#organization` } } : {}) }
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ar" dir="rtl" suppressHydrationWarning data-scroll-behavior="smooth"><head><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/><Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{__html: `(function(){try{var t=localStorage.getItem('speracode-theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');var l=location.pathname==='/en'||location.pathname.indexOf('/en/')===0?'en':'ar';document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr'}catch(e){}})()`}}/><Script id="organization-jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{__html: JSON.stringify({ '@context': 'https://schema.org', '@graph': [organization, website] })}}/></head><body className="antialiased">{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="ar" dir="rtl" suppressHydrationWarning data-scroll-behavior="smooth"><head><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/><Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{__html: `(function(){try{var t=localStorage.getItem('speracode-theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');var l=location.pathname==='/en'||location.pathname.indexOf('/en/')===0?'en':'ar';document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr'}catch(e){}})()`}}/><Script id="organization-jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{__html: JSON.stringify({ '@context': 'https://schema.org', '@graph': [organization, website] })}}/></head><body className="antialiased">{children}</body></html>
 }

@@ -44,7 +44,7 @@ export function createFaqPageSchema(locale: 'ar' | 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${SITE_URL}${locale === 'ar' ? '/' : '/en'}#faq`,
+    ...(SITE_URL ? { '@id': `${SITE_URL}${locale === 'ar' ? '/' : '/en'}#faq` } : {}),
     inLanguage: locale === 'ar' ? 'ar-EG' : 'en',
     mainEntity: homeFaqs.map((faq) => ({
       '@type': 'Question',
@@ -63,12 +63,13 @@ export function createContactPageSchema(locale: 'ar' | 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    '@id': `${SITE_URL}${path}#webpage`,
-    url: `${SITE_URL}${path}`,
+    ...(SITE_URL ? { '@id': `${SITE_URL}${path}#webpage`, url: `${SITE_URL}${path}` } : {}),
     name: locale === 'ar' ? 'تواصل مع SperaCode' : 'Contact SperaCode',
     inLanguage: locale === 'ar' ? 'ar-EG' : 'en',
-    isPartOf: { '@id': `${SITE_URL}/#website` },
-    mainEntity: { '@id': `${SITE_URL}/#organization` },
+    ...(SITE_URL ? {
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      mainEntity: { '@id': `${SITE_URL}/#organization` },
+    } : {}),
   }
 }
 
@@ -78,11 +79,10 @@ export function createPortfolioPageSchema(locale: 'ar' | 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    '@id': `${SITE_URL}${path}#webpage`,
-    url: `${SITE_URL}${path}`,
+    ...(SITE_URL ? { '@id': `${SITE_URL}${path}#webpage`, url: `${SITE_URL}${path}` } : {}),
     name: locale === 'ar' ? 'أعمال ومشاريع SperaCode' : 'SperaCode selected work',
     inLanguage: locale === 'ar' ? 'ar-EG' : 'en',
-    isPartOf: { '@id': `${SITE_URL}/#website` },
+    ...(SITE_URL ? { isPartOf: { '@id': `${SITE_URL}/#website` } } : {}),
     mainEntity: {
       '@type': 'ItemList',
       itemListOrder: 'https://schema.org/ItemListOrderAscending',
@@ -95,7 +95,7 @@ export function createPortfolioPageSchema(locale: 'ar' | 'en') {
           name: project.title,
           description: locale === 'ar' ? project.arDescription : project.description,
           url: project.demoUrl,
-          image: `${SITE_URL}${project.image}`,
+          ...(SITE_URL ? { image: `${SITE_URL}${project.image}` } : {}),
         },
       })),
     },
@@ -109,9 +109,11 @@ export function serializeStructuredData(data: unknown) {
 export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': `${SITE_URL}/#website`,
   name: SITE_NAME,
-  url: SITE_URL,
   inLanguage: ['ar-EG', 'en'],
-  publisher: { '@id': `${SITE_URL}/#organization` },
+  ...(SITE_URL ? {
+    '@id': `${SITE_URL}/#website`,
+    url: SITE_URL,
+    publisher: { '@id': `${SITE_URL}/#organization` },
+  } : {}),
 }

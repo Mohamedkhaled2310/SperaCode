@@ -8,19 +8,19 @@ const description = 'استكشف أعمال SperaCode في المواقع ال�
 export const metadata: Metadata = {
   title: 'أعمالنا ومشاريعنا',
   description,
-  alternates: {
+  alternates: SITE_URL ? {
     canonical: '/projects',
     languages: { 'ar-EG': '/projects', en: '/en/projects', 'x-default': '/projects' },
-  },
+  } : undefined,
   openGraph: {
     title: 'أعمال ومشاريع SperaCode',
     description,
-    url: `${SITE_URL}/projects`,
+    url: SITE_URL ? `${SITE_URL}/projects` : undefined,
     siteName: 'SperaCode',
     type: 'website',
     locale: 'ar_EG',
     alternateLocale: ['en_US'],
-    images: [{ url: '/hero-devices-light.png', alt: 'نماذج من أعمال SperaCode الرقمية' }],
+    images: SITE_URL ? [{ url: '/speracode-mark.png', alt: 'شعار SperaCode — سبيرا كود' }] : undefined,
   },
 }
 
