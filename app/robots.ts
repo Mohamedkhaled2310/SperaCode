@@ -14,14 +14,26 @@ const aiAndSearchCrawlers = [
   'Bingbot',
   'CCBot',
   'Bytespider',
+  'Meta-ExternalAgent',
+  'cohere-ai',
+  'Amazonbot',
+  'DuckAssistBot',
 ]
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: '*', allow: '/', disallow: '/admin/' },
-      ...aiAndSearchCrawlers.map((userAgent) => ({ userAgent, allow: '/' })),
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/admin/', '/api/'],
+      },
+      ...aiAndSearchCrawlers.map((userAgent) => ({
+        userAgent,
+        allow: '/',
+      })),
     ],
-    ...(SITE_URL ? { sitemap: `${SITE_URL}/sitemap.xml` } : {}),
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   }
 }

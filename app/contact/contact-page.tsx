@@ -2,7 +2,22 @@
 
 import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
-import { ArrowLeft, ArrowRight, ArrowUpLeft, ArrowUpRight, Check, Clock3, Menu, MessageCircle, Moon, Send, Sun, X } from 'lucide-react'
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpLeft,
+  ArrowUpRight,
+  Check,
+  Clock3,
+  Copy,
+  Mail,
+  Menu,
+  MessageCircle,
+  Moon,
+  Send,
+  Sun,
+  X,
+} from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { PageHeroVisual } from '../page-hero-visual'
 
@@ -10,36 +25,154 @@ type Locale = 'ar' | 'en'
 
 const content = {
   ar: {
-    home: 'الرئيسية', work: 'أعمالنا', services: 'خدماتنا', page: 'تواصل معنا',
-    kicker: 'خلّينا نبدأ من هنا', title: 'احكِ لنا عن فكرتك.', intro: 'سواء كانت لديك فكرة واضحة أو ما زلت تستكشف الخيارات، شاركنا ما تحتاجه وسنساعدك في تحديد الخطوة المناسبة.',
-    formTitle: 'أرسل تفاصيل مشروعك', formIntro: 'املأ النموذج وسيفتح لك واتساب برسالة جاهزة للمراجعة والإرسال.',
-    name: 'الاسم', nameHint: 'كيف يمكننا مناداتك؟', phone: 'رقم الهاتف (اختياري)', phoneHint: '+20', company: 'الشركة (اختياري)', companyHint: 'اسم شركتك أو مشروعك',
-    service: 'ما الخدمة التي تبحث عنها؟', serviceOptions: ['اختر الخدمة', 'موقع إلكتروني', 'تطبيق جوال', 'منيو رقمي QR', 'حل ذكاء اصطناعي', 'تصميم UI/UX', 'نظام أو برنامج مخصص', 'أخرى'],
-    timeline: 'موعد الإطلاق المتوقع (اختياري)', timelineOptions: ['اختر موعدًا', 'في أقرب وقت', 'خلال شهر', 'خلال 1–3 أشهر', 'ما زلت أستكشف'],
-    message: 'حدثنا أكثر عن مشروعك', messageHint: 'ما الهدف الذي تريد تحقيقه؟ ومن سيستخدم المنتج؟ أي تفاصيل تساعدنا على فهم احتياجك مرحب بها.',
-    send: 'إرسال عبر واتساب', privacy: 'لن تُحفظ بياناتك على الموقع؛ سيفتح واتساب برسالة جاهزة لتراجعها وتختار المحادثة ثم ترسلها.',
-    sent: 'فتحنا واتساب برسالتك جاهزة. اختر المحادثة، راجع التفاصيل، ثم أرسلها إلى فريق SperaCode.',
-    direct: 'تواصل بالطريقة التي تناسبك', directText: 'راسلنا مباشرة على واتساب أو أرسل تفاصيل مشروعك من النموذج.', whatsappLabel: 'ابدأ محادثة واتساب', whatsappCta: 'افتح واتساب واختر المحادثة',
-    note: 'لمساعدتنا على الرد بشكل أدق', stepsTitle: 'ماذا يحدث بعد إرسال رسالتك؟', steps: [['نراجع احتياجك', 'نطّلع على فكرتك والتفاصيل التي شاركتها.'], ['نقترح الخطوة التالية', 'نرتب معك محادثة قصيرة لفهم الأولويات.'], ['تستلم تصورًا واضحًا', 'نناقش النطاق والخيارات المناسبة قبل البدء.']],
-    faqTitle: 'قبل أن تراسلنا', faqs: [['هل يجب أن أكون متأكدًا من فكرتي؟', 'ليس بالضرورة. يمكننا مساعدتك على ترتيب الفكرة وتحويلها إلى نطاق عمل واضح.'], ['هل تقدمون عرض سعر قبل البدء؟', 'نعم، نراجع المتطلبات أولًا ثم نشاركك تصورًا مكتوبًا للنطاق والتكلفة قبل بدء التنفيذ.'], ['هل يمكنني التواصل حتى لو لم أكن في مصر؟', 'نعم، نعمل عن بُعد ونتابع التواصل والاجتماعات عبر الإنترنت.']],
-    footer: 'نحوّل الأفكار إلى تجارب رقمية مدروسة.', back: 'العودة للرئيسية', themeDark: 'التبديل إلى الوضع الداكن', themeLight: 'التبديل إلى الوضع الفاتح', language: 'Switch to English',
-    required: 'هذا الحقل مطلوب.',
+    home: 'الرئيسية',
+    work: 'أعمالنا',
+    services: 'خدماتنا',
+    page: 'تواصل معنا',
+    kicker: 'ابدأ مشروعك باحترافية',
+    title: 'احكِ لنا عن فكرتك ومشروعك القادم.',
+    intro: 'سواء كانت لديك فكرة مفصلة أو ما زلت تستكشف الإمكانيات، شاركنا ما ترغب في إنجازه وسيقدم لك مهندسونا استشارة تقنية وعرض سعر مخصص في أسرع وقت.',
+    formTitle: 'طلب استشارة وعرض سعر مجاني',
+    formIntro: 'املأ النموذج بالأسفل لإنشاء رسالة متكاملة تفتح في تطبيق واتساب مباشرة للمراجعة والإرسال.',
+    name: 'الاسم الكريم',
+    nameHint: 'ما هو اسمك الكريم؟',
+    phone: 'رقم الهاتف أو واتساب',
+    phoneHint: '+20 100 000 0000',
+    company: 'اسم الشركة أو المشروع (اختياري)',
+    companyHint: 'شركتك أو فكرة مشروعك',
+    service: 'الخدمة المطلوبة',
+    serviceOptions: [
+      'اختر الخدمة',
+      'تطوير موقع أو منصة إلكترونية',
+      'تطبيق جوال (iOS & Android)',
+      'المنيو الرقمي التفاعلي QR',
+      'حلول الذكاء الاصطناعي والأتمتة',
+      'تصميم واجهات وتجربة المستخدم UI/UX',
+      'نظام إدارة أعمال أو ERP مخصص',
+      'استشارة أو فحص فني شامل',
+    ],
+    timeline: 'الموعد المستهدف للإطلاق (اختياري)',
+    timelineOptions: [
+      'اختر الموعد',
+      'في أقرب وقت ممكن (عاجل)',
+      'خلال شهر',
+      'خلال 1–3 أشهر',
+      'ما زلت في مرحلة الاستكشاف والتخطيط',
+    ],
+    message: 'تفاصيل إضافية عن المشروع',
+    messageHint: 'ما هو الهدف من المشروع؟ من هم المستخدمون؟ وما هي أهم الميزات التي ترغب بتضمينها؟',
+    send: 'إرسال ومتابعة عبر واتساب',
+    privacy: 'نحترم خصوصيتك؛ بياناتك تذهب مباشرة في محادثتك مع فريقنا على واتساب ولن تُشارك مع أي طرف خارجي.',
+    sent: 'تم تجهيز الرسالة وفتح واتساب! راجع التفاصيل ثم أرسلها لفريق SperaCode لبدء المحادثة.',
+    copied: 'تم نسخ نص الرسالة إلى الحافظة بنجاح!',
+    direct: 'تواصل فوري ومباشر',
+    directText: 'يمكنك محادثتنا فورًا على واتساب أو التواصل عبر البريد الرسمي.',
+    whatsappLabel: 'محادثة فورية على واتساب',
+    whatsappCta: 'تحدث مع مهندسينا الآن',
+    emailLabel: 'البريد الإلكتروني الرسمي',
+    emailCta: 'contact@speracode.com',
+    note: 'متوسط سرعة الرد لدينا أقل من ساعتين خلال أوقات العمل.',
+    stepsTitle: 'ماذا بعد إرسال رسالتك؟',
+    steps: [
+      ['مراجعة وتحليل المتطلبات', 'يطلع فريقنا الهندسي على فكرة مشروعك ويدرس الحل الأنسب.'],
+      ['جلسة استكشاف سريعة', 'نتواصل معك هاتفيًا أو عبر مكالمة مرئية لتأكيد الأولويات والخصائص.'],
+      ['خطة عمل وعرض سعر مكتوب', 'نقدم لك جدولًا زمنيًا واضحًا وتكلفة ثابتة قبل البدء بأي خطوة.'],
+    ],
+    faqTitle: 'أسئلة مهمة قبل التواصل',
+    faqs: [
+      [
+        'هل الاستشارة الأولية وعرض السعر مجانيان؟',
+        'نعم تمامًا. نقدم استشارة فنية أولية وعرض سعر مفصل بدون أي التزام مالي من طرفك.',
+      ],
+      [
+        'هل يجب أن أمتلك مواصفات فنية جاهزة للبدء؟',
+        'ليس بالضرورة. يمكننا مساعدتك في صياغة الفكرة وترتيب الأولويات وتحويلها إلى متطلبات تقنية واضحة.',
+      ],
+      [
+        'هل يمكن التعاقد والعمل عن بُعد للعملاء خارج مصر؟',
+        'نعم، معظم مشاريعنا تُنفذ بنجاح مع شركائنا في السعودية والإمارات والكويت والخليج عبر قنوات عمل وإدارة مشاريع احترافية عبر الإنترنت.',
+      ],
+    ],
+    footer: 'نحوّل الأفكار الطموحة إلى حلول برمجية استثنائية تقود السوق.',
+    back: 'العودة للصفحة الرئيسية',
+    themeDark: 'تفعيل الوضع الداكن',
+    themeLight: 'تفعيل الوضع الفاتح',
+    language: 'Switch to English',
   },
   en: {
-    home: 'Home', work: 'Our work', services: 'Services', page: 'Contact',
-    kicker: 'A good place to start', title: 'Tell us what you have in mind.', intro: 'Whether you have a detailed brief or are still exploring, share what you need and we will help you find the right next step.',
-    formTitle: 'Tell us about your project', formIntro: 'Complete the form and WhatsApp will open with a ready-to-review message.',
-    name: 'Your name', nameHint: 'What should we call you?', phone: 'Phone number (optional)', phoneHint: '+20', company: 'Company (optional)', companyHint: 'Your company or project',
-    service: 'What do you need help with?', serviceOptions: ['Choose a service', 'Website', 'Mobile app', 'QR digital menu', 'AI solution', 'UI/UX design', 'Custom software', 'Something else'],
-    timeline: 'Target launch (optional)', timelineOptions: ['Select a timeframe', 'As soon as possible', 'Within a month', 'In 1–3 months', 'Still exploring'],
-    message: 'A little more about your project', messageHint: 'What are you hoping to achieve? Who will use it? Any context that helps us understand your needs is welcome.',
-    send: 'Send via WhatsApp', privacy: 'Your details are not stored on this site. WhatsApp opens with a ready-to-review message; choose a chat and send it yourself.',
-    sent: 'WhatsApp opened with your message. Choose a chat, review the details, and send it to the SperaCode team.',
-    direct: 'Reach us your way', directText: 'Message us on WhatsApp or send your project details using the form.', whatsappLabel: 'Start a WhatsApp chat', whatsappCta: 'Open WhatsApp and choose a chat',
-    note: 'A little context goes a long way', stepsTitle: 'What happens next?', steps: [['We review your brief', 'We read your idea and the details you shared.'], ['We suggest a next step', 'We arrange a short conversation to understand your priorities.'], ['We outline the options', 'We discuss scope and a suitable approach before work begins.']],
-    faqTitle: 'A few quick answers', faqs: [['Do I need a complete brief?', 'Not at all. We can help shape the idea and turn it into a clear scope of work.'], ['Will I get a quote before work starts?', 'Yes. We review the requirements and share a written scope and estimate before implementation.'], ['Can I contact you from outside Egypt?', 'Absolutely. We work remotely and hold meetings online.']],
-    footer: 'Thoughtful digital experiences, built around your goals.', back: 'Back to home', themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', language: 'التبديل إلى العربية',
-    required: 'This field is required.',
+    home: 'Home',
+    work: 'Our work',
+    services: 'Services',
+    page: 'Contact',
+    kicker: 'ENGINEERING YOUR VISION',
+    title: 'Tell us about your next project.',
+    intro: 'Whether you have a comprehensive RFP or are evaluating technological options, share your vision and our software architects will provide strategic recommendations and an estimate.',
+    formTitle: 'Request a Free Consultation & Quote',
+    formIntro: 'Fill in the project details below to generate a formatted brief that opens directly in WhatsApp for review.',
+    name: 'Your Name',
+    nameHint: 'What should we call you?',
+    phone: 'Phone or WhatsApp Number',
+    phoneHint: '+20 100 000 0000',
+    company: 'Company / Organization (Optional)',
+    companyHint: 'Your company or project name',
+    service: 'Required Service',
+    serviceOptions: [
+      'Choose a service',
+      'Web Application or Platform',
+      'Mobile App (iOS & Android)',
+      'Digital Interactive QR Menu',
+      'AI & Workflow Automation',
+      'UI/UX Product Design',
+      'Custom ERP or Management Tool',
+      'Code Audit & Re-architecture',
+    ],
+    timeline: 'Target Launch Timeline (Optional)',
+    timelineOptions: [
+      'Select a timeframe',
+      'As soon as possible (Urgent)',
+      'Within 1 month',
+      'In 1–3 months',
+      'Currently planning and budgeting',
+    ],
+    message: 'Project Scope & Requirements',
+    messageHint: 'What are your key goals? Who will use this solution? What features are essential?',
+    send: 'Send & Continue on WhatsApp',
+    privacy: 'Your privacy is paramount; this form prepares a message directly on your device without storing inputs on our servers.',
+    sent: 'WhatsApp has opened with your prepared brief! Review and send it to connect with our engineers.',
+    copied: 'Message copied to clipboard!',
+    direct: 'Direct Channels',
+    directText: 'Prefer instant chat? Reach out directly via WhatsApp or email.',
+    whatsappLabel: 'Instant WhatsApp Chat',
+    whatsappCta: 'Chat directly with our team',
+    emailLabel: 'Official Support Email',
+    emailCta: 'contact@speracode.com',
+    note: 'Average response time is under 2 hours during active business hours.',
+    stepsTitle: 'What happens after sending?',
+    steps: [
+      ['Engineering Review', 'Our architects assess your brief and technical requirements.'],
+      ['Brief Discovery Call', 'We schedule a quick call to refine objectives and key workflows.'],
+      ['Milestone Proposal', 'You receive an itemized proposal with clear milestones and pricing.'],
+    ],
+    faqTitle: 'Frequently Asked Questions',
+    faqs: [
+      [
+        'Are initial consultations and proposals complimentary?',
+        'Yes, 100%. We provide discovery sessions and comprehensive technical quotes at zero cost or obligation.',
+      ],
+      [
+        'Do I need a finalized technical brief before reaching out?',
+        'Not at all. We frequently assist clients in shaping their ideas into clear engineering roadmaps.',
+      ],
+      [
+        'Do you collaborate with clients internationally outside Egypt?',
+        'Yes. We operate a seamless remote delivery model for enterprise clients across GCC (Saudi Arabia, UAE, Kuwait, Qatar) and globally.',
+      ],
+    ],
+    footer: 'Engineering resilient, scalable digital products for forward-thinking organizations.',
+    back: 'Back to home',
+    themeDark: 'Switch to dark mode',
+    themeLight: 'Switch to light mode',
+    language: 'التبديل إلى العربية',
   },
 } as const
 
@@ -48,22 +181,57 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
   const [dark, setDark] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  // Form field states for live interactive preview
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [company, setCompany] = useState('')
+  const [selectedService, setSelectedService] = useState('')
+  const [selectedTimeline, setSelectedTimeline] = useState('')
+  const [messageText, setMessageText] = useState('')
+
   const t = content[locale]
   const rtl = locale === 'ar'
   const basePath = rtl ? '' : '/en'
   const homeHref = basePath || '/'
   const servicesHref = `${homeHref}#services`
-  const aboutHref = `${homeHref}#about`
+  const aboutHref = `${homeHref}#why`
   const projectsHref = `${basePath}/projects`
   const contactHref = `${basePath}/contact`
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(rtl ? 'مرحبًا SperaCode، أود مناقشة مشروع.' : 'Hello SperaCode, I would like to discuss a project.')}`
+
+  const whatsappDirectUrl = `https://wa.me/?text=${encodeURIComponent(
+    rtl
+      ? 'مرحبًا SperaCode، أود مناقشة مشروع جديد معكم.'
+      : 'Hello SperaCode, I would like to discuss a project with your team.'
+  )}`
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('speracode-theme')
     const nextDark = savedTheme ? savedTheme === 'dark' : document.documentElement.classList.contains('dark')
     setDark(nextDark)
+    document.documentElement.classList.toggle('dark', nextDark)
     document.documentElement.lang = initialLocale
     document.documentElement.dir = initialLocale === 'ar' ? 'rtl' : 'ltr'
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            revealObserver.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    document.querySelectorAll('[data-reveal], .contact-form-card, .contact-sidebar > div, .contact-faq').forEach((el) => {
+      el.setAttribute('data-reveal', '')
+      revealObserver.observe(el)
+    })
+
+    return () => revealObserver.disconnect()
   }, [initialLocale])
 
   function toggleLocale() {
@@ -77,119 +245,442 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
     document.documentElement.classList.toggle('dark', next)
   }
 
-  function sendToWhatsApp(event: FormEvent<HTMLFormElement>) {
+  const generatedBrief = `${rtl ? 'مرحبًا فريق SperaCode، أود مناقشة مشروع جديد:' : 'Hello SperaCode team, I would like to discuss a new project:'}
+
+• ${t.name}: ${name || '—'}
+• ${t.phone}: ${phone || '—'}
+• ${t.company}: ${company || '—'}
+• ${t.service}: ${selectedService || '—'}
+• ${t.timeline}: ${selectedTimeline || '—'}
+
+${t.message}:
+${messageText || '—'}`
+
+  function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
-    const fields = [
-      `${t.name}: ${form.get('name')}`,
-      `${t.phone}: ${form.get('phone') || '—'}`,
-      `${t.company}: ${form.get('company') || '—'}`,
-      `${t.service}: ${form.get('service')}`,
-      `${t.timeline}: ${form.get('timeline') || '—'}`,
-      '',
-      `${t.message}:`,
-      `${form.get('message')}`,
-    ]
-    const message = `${rtl ? 'مرحبًا SperaCode، أود مناقشة مشروعي.' : 'Hello SperaCode, I would like to discuss my project.'}\n\n${fields.join('\n')}`
-    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')
+    window.open(`https://wa.me/?text=${encodeURIComponent(generatedBrief)}`, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
+  }
+
+  function copyBrief() {
+    navigator.clipboard.writeText(generatedBrief)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 3000)
   }
 
   return (
     <div className={`site contact-site ${dark ? 'theme-dark' : ''}`} dir={rtl ? 'rtl' : 'ltr'}>
-      <a className="skip-link" href="#contact-main">{rtl ? 'انتقل إلى المحتوى' : 'Skip to content'}</a>
+      <a className="skip-link" href="#contact-main">
+        {rtl ? 'انتقل إلى المحتوى الرئيسي' : 'Skip to main content'}
+      </a>
+
+      {/* Header */}
       <header className="navbar contact-navbar">
-        <div className="container contact-nav-inner">
+        <div className="container nav-inner">
           <SperaLogo rtl={rtl} homeHref={homeHref} />
-          <nav aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
+
+          <nav className="desktop-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
             <Link href={homeHref}>{t.home}</Link>
             <Link href={servicesHref}>{t.services}</Link>
             <Link href={projectsHref}>{t.work}</Link>
-            <Link href={aboutHref}>{rtl ? 'من نحن' : 'About'}</Link>
-            <Link href={contactHref}>{t.page}</Link>
+            <Link href={aboutHref}>{rtl ? 'لماذا نحن' : 'About'}</Link>
+            <Link href={contactHref} aria-current="page">
+              {t.page}
+            </Link>
           </nav>
-          <div className="contact-nav-actions">
-            <button type="button" className="icon-button locale-button" onClick={toggleLocale} aria-label={t.language}>{rtl ? 'EN' : 'عربي'}</button>
-            <button type="button" className="icon-button" onClick={toggleTheme} aria-label={dark ? t.themeLight : t.themeDark}>{dark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}</button>
-            <button type="button" className="icon-button contact-menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? (rtl ? 'إغلاق القائمة' : 'Close menu') : (rtl ? 'فتح القائمة' : 'Open menu')}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+
+          <div className="nav-actions">
+            <button
+              type="button"
+              className="icon-button locale-button"
+              onClick={toggleLocale}
+              aria-label={t.language}
+            >
+              {rtl ? 'EN' : 'عربي'}
+            </button>
+            <button
+              type="button"
+              className="icon-button"
+              onClick={toggleTheme}
+              aria-label={dark ? t.themeLight : t.themeDark}
+            >
+              {dark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+            </button>
+            <button
+              type="button"
+              className="icon-button mobile-menu-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </button>
           </div>
         </div>
-        {menuOpen && <nav className="mobile-nav contact-mobile-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
-          <Link onClick={() => setMenuOpen(false)} href={homeHref}>{t.home}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href={servicesHref}>{t.services}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href={projectsHref}>{t.work}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href={aboutHref}>{rtl ? 'من نحن' : 'About'}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href={contactHref}>{t.page}<ArrowUpRight aria-hidden="true" /></Link>
-        </nav>}
+
+        {menuOpen && (
+          <nav className="mobile-nav" aria-label="Mobile navigation">
+            <Link onClick={() => setMenuOpen(false)} href={homeHref}>
+              {t.home}
+              <ArrowUpRight aria-hidden="true" />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={servicesHref}>
+              {t.services}
+              <ArrowUpRight aria-hidden="true" />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={projectsHref}>
+              {t.work}
+              <ArrowUpRight aria-hidden="true" />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={aboutHref}>
+              {rtl ? 'لماذا نحن' : 'About'}
+              <ArrowUpRight aria-hidden="true" />
+            </Link>
+            <Link onClick={() => setMenuOpen(false)} href={contactHref}>
+              {t.page}
+              <ArrowUpRight aria-hidden="true" />
+            </Link>
+            <button className="button button-secondary" style={{ marginTop: '14px' }} onClick={toggleLocale}>
+              {t.language}
+            </button>
+          </nav>
+        )}
       </header>
 
-      <main id="contact-main" className="contact-main">
+      <main id="contact-main">
+        {/* Contact Hero */}
         <section className="contact-hero container">
           <div className="contact-hero-copy">
-            <span className="contact-kicker"><span className="contact-kicker-mark" />{t.kicker}</span>
+            <span className="section-kicker">
+              <span className="live-dot" />
+              {t.kicker}
+            </span>
             <h1>{t.title}</h1>
             <p>{t.intro}</p>
-            <div className="contact-hero-actions">
-              <a className="button button-primary" href="#contact-form">{rtl ? 'احكِ لنا عن مشروعك' : 'Tell us about your project'}{rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}</a>
-              <a className="button button-secondary" href={whatsappUrl} target="_blank" rel="noreferrer">{rtl ? 'محادثة واتساب' : 'Chat on WhatsApp'}<MessageCircle aria-hidden="true" /></a>
+
+            <div className="hero-actions">
+              <a className="button button-primary" href="#contact-form">
+                {rtl ? 'تعبئة تفاصيل المشروع' : 'Start project brief'}
+                {rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+              </a>
+              <a
+                className="button button-secondary"
+                href={whatsappDirectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {rtl ? 'محادثة فورية على واتساب' : 'Chat on WhatsApp'}
+                <MessageCircle aria-hidden="true" />
+              </a>
             </div>
-            <div className="contact-hero-trust" aria-label={rtl ? 'مميزات العمل معنا' : 'Why work with us'}>
-              <span><Check aria-hidden="true" />{rtl ? 'تسعير واضح' : 'Clear pricing'}</span>
-              <span><Check aria-hidden="true" />{rtl ? 'دعم بعد الإطلاق' : 'Post-launch support'}</span>
-              <span><Check aria-hidden="true" />{rtl ? 'التزام بالمواعيد' : 'On-time delivery'}</span>
+
+            <div className="trust-points">
+              <span>
+                <Check aria-hidden="true" />
+                {rtl ? 'استشارة مجانية بالكامل' : '100% free consultation'}
+              </span>
+              <span>
+                <Check aria-hidden="true" />
+                {rtl ? 'عرض سعر مفصل ومكتوب' : 'Detailed fixed quote'}
+              </span>
+              <span>
+                <Check aria-hidden="true" />
+                {rtl ? 'ضمان فني بعد التسليم' : 'Post-launch warranty'}
+              </span>
             </div>
           </div>
-          <div className="contact-hero-visual"><PageHeroVisual dark={dark} rtl={rtl} /></div>
+
+          <div className="contact-hero-visual">
+            <PageHeroVisual dark={dark} rtl={rtl} />
+          </div>
         </section>
 
+        {/* Contact Workspace Grid */}
         <section id="contact-form" className="contact-workspace container" aria-label={t.page}>
           <div className="contact-form-card">
             <div className="contact-card-heading">
-              <span className="contact-card-icon"><Send aria-hidden="true" /></span>
-              <div><span className="contact-eyebrow">{rtl ? 'ابدأ محادثة' : 'START A CONVERSATION'}</span><h2>{t.formTitle}</h2><p>{t.formIntro}</p></div>
-            </div>
-            <form className="contact-form" onSubmit={sendToWhatsApp}>
-              <div className="contact-fields-grid">
-                <label className="contact-field"><span>{t.name} <b aria-hidden="true">*</b></span><input autoComplete="name" name="name" placeholder={t.nameHint} required /></label>
-                <label className="contact-field"><span>{t.company}</span><input autoComplete="organization" name="company" placeholder={t.companyHint} /></label>
-                <label className="contact-field"><span>{t.phone}</span><input autoComplete="tel" dir="ltr" inputMode="tel" name="phone" placeholder={t.phoneHint} /></label>
-                <label className="contact-field"><span>{t.service} <b aria-hidden="true">*</b></span><select key={locale} name="service" defaultValue="" required>{t.serviceOptions.map((item, index) => <option value={index === 0 ? '' : item} key={item} disabled={index === 0}>{item}</option>)}</select></label>
-                <label className="contact-field"><span>{t.timeline}</span><select key={locale} name="timeline" defaultValue="">{t.timelineOptions.map((item, index) => <option value={index === 0 ? '' : item} key={item}>{item}</option>)}</select></label>
-                <label className="contact-field contact-field-message"><span>{t.message} <b aria-hidden="true">*</b></span><textarea name="message" rows={5} placeholder={t.messageHint} required /></label>
+              <span className="contact-card-icon">
+                <Send aria-hidden="true" />
+              </span>
+              <div>
+                <span className="section-kicker">{rtl ? 'النموذج الذكي' : 'DIRECT BRIEF'}</span>
+                <h2>{t.formTitle}</h2>
+                <p>{t.formIntro}</p>
               </div>
-              <button className="contact-submit" type="submit">{t.send}{rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}</button>
-              <p className="contact-privacy"><Check aria-hidden="true" />{t.privacy}</p>
-              {submitted && <p className="contact-success" role="status" aria-live="polite">{t.sent}</p>}
+            </div>
+
+            <form className="contact-form" onSubmit={handleFormSubmit}>
+              <div className="contact-fields-grid">
+                <label className="contact-field">
+                  <span>
+                    {t.name} <b style={{ color: '#ef4444' }}>*</b>
+                  </span>
+                  <input
+                    autoComplete="name"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={t.nameHint}
+                    required
+                  />
+                </label>
+
+                <label className="contact-field">
+                  <span>{t.company}</span>
+                  <input
+                    autoComplete="organization"
+                    name="company"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    placeholder={t.companyHint}
+                  />
+                </label>
+
+                <label className="contact-field">
+                  <span>{t.phone}</span>
+                  <input
+                    autoComplete="tel"
+                    dir="ltr"
+                    inputMode="tel"
+                    name="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder={t.phoneHint}
+                  />
+                </label>
+
+                <div className="contact-field contact-field-full">
+                  <span>
+                    {t.service} <b style={{ color: '#ef4444' }}>*</b>
+                  </span>
+                  <div className="service-selector-pills">
+                    {t.serviceOptions.slice(1).map((opt) => (
+                      <button
+                        type="button"
+                        key={opt}
+                        className={`service-pill-btn ${selectedService === opt ? 'active' : ''}`}
+                        onClick={() => setSelectedService(opt)}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  <input type="hidden" name="service" value={selectedService} required />
+                </div>
+
+                <div className="contact-field contact-field-full">
+                  <span>{t.timeline}</span>
+                  <div className="service-selector-pills">
+                    {t.timelineOptions.slice(1).map((opt) => (
+                      <button
+                        type="button"
+                        key={opt}
+                        className={`service-pill-btn ${selectedTimeline === opt ? 'active' : ''}`}
+                        onClick={() => setSelectedTimeline(opt)}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  <input type="hidden" name="timeline" value={selectedTimeline} />
+                </div>
+
+                <label className="contact-field contact-field-full">
+                  <span>
+                    {t.message} <b style={{ color: '#ef4444' }}>*</b>
+                  </span>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    value={messageText}
+                    onChange={(e) => setMessageText(e.target.value)}
+                    placeholder={t.messageHint}
+                    required
+                  />
+                </label>
+              </div>
+
+              {/* Live Preview Box */}
+              {(name || selectedService || messageText) && (
+                <div className="live-message-preview">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <b>{rtl ? 'معاينة الرسالة التي ستصل عبر واتساب:' : 'Live WhatsApp Message Preview:'}</b>
+                    <button
+                      type="button"
+                      onClick={copyBrief}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        fontSize: '11px',
+                        color: 'var(--blue)',
+                        fontWeight: 700,
+                      }}
+                    >
+                      <Copy size={13} />
+                      {copied ? t.copied : (rtl ? 'نسخ النص' : 'Copy text')}
+                    </button>
+                  </div>
+                  <pre
+                    style={{
+                      whiteSpace: 'pre-wrap',
+                      fontFamily: 'inherit',
+                      fontSize: '12px',
+                      color: 'var(--muted)',
+                      margin: '8px 0 0',
+                    }}
+                  >
+                    {generatedBrief}
+                  </pre>
+                </div>
+              )}
+
+              <button className="contact-submit" type="submit">
+                {t.send}
+                {rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+              </button>
+
+              <p className="contact-privacy">
+                <Check aria-hidden="true" style={{ color: 'var(--cyan)' }} />
+                {t.privacy}
+              </p>
+
+              {submitted && (
+                <p className="contact-success" role="status" aria-live="polite">
+                  {t.sent}
+                </p>
+              )}
             </form>
           </div>
 
+          {/* Sidebar */}
           <aside className="contact-sidebar">
             <div className="contact-direct-card">
-              <span className="contact-eyebrow">{rtl ? 'تواصل مباشر' : 'DIRECT CONTACT'}</span>
+              <span className="section-kicker">{rtl ? 'قنوات مباشرة' : 'DIRECT CONTACT'}</span>
               <h2>{t.direct}</h2>
               <p>{t.directText}</p>
-              <a className="contact-channel contact-channel-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
-                <span className="contact-channel-icon"><MessageCircle aria-hidden="true" /></span>
-                <span><small>{t.whatsappLabel}</small><strong>{t.whatsappCta}</strong></span>
-                {rtl ? <ArrowUpLeft aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
-              </a>
-              <div className="contact-response-note"><Clock3 aria-hidden="true" /><span>{t.note}</span></div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '16px' }}>
+                <a
+                  className="contact-channel contact-channel-whatsapp"
+                  href={whatsappDirectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="contact-channel-icon">
+                    <MessageCircle aria-hidden="true" />
+                  </span>
+                  <span className="contact-channel-text">
+                    <small>{t.whatsappLabel}</small>
+                    <strong>{t.whatsappCta}</strong>
+                  </span>
+                  {rtl ? <ArrowUpLeft aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
+                </a>
+
+                <a className="contact-channel" href="mailto:contact@speracode.com">
+                  <span className="contact-channel-icon">
+                    <Mail aria-hidden="true" />
+                  </span>
+                  <span className="contact-channel-text">
+                    <small>{t.emailLabel}</small>
+                    <strong>{t.emailCta}</strong>
+                  </span>
+                  {rtl ? <ArrowUpLeft aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
+                </a>
+              </div>
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  marginTop: '18px',
+                  color: 'var(--muted)',
+                  fontSize: '12px',
+                }}
+              >
+                <Clock3 size={15} style={{ color: 'var(--blue)' }} />
+                <span>{t.note}</span>
+              </div>
             </div>
+
             <div className="contact-process-card">
-              <span className="contact-eyebrow">{rtl ? 'الخطوات التالية' : 'NEXT STEPS'}</span>
+              <span className="section-kicker">{rtl ? 'الخطوات القادمة' : 'NEXT MILESTONES'}</span>
               <h2>{t.stepsTitle}</h2>
-              <ol>{t.steps.map(([title, description], index) => <li key={title}><span className="contact-step-number">0{index + 1}</span><span><strong>{title}</strong><small>{description}</small></span></li>)}</ol>
+              <ol style={{ padding: 0, margin: '18px 0 0', listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {t.steps.map(([title, description], index) => (
+                  <li key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <span
+                      style={{
+                        width: '28px',
+                        height: '28px',
+                        borderRadius: '8px',
+                        background: 'var(--blue-light)',
+                        color: 'var(--blue)',
+                        display: 'grid',
+                        placeItems: 'center',
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        flex: 'none',
+                      }}
+                    >
+                      0{index + 1}
+                    </span>
+                    <div>
+                      <strong style={{ display: 'block', fontSize: '13px', color: 'var(--ink)' }}>
+                        {title}
+                      </strong>
+                      <small style={{ color: 'var(--muted)', fontSize: '12px', lineHeight: 1.6 }}>
+                        {description}
+                      </small>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
           </aside>
         </section>
 
-        <section className="contact-faq container">
-          <div className="contact-faq-heading"><span className="contact-eyebrow">{rtl ? 'إجابات سريعة' : 'QUICK ANSWERS'}</span><h2>{t.faqTitle}</h2></div>
-          <div className="contact-faq-list">{t.faqs.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div>
+        {/* Contact FAQ */}
+        <section className="container section" style={{ paddingTop: '64px' }}>
+          <div className="faq-layout">
+            <div>
+              <span className="section-kicker">{rtl ? 'إجابات سريعة' : 'QUICK ANSWERS'}</span>
+              <h2 style={{ fontSize: '28px', fontWeight: 800, margin: '8px 0' }}>{t.faqTitle}</h2>
+              <p style={{ color: 'var(--muted)', fontSize: '15px' }}>
+                {rtl
+                  ? 'معلومات أساسية حول آلية العمل، الاستشارات المجانية، والتعاقد مع SperaCode.'
+                  : 'Important facts regarding consultations, delivery terms, and international work.'}
+              </p>
+            </div>
+
+            <div className="faq-list">
+              {t.faqs.map(([question, answer]) => (
+                <details className="faq-item" key={question}>
+                  <summary>
+                    {question}
+                    <span className="faq-plus" />
+                  </summary>
+                  <p>{answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
         </section>
       </main>
 
-      <footer className="contact-footer"><div className="container contact-footer-inner"><div><SperaLogo footer rtl={rtl} homeHref={homeHref} /><p>{t.footer}</p></div><Link className="contact-back-link" href={homeHref}>{t.back}{rtl ? <ArrowRight aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}</Link></div></footer>
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container contact-footer-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <SperaLogo footer rtl={rtl} homeHref={homeHref} />
+            <p style={{ color: 'var(--muted)', fontSize: '13px', margin: '8px 0 0' }}>{t.footer}</p>
+          </div>
+          <Link className="button button-secondary" href={homeHref}>
+            {t.back}
+            {rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+          </Link>
+        </div>
+      </footer>
     </div>
   )
 }
