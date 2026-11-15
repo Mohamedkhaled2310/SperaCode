@@ -1,6 +1,6 @@
 # SEO launch checklist
 
-- [ ] Verify ownership in Google Search Console and Bing Webmaster Tools; submit `https://speracode.com/sitemap.xml`.
+- [ ] Verify ownership in Google Search Console and Bing Webmaster Tools; submit `https://lumina-seven-pearl-99.vercel.app/sitemap.xml`. If a custom domain is connected later, update the canonical host and resubmit its sitemap.
 - [ ] Complete Google Business Profile with the Software company category, services, photos, and regular posts.
 - [ ] Keep business name, address, and contact details consistent anywhere the company is listed.
 - [ ] Create and maintain company profiles on LinkedIn, Facebook, Instagram, and GitHub.
@@ -12,3 +12,4 @@
 - [ ] Replace all bracketed contact, social, project, team, testimonial, price, and founding-year placeholders before launch.
 - [ ] Configure analytics and consent only after the relevant IDs and privacy requirements are confirmed.
 - [ ] Verify all canonical, hreflang, JSON-LD, sitemap, robots, and contact details in production.
+- [ ] Add the production domain to Google Search Console and Bing Webmaster Tools, then monitor index coverage and rich-result reports.

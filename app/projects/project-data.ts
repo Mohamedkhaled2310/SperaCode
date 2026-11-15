@@ -7,6 +7,7 @@ export type PortfolioProject = {
   tags: string[]
   image: string
   imageAlt: string
+  imageAltEn: string
   demoUrl: string
 }
 
@@ -20,6 +21,7 @@ export const projects: PortfolioProject[] = [
     tags: ['مقاولات', 'بنية تحتية', 'توريدات'],
     image: '/projects/4m-group.png',
     imageAlt: 'لقطة من الصفحة الرئيسية لموقع 4M Group تعرض حلول المقاولات والتوريدات.',
+    imageAltEn: 'Screenshot of the 4M Group home page highlighting contracting and supply services.',
     demoUrl: 'https://www.4mgroupcs.com/',
   },
   {
@@ -31,6 +33,7 @@ export const projects: PortfolioProject[] = [
     tags: ['ترفيه عائلي', 'ألعاب أركيد', 'Kids Area'],
     image: '/projects/fun-group.png',
     imageAlt: 'صورة غلاف توضيحية لمركز ترفيه عائلي يضم ألعاب أركيد ومنطقة ألعاب أطفال.',
+    imageAltEn: 'Illustrative cover image of a family entertainment center with arcade games and a children’s play area.',
     demoUrl: 'https://www.fungroup-eg.com/',
   },
   {
@@ -42,6 +45,7 @@ export const projects: PortfolioProject[] = [
     tags: ['تعليم', 'مكتبة رقمية', 'اختبارات'],
     image: '/projects/schoolq8.png',
     imageAlt: 'صورة غلاف توضيحية لمنصة تعليمية على جهاز لوحي مع كتب ومواد دراسية.',
+    imageAltEn: 'Illustrative cover image of an educational platform on a tablet with books and study materials.',
     demoUrl: 'https://schoolq8.com/',
   },
   {
@@ -53,6 +57,7 @@ export const projects: PortfolioProject[] = [
     tags: ['طرق', 'مقاولات', 'عربي / English'],
     image: '/projects/red-sea-roads.png',
     imageAlt: 'صورة غلاف توضيحية لطريق حديث ومعدات أعمال بنية تحتية.',
+    imageAltEn: 'Illustrative cover image of a modern road and infrastructure construction equipment.',
     demoUrl: 'https://www.redsearoadseg.com',
   },
   {
@@ -64,6 +69,7 @@ export const projects: PortfolioProject[] = [
     tags: ['إنشاءات', 'تشغيل وصيانة', 'السعودية'],
     image: '/projects/hz-construction.png',
     imageAlt: 'صورة غلاف توضيحية لموقع إنشاءات وبنية تحتية في السعودية.',
+    imageAltEn: 'Illustrative cover image for a Saudi construction and infrastructure company website.',
     demoUrl: 'https://www.hz-ksa.com',
   },
   {
@@ -75,6 +81,7 @@ export const projects: PortfolioProject[] = [
     tags: ['ERP', 'مشتريات', 'إدارة مخزون'],
     image: '/projects/titan-trade.png',
     imageAlt: 'صورة غلاف توضيحية لنظام ERP وإدارة مخزون على شاشة حاسوب.',
+    imageAltEn: 'Illustrative cover image of an ERP inventory management system on a computer screen.',
     demoUrl: 'https://system.titantrade-eg.com',
   },
   {
@@ -86,6 +93,7 @@ export const projects: PortfolioProject[] = [
     tags: ['هندسة صناعية', 'أتمتة', 'B2B'],
     image: '/projects/esw-engineering.png',
     imageAlt: 'صورة غلاف توضيحية لخط إنتاج صناعي وحلول أتمتة هندسية.',
+    imageAltEn: 'Illustrative cover image of an industrial production line and engineering automation solutions.',
     demoUrl: 'https://esw-co.com',
   },
   {
@@ -97,6 +105,7 @@ export const projects: PortfolioProject[] = [
     tags: ['تسويق رقمي', 'هوية بصرية', 'نمو الأعمال'],
     image: '/projects/athar-digital.png',
     imageAlt: 'صورة غلاف توضيحية لاستوديو تسويق رقمي ولوحة تحليلات للحملات.',
+    imageAltEn: 'Illustrative cover image of a digital marketing studio and campaign analytics dashboard.',
     demoUrl: 'https://athar-cfy.pages.dev',
   },
   {
@@ -108,6 +117,7 @@ export const projects: PortfolioProject[] = [
     tags: ['بوابة موزعين', 'طلبات', 'مبيعات'],
     image: '/projects/al-nowkhaza.png',
     imageAlt: 'صورة غلاف توضيحية لبوابة موزعين على جهاز لوحي داخل مستودع.',
+    imageAltEn: 'Illustrative cover image of a distributor portal on a tablet inside a warehouse.',
     demoUrl: 'https://al-nowkhaza-uae-agents.vercel.app/auth',
   },
   {
@@ -119,6 +129,7 @@ export const projects: PortfolioProject[] = [
     tags: ['خصوصية', 'تشفير نصوص', 'أداة ويب'],
     image: '/projects/cryptoguard.png',
     imageAlt: 'صورة غلاف توضيحية لأداة خصوصية وتشفير نصوص على شاشة حاسوب.',
+    imageAltEn: 'Illustrative cover image of a privacy and text encryption tool on a desktop screen.',
     demoUrl: 'https://safe-arabic-secrets.vercel.app',
   },
   {
@@ -130,6 +141,7 @@ export const projects: PortfolioProject[] = [
     tags: ['تقارير', 'لوحات بيانات', 'PDF / Excel'],
     image: '/projects/report-builder.png',
     imageAlt: 'صورة غلاف توضيحية لمنصة تقارير تعرض مخططات ولوحة بيانات.',
+    imageAltEn: 'Illustrative cover image of a reporting platform with charts and a data dashboard.',
     demoUrl: 'https://report-builder-three.vercel.app',
   },
   {
@@ -141,6 +153,7 @@ export const projects: PortfolioProject[] = [
     tags: ['تواصل داخلي', 'إشعارات', 'فرق العمل'],
     image: '/projects/smart-communication.png',
     imageAlt: 'صورة غلاف توضيحية لنظام تواصل داخلي يعرض محادثات ومؤشرات التواجد.',
+    imageAltEn: 'Illustrative cover image of an internal communications system with conversations and presence indicators.',
     demoUrl: 'https://smart-communication-git-c2709f-mohamedkhaleds-projects-1b0eba16.vercel.app',
   },
   {
@@ -152,6 +165,7 @@ export const projects: PortfolioProject[] = [
     tags: ['موارد بشرية', 'حضور وانصراف', 'تقارير رواتب'],
     image: '/projects/attendance.png',
     imageAlt: 'صورة غلاف توضيحية لنظام حضور وورديات وتقارير موظفين على جهاز لوحي.',
+    imageAltEn: 'Illustrative cover image of an employee attendance and shift reporting system on a tablet.',
     demoUrl: 'https://attendance-umber-beta.vercel.app',
   },
   {
@@ -163,6 +177,7 @@ export const projects: PortfolioProject[] = [
     tags: ['رخام وجرانيت', 'مواد تشطيب', 'عروض أسعار'],
     image: '/projects/ram-stone.png',
     imageAlt: 'صورة غلاف توضيحية لمعرض رخام وجرانيت ومواد تشطيب.',
+    imageAltEn: 'Illustrative cover image of a marble, granite, and finishing materials showroom.',
     demoUrl: 'https://ram-stone.vercel.app',
   },
   {
@@ -174,6 +189,7 @@ export const projects: PortfolioProject[] = [
     tags: ['تجارة جملة', 'توزيع', 'طلب عبر واتساب'],
     image: '/projects/elbaraka.png',
     imageAlt: 'صورة غلاف توضيحية لمنصة توزيع وبيع بالجملة مع واجهة طلبات على الهاتف.',
+    imageAltEn: 'Illustrative cover image of a wholesale distribution ordering platform on a phone.',
     demoUrl: 'https://elbaraka.kesug.com/?i=1',
   },
 ]

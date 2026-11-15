@@ -1,136 +1,40 @@
-'use client'
+import type { Metadata } from 'next'
+import HomePage from './home-page'
+import { createFaqPageSchema, serializeStructuredData } from './seo-data'
+import { SITE_URL } from './site-config'
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { ArrowDownLeft, ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Bot, Check, Code2, Globe2, Mail, Menu, Moon, PenTool, QrCode, Smartphone, Sun, Wrench, X } from 'lucide-react'
-import { SperaLogo } from '@/components/spera-logo'
-import { projects } from './projects/project-data'
+const description = 'شركة SperaCode المصرية لتطوير المواقع وتطبيقات الجوال والمنيو الرقمي وحلول الذكاء الاصطناعي وتصميم UI/UX، من الفكرة حتى الإطلاق والدعم.'
 
-type Locale = 'ar' | 'en'
-const services = [
-  { icon: Globe2, en: 'Web development', ar: 'تطوير المواقع الإلكترونية', descEn: 'Fast, secure, search-optimized websites for ambitious businesses.', descAr: 'مواقع سريعة وآمنة ومهيّأة لمحركات البحث لنمو أعمالك.' },
-  { icon: Smartphone, en: 'Mobile applications', ar: 'تطبيقات الجوال', descEn: 'Native-quality iOS and Android apps, built around your users.', descAr: 'تطبيقات iOS وAndroid بجودة عالية وتجربة استخدام سلسة.' },
-  { icon: QrCode, en: 'Digital QR menu', ar: 'المنيو الرقمي QR', descEn: 'Digital menus with instant updates and no printing costs.', descAr: 'قوائم رقمية بتحديث فوري دون تكاليف طباعة.', badge: true },
-  { icon: Bot, en: 'AI solutions', ar: 'حلول الذكاء الاصطناعي', descEn: 'Chatbots and automation that make everyday work simpler.', descAr: 'روبوتات محادثة وأتمتة تجعل عملياتك اليومية أكثر كفاءة.' },
-  { icon: PenTool, en: 'UI/UX design', ar: 'تصميم تجربة المستخدم UI/UX', descEn: 'Research-led interfaces shaped around people and goals.', descAr: 'واجهات مبنية على البحث وتراعي احتياجات المستخدمين وأهدافك.' },
-  { icon: Wrench, en: 'Maintenance & support', ar: 'الصيانة والدعم الفني', descEn: 'Fixes, performance improvements, and stronger security.', descAr: 'إصلاح الأعطال وتحسين الأداء وتعزيز الأمان.' },
-  { icon: Mail, en: 'Email, domain & hosting', ar: 'البريد المؤسسي والنطاق والاستضافة', descEn: 'Professional digital essentials under your company brand.', descAr: 'أساسيات رقمية احترافية تعكس هوية شركتك.' },
-  { icon: Code2, en: 'Custom software', ar: 'البرمجيات المخصصة', descEn: 'Management systems and tools built for your workflow.', descAr: 'أنظمة إدارة وأدوات داخلية مصممة وفق طبيعة عملك.' },
-]
-const questions = [
-  ['How long does a project take?', 'Simple websites typically take 1–3 weeks. Larger systems depend on scope, and we provide a clear timeline after the initial consultation.', 'كم تستغرق مدة تنفيذ المشروع؟', 'تستغرق المواقع البسيطة عادةً من أسبوع إلى ثلاثة أسابيع، أما الأنظمة الأكبر فتعتمد على نطاق العمل، ونقدّم جدولًا زمنيًا واضحًا بعد الاستشارة الأولية.'],
-  ['Do you provide support after delivery?', 'Yes. Every project includes a support period, and we offer monthly maintenance plans.', 'هل تقدمون دعمًا بعد التسليم؟', 'نعم، يشمل كل مشروع فترة دعم فني، كما نوفّر باقات صيانة شهرية.'],
-  ['How is pricing determined?', 'Pricing is based on scope and features. You receive a fixed written quote before work begins.', 'كيف يتم تحديد السعر؟', 'يعتمد السعر على نطاق العمل والمميزات المطلوبة، وتحصل على عرض سعر ثابت ومكتوب قبل بدء التنفيذ.'],
-  ['Do you work remotely?', 'Yes. Meetings, delivery, and support are all conducted online, so location is never a constraint.', 'هل تعملون عن بُعد؟', 'نعم، تتم الاجتماعات والتسليم والدعم عبر الإنترنت، لذا لا يشكّل الموقع الجغرافي أي عائق.'],
-  ['Who owns the code and design?', 'You do. Full ownership transfers to you upon final payment.', 'لمن تعود ملكية الشيفرة والتصميم؟', 'تعود الملكية الكاملة إليك بعد السداد النهائي.'],
-  ['Can you improve an existing website or app?', 'Yes. We begin with a technical audit, then fix, optimize, or rebuild as needed.', 'هل يمكنكم تحسين موقع أو تطبيق قائم؟', 'نعم، نبدأ بفحص فني شامل، ثم نصلح أو نحسّن أو نعيد البناء حسب الحاجة.'],
-]
-const process = [
-  ['Discover', 'We study your goals, users, and requirements.', 'الاستكشاف', 'ندرس أهدافك ومستخدميك ومتطلباتك.'],
-  ['Design', 'We plan the solution and design the experience.', 'التصميم', 'نخطط الحل ونصمّم تجربة الاستخدام.'],
-  ['Develop', 'We build with modern, scalable technologies.', 'التطوير', 'نبني الحل بتقنيات حديثة وقابلة للتوسع.'],
-  ['Test & launch', 'We test thoroughly, then deliver and deploy.', 'الاختبار والإطلاق', 'نختبر بدقة ثم نسلّم وننشر.'],
-  ['Support & growth', 'We monitor, maintain, and keep improving.', 'الدعم والنمو', 'نتابع ونصون ونواصل التحسين.'],
-]
-const founders = [
-  { name: 'م. محمود وليد', role: 'شريك مؤسس | الإدارة والتقنية', initials: 'م و', bio: 'يقود الرؤية التقنية ويحرص على تحويل أهداف العمل إلى حلول عملية قابلة للنمو.' },
-  { name: 'م. محمد خالد', role: 'شريك مؤسس | تطوير المنتجات', initials: 'م خ', bio: 'يركز على تطوير المنتجات الرقمية وتجربة استخدام متقنة من الفكرة حتى الإطلاق.' },
-]
-const reviewSummaries = [
-  { ar: 'تجربتنا مع SperaCode كانت ممتازة، وفريق العمل متعاون ومحترف.', en: 'Our experience with SperaCode was excellent. The team was professional and easy to work with.' },
-  { ar: 'سعدنا بالتعاون مع الفريق؛ تعامل راقٍ وشغل مميز.', en: 'We enjoyed working with the team. The communication was warm and the work was excellent.' },
-  { ar: 'فريق محترف ومتعاون، وتجربة العمل معهم كانت موفقة.', en: 'A professional, collaborative team and a genuinely positive experience.' },
-  { ar: 'التعامل كان سلسًا والنتيجة ممتازة. شكرًا لفريق SperaCode.', en: 'The collaboration was smooth and we are very happy with the result. Thank you, SperaCode.' },
-  { ar: 'تجربة إيجابية جدًا، والفريق كان على قدر التوقعات.', en: 'A very positive experience. The team delivered work we are happy with.' },
-  { ar: 'وجدنا فريقًا متعاونًا واحترافيًا، وسعدنا بهذه التجربة.', en: 'We found the team collaborative and professional, and we are glad we worked together.' },
-  { ar: 'تعاون رائع واهتمام واضح بالمشروع. تجربة نعتز بها.', en: 'A great collaboration and a team that cared about the project. We value the experience.' },
-  { ar: 'شغل مرتب وتعامل محترم؛ تجربة موفقة مع SperaCode.', en: 'Excellent work and thoughtful communication. A successful collaboration with SperaCode.' },
-  { ar: 'تجربتنا كانت ممتازة، وسعدنا بالتعامل مع الفريق.', en: 'We had an excellent experience and really enjoyed working with the team.' },
-  { ar: 'احترافية في التعامل وتعاون مميز طوال المشروع.', en: 'Professional throughout, with a collaborative approach to the project.' },
-  { ar: 'فريق متعاون وتجربة مرضية جدًا. كل الشكر لـ SperaCode.', en: 'A helpful team and a very satisfying experience. Many thanks to SperaCode.' },
-  { ar: 'سعداء بالتعامل الاحترافي مع فريق SperaCode وبالنتيجة.', en: 'We are happy with the result and the professional way the SperaCode team worked with us.' },
-  { ar: 'تجربة طيبة وشغل احترافي؛ كل الشكر لفريق SperaCode.', en: 'A positive experience and professional work. Thanks to the SperaCode team.' },
-  { ar: 'التعاون كان مريحًا، والفريق قدم تجربة ممتازة.', en: 'A comfortable collaboration and an excellent overall experience with the team.' },
-  { ar: 'عمل مميز وتعامل محترف؛ سعداء بشغلنا مع SperaCode.', en: 'Excellent work and professional service. We are glad we chose to work with SperaCode.' },
-]
-const testimonials = projects.map((project, index) => ({
-  quote: reviewSummaries[index % reviewSummaries.length],
-  author: project.title,
-  role: { ar: project.arCategory, en: project.category },
-}))
-const socialLinks = [
-  { label: 'Facebook', icon: 'https://thesvg.org/icons/facebook/default.svg', url: 'https://facebook.com' },
-  { label: 'Instagram', icon: 'https://thesvg.org/icons/instagram/default.svg', url: 'https://instagram.com' },
-  { label: 'LinkedIn', icon: 'https://thesvg.org/icons/linkedin/default.svg', url: 'https://linkedin.com' },
-]
-const copy = {
-  en: { nav: ['Home', 'Services', 'Work', 'About', 'Blog', 'Contact'], badge: 'SOFTWARE HOUSE', hero: <>We build digital products that <em>drive business growth.</em></>, sub: 'SperaCode is a software house delivering end-to-end solutions: websites, mobile applications, digital menus, AI, and UI/UX design, from concept to launch and beyond.', start: 'Start a project', work: 'View our work', checks: ['On-time delivery', 'Post-launch support', 'Transparent pricing'], stats: ['Projects delivered', 'Clients served', 'Years of experience', 'Technical support'], services: 'Our services', servicesSub: 'End-to-end software solutions under one roof.', projects: 'Selected work', projectsSub: 'A curated selection of websites, platforms, and business systems. Open any link to explore the project.', projectDemo: 'LIVE DEMO', case: 'Open demo', qrTitle: 'Your menu, one scan away.', qrSub: 'A smoother way to welcome guests, keep your menu fresh, and make every update count.', benefits: ['Update prices and items instantly', 'No printing costs', 'Arabic and English menus', 'Works on any smartphone', 'Order via WhatsApp'], plans: 'View plans', demo: 'Try the demo', why: 'Why SperaCode', reasons: [['On-time delivery', 'Clear milestones and delivery dates that we commit to.'], ['Post-launch support', 'Dedicated support and maintenance after your product goes live.'], ['Transparent pricing', 'Fixed, written quotes with no hidden costs.'], ['Clean, scalable code', 'Well-structured, documented code that grows with your business.']], process: 'Our process', tech: 'Technologies we use', faq: 'Frequently asked questions', final: 'Ready to start your project?', finalSub: 'Tell us about your goals and we will propose the right solution.', whatsapp: 'Chat on WhatsApp', message: 'Send a message', footer: 'We turn your idea into a successful digital product.', more: 'Learn more', all: 'All', category: ['Websites', 'Platforms', 'Business systems'] },
-  ar: { nav: ['الرئيسية', 'الخدمات', 'الأعمال', 'من نحن', 'المدونة', 'اتصل بنا'], badge: 'شركة برمجيات', hero: <>نبني منتجات رقمية <em>تدعم نمو أعمالك.</em></>, sub: 'سبيرا كود شركة برمجيات تقدّم حلولًا متكاملة تشمل المواقع الإلكترونية وتطبيقات الجوال والمنيو الرقمي وحلول الذكاء الاصطناعي وتصميم تجربة المستخدم، من الفكرة حتى الإطلاق وما بعده.', start: 'ابدأ مشروعك', work: 'استعرض أعمالنا', checks: ['التزام بمواعيد التسليم', 'دعم فني بعد الإطلاق', 'تسعير واضح'], stats: ['مشروعًا منفّذًا', 'عميلًا', 'سنوات من الخبرة', 'دعم فني متواصل'], services: 'خدماتنا', servicesSub: 'حلول برمجية متكاملة تحت مظلة واحدة.', projects: 'أبرز أعمالنا', projectsSub: 'مجموعة مختارة من المواقع والمنصات وأنظمة الأعمال، مع رابط مباشر لاستكشاف كل مشروع.', projectDemo: 'رابط مباشر', case: 'عرض الديمو', qrTitle: 'قائمة طعامك على بُعد مسحة واحدة.', qrSub: 'طريقة أسهل لاستقبال ضيوفك وتحديث قائمتك ومواكبة احتياجات مطعمك.', benefits: ['تحديث الأسعار والأصناف فورًا', 'بلا تكاليف طباعة', 'قوائم بالعربية والإنجليزية', 'يعمل على جميع الهواتف', 'الطلب عبر واتساب'], plans: 'استعرض الباقات', demo: 'جرّب النسخة التجريبية', why: 'لماذا SperaCode', reasons: [['الالتزام بالمواعيد', 'مراحل تنفيذ وتواريخ تسليم واضحة نلتزم بها.'], ['دعم ما بعد الإطلاق', 'دعم فني وصيانة مستمرة بعد إطلاق منتجك.'], ['تسعير شفاف', 'عروض أسعار ثابتة ومكتوبة دون أي تكاليف خفية.'], ['برمجة نظيفة وقابلة للتوسع', 'شيفرة منظمة وموثّقة تنمو مع نمو أعمالك.']], process: 'منهجية العمل', tech: 'التقنيات التي نعتمدها', faq: 'الأسئلة الشائعة', final: 'هل أنت مستعد لبدء مشروعك؟', finalSub: 'أخبرنا بأهدافك، وسنقترح عليك الحل الأنسب.', whatsapp: 'تواصل عبر واتساب', message: 'أرسل رسالة', footer: 'نحوّل فكرتك إلى منتج رقمي ناجح.', more: 'اعرف المزيد', all: 'الكل', category: ['مواقع إلكترونية', 'منصات رقمية', 'أنظمة أعمال'] },
+export const metadata: Metadata = {
+  title: 'شركة برمجيات في مصر',
+  description,
+  alternates: {
+    canonical: '/',
+    languages: { 'ar-EG': '/', en: '/en', 'x-default': '/' },
+  },
+  openGraph: {
+    title: 'SperaCode — حلول رقمية لنمو أعمالك',
+    description,
+    url: SITE_URL,
+    siteName: 'SperaCode',
+    type: 'website',
+    locale: 'ar_EG',
+    alternateLocale: ['en_US'],
+    images: [{ url: '/hero-devices-light.png', alt: 'حلول SperaCode الرقمية على الحاسوب والهاتف' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SperaCode — شركة برمجيات في مصر',
+    description,
+    images: ['/hero-devices-light.png'],
+  },
 }
 
-export default function HomePage() {
-  const [locale, setLocale] = useState<Locale>('ar')
-  const [dark, setDark] = useState(false)
-  const [filter, setFilter] = useState('All')
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [founderIndex, setFounderIndex] = useState(0)
-  const [testimonialIndex, setTestimonialIndex] = useState(0)
-  useEffect(() => {
-    const savedLocale = localStorage.getItem('speracode-locale') as Locale | null
-    const savedTheme = localStorage.getItem('speracode-theme')
-    const isDark = savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (savedLocale) setLocale(savedLocale)
-    setDark(isDark)
-    document.documentElement.classList.toggle('dark', isDark)
-    document.documentElement.lang = savedLocale ?? 'ar'
-    document.documentElement.dir = savedLocale === 'en' ? 'ltr' : 'rtl'
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target) }
-    }), { threshold: 0.12 })
-    document.querySelectorAll('[data-reveal], .section:not(.hero), .service-card, .project-card, .tech-section, .final-panel, .footer-grid').forEach((element) => { element.setAttribute('data-reveal', ''); revealObserver.observe(element) })
-    const carouselTimer = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? null : window.setInterval(() => {
-      if (!document.hidden) {
-        setFounderIndex((index) => (index + 1) % founders.length)
-        setTestimonialIndex((index) => (index + 1) % testimonials.length)
-      }
-    }, 7000)
-    return () => { window.removeEventListener('scroll', onScroll); revealObserver.disconnect(); if (carouselTimer !== null) window.clearInterval(carouselTimer) }
-  }, [])
-  const t = copy[locale]
-  const rtl = locale === 'ar'
-  const changeLocale = () => { const next = rtl ? 'en' : 'ar'; setLocale(next); localStorage.setItem('speracode-locale', next); document.documentElement.lang = next; document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr' }
-  const changeTheme = () => { const next = !dark; setDark(next); localStorage.setItem('speracode-theme', next ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', next) }
-  const categories = ['All', 'Websites', 'Platforms', 'Business systems']
-  const visibleProjects = (filter === 'All' ? projects.slice(0, 3) : projects.filter((project) => project.category === filter).slice(0, 3))
-  const navHrefs = ['#home', '#services', '#work', '#about', '#insights', '/contact']
-  return <div className={`site ${dark ? 'theme-dark' : ''}`} dir={rtl ? 'rtl' : 'ltr'}>
-    <a className="skip-link" href="#main">{rtl ? 'انتقل إلى المحتوى' : 'Skip to content'}</a>
-    <header className={`navbar ${scrolled ? 'scrolled' : ''}`}><div className="container nav-inner">
-      <SperaLogo rtl={rtl}/>
-      <nav className="desktop-nav" aria-label="Main navigation">{t.nav.map((item, i) => i === 2 ? <Link key={item} href="/projects">{item}</Link> : <a key={item} href={navHrefs[i]}>{item}</a>)}</nav>
-      <div className="nav-actions"><button className="icon-button locale-button" onClick={changeLocale} aria-label={rtl ? 'Switch to English' : 'التبديل إلى العربية'}>{rtl ? 'EN' : 'عربي'}</button><button className="icon-button" onClick={changeTheme} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>{dark ? <Sun/> : <Moon/>}</button><a className="button button-primary nav-cta" href="/contact">{t.start}<ArrowUpRight/></a><button className="icon-button mobile-menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>{menuOpen ? <X/> : <Menu/>}</button></div>
-    </div>{menuOpen && <nav className="mobile-nav">{t.nav.map((item, i) => i === 2 ? <Link onClick={() => setMenuOpen(false)} key={item} href="/projects">{item}<ArrowUpRight/></Link> : <a onClick={() => setMenuOpen(false)} key={item} href={navHrefs[i]}>{item}<ArrowUpRight/></a>)}<button className="button button-primary" onClick={changeLocale}>{rtl ? 'English' : 'العربية'}</button></nav>}</header>
-    <main id="main">
-      <section className="hero section" id="home"><div className="container hero-grid"><div className="hero-copy"><div className="eyebrow"><span className="live-dot"/>{t.badge}</div><h1>{t.hero}</h1><p className="hero-description">{t.sub}</p><div className="hero-actions"><a className="button button-primary" href="/contact">{t.start}{rtl ? <ArrowDownLeft/> : <ArrowDownRight/>}</a><a className="button button-secondary" href="#work">{t.work}<ArrowUpRight/></a></div><div className="trust-points">{t.checks.map((x) => <span key={x}><Check/>{x}</span>)}</div></div><div className="home-hero-art"><Image className="home-hero-image" src={dark ? '/home-hero-dark.png' : '/home-hero-light.png'} alt={rtl ? 'تصميم متجر إلكتروني متكامل يعرض المنتجات على الحاسوب والهاتف' : 'Detailed ecommerce storefront design displayed on laptop and phone screens'} width={1312} height={816} priority /><svg className="contact-art-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path className="signal-track" d="M3 21H16L22 27H34"/><path className="signal-pulse signal-pulse-one" d="M3 21H16L22 27H34"/><path className="signal-track" d="M97 76H84L78 70H65"/><path className="signal-pulse signal-pulse-two" d="M97 76H84L78 70H65"/><path className="signal-track" d="M5 84H17L23 78H31"/><path className="signal-pulse signal-pulse-three" d="M5 84H17L23 78H31"/></svg></div></div>
-      <div className="container stats-wrap"><div className="stats-card" role="group" aria-label={rtl ? 'أرقام SperaCode' : 'SperaCode at a glance'}>{['50+', '45', '6+', '24/7'].map((num, i) => <div className="stat" key={num}><strong>{num}</strong><span>{t.stats[i]}</span></div>)}</div></div></section>
-      <section className="section section-muted" id="services"><div className="container"><SectionHeading label={rtl ? '01 / خدماتنا' : '01 / WHAT WE DO'} title={t.services} subtitle={t.servicesSub} rtl={rtl}/><div className="services-grid">{services.map(({icon: Icon, ...item}, i) => <article className="service-card" key={item.en}><div className="service-card-top"><span className="service-icon"><Icon/></span>{item.badge && <span className="popular-badge">{rtl ? 'الأكثر طلبًا' : 'MOST REQUESTED'}</span>}</div><h3>{rtl ? item.ar : item.en}</h3><p>{rtl ? item.descAr : item.descEn}</p><a className="text-link" href={i === 2 ? '#qr-menu' : '#contact'}>{t.more}{rtl ? <ArrowLeft/> : <ArrowRight/>}</a></article>)}</div></div></section>
-      <section className="section" id="work"><div className="container"><SectionHeading label={rtl ? '02 / أعمالنا' : '02 / SELECTED WORK'} title={t.projects} subtitle={t.projectsSub} rtl={rtl}/><div className="filter-row" role="group" aria-label="Filter projects">{categories.map((category, i) => <button className={filter === category ? 'filter-chip active' : 'filter-chip'} key={category} onClick={() => setFilter(category)}>{rtl ? (i === 0 ? t.all : t.category[i - 1]) : category}</button>)}</div><div className="projects-grid">{visibleProjects.map((project) => <article className="project-card" key={project.title}><a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="project-cover" aria-label={`${t.case}: ${project.title}`}><Image src={project.image} alt={project.imageAlt} width={1024} height={1024} loading="lazy"/><span className="concept-tag">{t.projectDemo}</span><span className="project-open">{t.case}<ArrowUpRight/></span></a><div className="project-meta"><span>{rtl ? project.arCategory : project.category}</span><span className="project-dot"/></div><h3>{project.title}</h3><p>{rtl ? project.arDescription : project.description}</p><div className="tag-row">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><small className="concept-note">{rtl ? 'رابط مباشر للموقع أو نسخة الديمو.' : 'Direct link to the website or demo.'}</small></article>)}</div><div className="projects-more"><Link className="button button-secondary" href="/projects">{rtl ? 'عرض المزيد من الأعمال' : 'View more projects'}{rtl ? <ArrowLeft/> : <ArrowRight/>}</Link></div></div></section>
-      <section className="section qr-section" id="qr-menu"><div className="container qr-panel"><div className="qr-copy"><div className="eyebrow eyebrow-light"><span className="live-dot"/> {rtl ? 'منيو QR' : 'QR MENU'}</div><h2>{t.qrTitle}</h2><p>{t.qrSub}</p><ul className="benefit-list">{t.benefits.map(x => <li key={x}><Check/>{x}</li>)}</ul><div className="hero-actions"><a href="/contact" className="button button-white">{t.plans}<ArrowUpRight/></a><a href="/contact" className="button button-ghost">{t.demo}</a></div></div><div className="qr-visual"><div className="phone-shell"><div className="phone-notch"/><div className="menu-screen"><div className="menu-cover"><QrCode/><span>{rtl ? 'منيو الكافيه' : 'CAFÉ MENU'}</span><b>{rtl ? <>أكل حلو.<br/>وقت أحلى.</> : <>Good food.<br/>Good moments.</>}</b></div><div className="menu-cats"><span>{rtl ? 'الأكثر طلبًا' : 'Popular'}</span><span>{rtl ? 'مشروبات' : 'Drinks'}</span><span>{rtl ? 'فطور متأخر' : 'Brunch'}</span></div><div className="menu-item"><i className="food food-a"/><span><b>{rtl ? 'توست أفوكادو' : 'Avocado toast'}</b><small>{rtl ? 'طازة ومتظبط يومك' : 'Fresh, bright, made today'}</small></span><strong>$12</strong></div><div className="menu-item"><i className="food food-b"/><span><b>{rtl ? 'بان كيك بالتوت' : 'Berry pancakes'}</b><small>{rtl ? 'بتوت طازة حسب الموسم' : 'With seasonal berries'}</small></span><strong>$14</strong></div><div className="menu-order">{rtl ? 'اطلب على واتساب' : 'Order via WhatsApp'} <ArrowUpRight/></div></div></div><div className="qr-chip"><QrCode/><span>{rtl ? 'امسح. اختار. استمتع.' : 'Scan. Browse. Enjoy.'}</span></div></div></div></section>
-      <section className="section section-muted" id="about"><div className="container"><SectionHeading label={rtl ? '03 / ليه SperaCode' : '03 / THE DIFFERENCE'} title={t.why} subtitle={rtl ? 'شراكة واضحة، وتنفيذ يضع أهدافك في المقدمة.' : 'A thoughtful partnership, built around the outcomes that matter.'} rtl={rtl}/><div className="reasons-grid">{t.reasons.map(([title, description], i) => <article className="reason-card" key={title}><span className="reason-number">0{i + 1}</span><div className="reason-icon">{[<Check key="c"/>, <Mail key="m"/>, <Code2 key="d"/>, <Globe2 key="g"/>][i]}</div><h3>{title}</h3><p>{description}</p></article>)}</div></div></section>
-      <section className="section team-section"><div className="container"><SectionHeading label={rtl ? '04 / الفريق' : '04 / THE PEOPLE BEHIND IT'} title={rtl ? 'فريق يقود الفكرة للتنفيذ' : 'Meet the people behind the work'} subtitle={rtl ? 'قيادة تقنية وخبرة عملية، مع تركيز على بناء منتجات رقمية تخدم أهدافك.' : 'Hands-on leadership, focused on building digital products that move your goals forward.'} rtl={rtl}/><div className="carousel-shell" data-reveal><div className="founder-card"><div className="founder-avatar" aria-hidden="true"><span>{founders[founderIndex].initials}</span><i/><i/></div><div className="founder-copy"><span className="founder-kicker">{rtl ? 'فريق التأسيس' : 'FOUNDING TEAM'}</span><h3>{founders[founderIndex].name}</h3><span className="founder-role">{founders[founderIndex].role}</span><p>{founders[founderIndex].bio}</p><small>{rtl ? 'الصورة الشخصية ستُضاف بعد استلامها من صاحبها.' : 'Portrait pending approval from the team member.'}</small></div></div><div className="carousel-controls"><button className="carousel-arrow" onClick={() => setFounderIndex((founderIndex + founders.length - 1) % founders.length)} aria-label={rtl ? 'السابق' : 'Previous'}><ArrowRight/></button><div className="carousel-dots">{founders.map((founder, i) => <button key={founder.name} onClick={() => setFounderIndex(i)} className={i === founderIndex ? 'active' : ''} aria-label={`${rtl ? 'عرض' : 'Show'} ${founder.name}`} aria-pressed={i === founderIndex}/>)}</div><button className="carousel-arrow" onClick={() => setFounderIndex((founderIndex + 1) % founders.length)} aria-label={rtl ? 'التالي' : 'Next'}><ArrowLeft/></button></div></div></div></section>
-      <section className="section testimonials-section section-muted"><div className="container"><SectionHeading label={rtl ? '05 / آراء العملاء' : '05 / CLIENT STORIES'} title={rtl ? 'آراء عملائنا' : 'What our clients say'} subtitle={rtl ? 'ملخصات لآراء حقيقية من عملائنا، صيغت للنشر باختصار ووضوح.' : 'Concise summaries of genuine feedback shared by our clients.'} rtl={rtl}/><div className="testimonial-carousel" data-reveal><div className="testimonial-mark">“</div><div className="testimonial-copy"><div className="testimonial-stars">{rtl ? 'ملخص رأي العميل' : 'CLIENT FEEDBACK SUMMARY'}</div><blockquote>{rtl ? testimonials[testimonialIndex].quote.ar : testimonials[testimonialIndex].quote.en}</blockquote><span className="testimonial-author">{testimonials[testimonialIndex].author}</span><span className="testimonial-role">{rtl ? testimonials[testimonialIndex].role.ar : testimonials[testimonialIndex].role.en}</span></div><div className="carousel-controls"><button className="carousel-arrow" onClick={() => setTestimonialIndex((testimonialIndex + testimonials.length - 1) % testimonials.length)} aria-label={rtl ? 'الرأي السابق' : 'Previous review'}><ArrowRight/></button><div className="carousel-dots">{testimonials.map((item, i) => <button key={item.author} onClick={() => setTestimonialIndex(i)} className={i === testimonialIndex ? 'active' : ''} aria-label={`${rtl ? 'عرض الرأي' : 'Show review'} ${i + 1}`} aria-pressed={i === testimonialIndex}/>)}</div><button className="carousel-arrow" onClick={() => setTestimonialIndex((testimonialIndex + 1) % testimonials.length)} aria-label={rtl ? 'الرأي التالي' : 'Next review'}><ArrowLeft/></button></div></div></div></section>
-      <section className="section"><div className="container"><SectionHeading label={rtl ? '06 / خطوات العمل' : '06 / HOW WE WORK'} title={t.process} subtitle={rtl ? 'خطوات واضحة من أول محادثة حتى ما بعد الإطلاق.' : 'Clear steps from the first conversation to what comes after launch.'} rtl={rtl}/><div className="process-grid">{process.map(([enTitle, enDesc, arTitle, arDesc], i) => <article className="process-step" key={enTitle}><span className="step-number">0{i + 1}</span><div className="step-line"/><h3>{rtl ? arTitle : enTitle}</h3><p>{rtl ? arDesc : enDesc}</p></article>)}</div></div></section>
-      <section className="tech-section"><div className="container tech-inner"><div><span className="section-kicker">{rtl ? '07 / تقنيات نثق بها' : '07 / BUILT WITH CARE'}</span><h2>{t.tech}</h2></div><div className="tech-list">{['React', 'Next.js', 'Node.js', 'TypeScript', 'Flutter', 'Python', 'Firebase', 'Supabase', 'PostgreSQL', 'Tailwind', 'Figma', 'OpenAI'].map(tech => <span key={tech}>{tech}</span>)}</div></div></section>
-      <section className="section faq-section" id="insights"><div className="container faq-layout"><div><SectionHeading label={rtl ? '08 / أسئلة شائعة' : '08 / GOOD TO KNOW'} title={t.faq} subtitle={rtl ? 'إجابات واضحة تساعدك على اتخاذ قرارك.' : 'Straightforward answers to help you make your next decision.'} rtl={rtl}/><a href="/contact" className="text-link">{rtl ? 'اسألنا عن مشروعك' : 'Ask us about your project'}{rtl ? <ArrowLeft/> : <ArrowRight/>}</a></div><div className="faq-list">{questions.map((q, i) => <details className="faq-item" key={q[0]}><summary>{rtl ? q[2] : q[0]}<span className="faq-plus"/></summary><p>{rtl ? q[3] : q[1]}</p></details>)}</div></div></section>
-      <section className="section final-section" id="contact"><div className="container"><div className="home-contact-cta"><span className="section-kicker">{rtl ? 'خطوتك التالية' : 'YOUR NEXT STEP'}</span><h2>{t.final}</h2><p>{t.finalSub}</p><Link className="button button-primary" href="/contact">{rtl ? 'تواصل معنا' : 'Get in touch'}{rtl ? <ArrowLeft/> : <ArrowRight/>}</Link></div></div></section>
-    </main>
-    <footer className="footer"><div className="container"><div className="footer-grid"><div className="footer-brand"><SperaLogo footer rtl={rtl}/><p>{t.footer}</p></div><div><h4>{rtl ? 'روابط سريعة' : 'Explore'}</h4>{t.nav.slice(0, 5).map((n, i) => i === 2 ? <Link key={n} href="/projects">{n}</Link> : <a key={n} href={navHrefs[i]}>{n}</a>)}</div><div><h4>{rtl ? 'خدماتنا' : 'Services'}</h4>{services.slice(0, 5).map(s => <a key={s.en} href="#services">{rtl ? s.ar : s.en}</a>)}</div><div><h4>{rtl ? 'تواصل معنا' : 'Get in touch'}</h4><a href="/contact">{rtl ? 'تواصل عبر واتساب' : 'WhatsApp'}</a><div className="social-links" aria-label={rtl ? 'حساباتنا' : 'Social media'}>{socialLinks.map(({label, icon, url}) => <a key={label} href={url} target="_blank" rel="noreferrer" aria-label={label}><img src={icon} alt=""/></a>)}</div><div className="footer-toggles"><button onClick={changeLocale}>{rtl ? 'English' : 'العربية'}</button><button onClick={changeTheme}>{dark ? <Sun/> : <Moon/>}</button></div></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} {rtl ? 'سبيرا كود' : 'SperaCode'}</span><span>{rtl ? 'صنع بواسطة سبيرا كود' : 'Built by SperaCode'}</span><a href="#home">{rtl ? 'العودة إلى الأعلى ↑' : 'Back to top ↑'}</a></div></div></footer>
-    <Link className="whatsapp-float" href="/contact" aria-label={rtl ? 'تواصل معنا' : 'Contact us'}><img className="whatsapp-mark" src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/whatsapp/default.svg" alt=""/></Link>
-  </div>
+export default function ArabicHomeRoute() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(createFaqPageSchema('ar')) }} />
+      <HomePage initialLocale="ar" />
+    </>
+  )
 }
-
-function SectionHeading({label, title, subtitle, rtl}: {label:string; title:string; subtitle:string; rtl:boolean}) { return <div className="section-heading"><span className="section-kicker">{label}</span><h2>{title}</h2><p>{subtitle}</p></div> }

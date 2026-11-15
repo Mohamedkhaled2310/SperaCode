@@ -27,4 +27,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://speracode.com/sitemap.xml
+Sitemap: https://lumina-seven-pearl-99.vercel.app/sitemap.xml

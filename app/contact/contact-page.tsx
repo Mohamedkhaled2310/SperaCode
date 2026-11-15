@@ -43,31 +43,31 @@ const content = {
   },
 } as const
 
-export default function ContactPage() {
-  const [locale, setLocale] = useState<Locale>('ar')
+export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: Locale }) {
+  const [locale] = useState<Locale>(initialLocale)
   const [dark, setDark] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const t = content[locale]
   const rtl = locale === 'ar'
+  const basePath = rtl ? '' : '/en'
+  const homeHref = basePath || '/'
+  const servicesHref = `${homeHref}#services`
+  const aboutHref = `${homeHref}#about`
+  const projectsHref = `${basePath}/projects`
+  const contactHref = `${basePath}/contact`
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(rtl ? 'مرحبًا SperaCode، أود مناقشة مشروع.' : 'Hello SperaCode, I would like to discuss a project.')}`
 
   useEffect(() => {
-    const savedLocale = localStorage.getItem('speracode-locale')
-    const nextLocale = savedLocale === 'en' ? 'en' : document.documentElement.lang === 'en' ? 'en' : 'ar'
-    const nextDark = localStorage.getItem('speracode-theme') === 'dark' || (!localStorage.getItem('speracode-theme') && document.documentElement.classList.contains('dark'))
-    setLocale(nextLocale)
+    const savedTheme = localStorage.getItem('speracode-theme')
+    const nextDark = savedTheme ? savedTheme === 'dark' : document.documentElement.classList.contains('dark')
     setDark(nextDark)
-    document.documentElement.lang = nextLocale
-    document.documentElement.dir = nextLocale === 'ar' ? 'rtl' : 'ltr'
-  }, [])
+    document.documentElement.lang = initialLocale
+    document.documentElement.dir = initialLocale === 'ar' ? 'rtl' : 'ltr'
+  }, [initialLocale])
 
   function toggleLocale() {
-    const next = locale === 'ar' ? 'en' : 'ar'
-    setLocale(next)
-    localStorage.setItem('speracode-locale', next)
-    document.documentElement.lang = next
-    document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr'
+    window.location.assign(rtl ? '/en/contact' : '/contact')
   }
 
   function toggleTheme() {
@@ -100,13 +100,13 @@ export default function ContactPage() {
       <a className="skip-link" href="#contact-main">{rtl ? 'انتقل إلى المحتوى' : 'Skip to content'}</a>
       <header className="navbar contact-navbar">
         <div className="container contact-nav-inner">
-          <SperaLogo rtl={rtl} />
+          <SperaLogo rtl={rtl} homeHref={homeHref} />
           <nav aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
-            <Link href="/">{t.home}</Link>
-            <Link href="/#services">{t.services}</Link>
-            <Link href="/projects">{t.work}</Link>
-            <Link href="/#about">{rtl ? 'من نحن' : 'About'}</Link>
-            <Link href="/contact">{t.page}</Link>
+            <Link href={homeHref}>{t.home}</Link>
+            <Link href={servicesHref}>{t.services}</Link>
+            <Link href={projectsHref}>{t.work}</Link>
+            <Link href={aboutHref}>{rtl ? 'من نحن' : 'About'}</Link>
+            <Link href={contactHref}>{t.page}</Link>
           </nav>
           <div className="contact-nav-actions">
             <button type="button" className="icon-button locale-button" onClick={toggleLocale} aria-label={t.language}>{rtl ? 'EN' : 'عربي'}</button>
@@ -115,11 +115,11 @@ export default function ContactPage() {
           </div>
         </div>
         {menuOpen && <nav className="mobile-nav contact-mobile-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
-          <Link onClick={() => setMenuOpen(false)} href="/">{t.home}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href="/#services">{t.services}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href="/projects">{t.work}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href="/#about">{rtl ? 'من نحن' : 'About'}<ArrowUpRight aria-hidden="true" /></Link>
-          <Link onClick={() => setMenuOpen(false)} href="/contact">{t.page}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href={homeHref}>{t.home}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href={servicesHref}>{t.services}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href={projectsHref}>{t.work}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href={aboutHref}>{rtl ? 'من نحن' : 'About'}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link onClick={() => setMenuOpen(false)} href={contactHref}>{t.page}<ArrowUpRight aria-hidden="true" /></Link>
         </nav>}
       </header>
 
@@ -189,7 +189,7 @@ export default function ContactPage() {
         </section>
       </main>
 
-      <footer className="contact-footer"><div className="container contact-footer-inner"><div><SperaLogo footer rtl={rtl} /><p>{t.footer}</p></div><Link className="contact-back-link" href="/">{t.back}{rtl ? <ArrowRight aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}</Link></div></footer>
+      <footer className="contact-footer"><div className="container contact-footer-inner"><div><SperaLogo footer rtl={rtl} homeHref={homeHref} /><p>{t.footer}</p></div><Link className="contact-back-link" href={homeHref}>{t.back}{rtl ? <ArrowRight aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}</Link></div></footer>
     </div>
   )
 }
