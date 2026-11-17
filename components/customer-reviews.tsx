@@ -118,11 +118,12 @@ export function CustomerReviews({ rtl }: { rtl: boolean }) {
   }
 
   const goToReview = (index: number) => {
+    if (index === activeIndex) return
     setDirection(index > activeIndex ? 'next' : 'prev')
     setActiveIndex(index)
   }
 
-  // Autoplay with pause on hover/interaction
+  // Autoplay with pause on hover/interaction (7 seconds)
   useEffect(() => {
     if (isPaused) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -150,17 +151,14 @@ export function CustomerReviews({ rtl }: { rtl: boolean }) {
     const deltaX = e.changedTouches[0].clientX - touchStartX.current
     const deltaY = e.changedTouches[0].clientY - touchStartY.current
 
-    // Only swipe if horizontal move is significant and greater than vertical
     if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
       if (rtl) {
-        // In RTL: dragging right is next, dragging left is prev
         if (deltaX > 0) {
           nextReview()
         } else {
           prevReview()
         }
       } else {
-        // In LTR: dragging left is next, dragging right is prev
         if (deltaX < 0) {
           nextReview()
         } else {
@@ -202,6 +200,14 @@ export function CustomerReviews({ rtl }: { rtl: boolean }) {
           <div className="testimonial-card-shell">
             {/* Ambient Backlight Glow */}
             <div className="testimonial-card-glow" aria-hidden="true" />
+
+            {/* Dynamic Autoplay Progress Bar */}
+            <div className="testimonial-progress-track" aria-hidden="true">
+              <div
+                key={activeIndex}
+                className={`testimonial-progress-fill ${isPaused ? 'is-paused' : ''}`}
+              />
+            </div>
 
             {/* Header: Rating & Verified Status */}
             <div className="testimonial-card-header">
@@ -299,8 +305,31 @@ export function CustomerReviews({ rtl }: { rtl: boolean }) {
 
             {/* Mobile Swipe Hint */}
             <div className="testimonial-mobile-hint" aria-hidden="true">
-              <span>{rtl ? '← اسحب لليمين أو اليسار للتنقل →' : '← Swipe left or right to explore →'}</span>
+              <span>{rtl ? '← اسحب للتنقل بين آراء العملاء →' : '← Swipe to navigate testimonials →'}</span>
             </div>
+          </div>
+
+          {/* Interactive Client Strip Below Main Card */}
+          <div className="testimonial-client-strip" role="tablist" aria-label={rtl ? 'شركاء النجاح' : 'Our Partners'}>
+            {reviews.map((r, idx) => {
+              const isSelected = idx === activeIndex
+              return (
+                <button
+                  key={`strip-${r.authorEn}`}
+                  type="button"
+                  className={`testimonial-strip-item ${isSelected ? 'is-selected' : ''}`}
+                  onClick={() => goToReview(idx)}
+                  aria-selected={isSelected}
+                  title={rtl ? `${r.authorAr} - ${r.projectAr}` : `${r.authorEn} - ${r.projectEn}`}
+                >
+                  <span className="strip-flag" aria-hidden="true">{r.flag}</span>
+                  <div className="strip-text">
+                    <strong className="strip-author">{rtl ? r.authorAr : r.authorEn}</strong>
+                    <span className="strip-project">{rtl ? r.projectAr : r.projectEn}</span>
+                  </div>
+                </button>
+              )
+            })}
           </div>
         </div>
       </div>

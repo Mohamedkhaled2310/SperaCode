@@ -26,6 +26,7 @@ import {
 } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
+import { AnimatedMarqueeCarousel } from '@/components/animated-marquee-carousel'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
 import { buildWhatsAppUrl } from './site-config'
@@ -390,6 +391,9 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
             </div>
           </div>
         </section>
+
+        {/* Live Animated Tech & Enterprise Partners Marquee */}
+        <AnimatedMarqueeCarousel rtl={rtl} />
 
         {/* Services Section */}
         <section className="section section-muted" id="services">
