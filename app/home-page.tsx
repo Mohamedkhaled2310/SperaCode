@@ -26,6 +26,7 @@ import {
 } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
+import { SiteFooter } from '@/components/site-footer'
 import { projects } from './projects/project-data'
 import { homeFaqs } from './seo-data'
 
@@ -210,7 +211,16 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
   const homeHref = basePath || '/'
   const contactHref = `${basePath}/contact`
   const projectsHref = `${basePath}/projects`
-  const navHrefs = ['#home', '#services', '#work', '#why', '#faq', contactHref]
+  const servicesHref = `${basePath}/services`
+  const aboutHref = `${basePath}/about`
+
+  const navItems = [
+    { label: rtl ? 'الرئيسية' : 'Home', href: homeHref, isCurrent: true },
+    { label: rtl ? 'خدماتنا' : 'Services', href: servicesHref },
+    { label: rtl ? 'أعمالنا' : 'Portfolio', href: projectsHref },
+    { label: rtl ? 'من نحن' : 'About', href: aboutHref },
+    { label: rtl ? 'اتصل بنا' : 'Contact', href: contactHref },
+  ]
 
   return (
     <div className={`site ${dark ? 'theme-dark' : ''}`} dir={rtl ? 'rtl' : 'ltr'}>
@@ -231,17 +241,16 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
           <SperaLogo rtl={rtl} homeHref={homeHref} />
 
           <nav className="desktop-nav" aria-label={rtl ? 'التنقل الرئيسي' : 'Main navigation'}>
-            {t.nav.map((item, i) =>
-              i === 2 ? (
-                <Link key={item} href={projectsHref}>
-                  {item}
-                </Link>
-              ) : (
-                <a key={item} href={navHrefs[i]}>
-                  {item}
-                </a>
-              )
-            )}
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={item.isCurrent ? 'page' : undefined}
+                className={item.isCurrent ? 'nav-active' : ''}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="nav-actions">
@@ -280,19 +289,17 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
         {/* Mobile Navigation Drawer */}
         {menuOpen && (
           <nav className="mobile-nav" aria-label="Mobile navigation">
-            {t.nav.map((item, i) =>
-              i === 2 ? (
-                <Link onClick={() => setMenuOpen(false)} key={item} href={projectsHref}>
-                  {item}
-                  <ArrowUpRight />
-                </Link>
-              ) : (
-                <a onClick={() => setMenuOpen(false)} key={item} href={navHrefs[i]}>
-                  {item}
-                  <ArrowUpRight />
-                </a>
-              )
-            )}
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                onClick={() => setMenuOpen(false)}
+                href={item.href}
+                className={item.isCurrent ? 'mobile-nav-active' : ''}
+              >
+                {item.label}
+                <ArrowUpRight />
+              </Link>
+            ))}
             <button
               className="button button-secondary"
               style={{ marginTop: '14px' }}
@@ -412,15 +419,22 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
                   <h3>{rtl ? item.ar : item.en}</h3>
                   <p>{rtl ? item.descAr : item.descEn}</p>
 
-                  <a
+                  <Link
                     className="text-link"
-                    href={i === 2 ? '#qr-menu' : contactHref}
+                    href={servicesHref}
                   >
                     {t.more}
                     {rtl ? <ArrowLeft /> : <ArrowRight />}
-                  </a>
+                  </Link>
                 </article>
               ))}
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: '36px' }}>
+              <Link className="button button-secondary" href={servicesHref}>
+                {rtl ? 'استكشف كافة الخدمات والمواصفات الفنية' : 'Explore All Services & Specifications'}
+                <ArrowUpRight />
+              </Link>
             </div>
           </div>
         </section>
@@ -766,85 +780,18 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
         </section>
       </main>
 
-      {/* Modern Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <SperaLogo footer rtl={rtl} homeHref={homeHref} />
-              <p>{t.footer}</p>
-            </div>
-
-            <div className="footer-col-nav">
-              <h4>{rtl ? 'روابط سريعة' : 'Navigation'}</h4>
-              {t.nav.slice(0, 5).map((n, i) =>
-                i === 2 ? (
-                  <Link key={n} href={projectsHref}>
-                    {n}
-                  </Link>
-                ) : (
-                  <a key={n} href={navHrefs[i]}>
-                    {n}
-                  </a>
-                )
-              )}
-            </div>
-
-            <div className="footer-col-services">
-              <h4>{rtl ? 'خدماتنا' : 'Services'}</h4>
-              {services.slice(0, 5).map((s) => (
-                <a key={s.en} href="#services">
-                  {rtl ? s.ar : s.en}
-                </a>
-              ))}
-            </div>
-
-            <div className="footer-col-contact">
-              <h4>{rtl ? 'تواصل معنا' : 'Get in touch'}</h4>
-              <Link href={contactHref}>
-                {rtl ? 'صفحة التواصل وعرض السعر' : 'Contact & Project Inquiry'}
-              </Link>
-              <a
-                href={`https://wa.me/?text=${encodeURIComponent(
-                  rtl ? 'مرحبًا SperaCode' : 'Hello SperaCode'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {rtl ? 'محادثة مباشرة على واتساب' : 'Direct WhatsApp'}
-              </a>
-
-              <div className="footer-toggles">
-                <button
-                  onClick={changeLocale}
-                  aria-label={rtl ? 'Switch to English' : 'التبديل إلى العربية'}
-                >
-                  {rtl ? 'English' : 'العربية'}
-                </button>
-                <button
-                  onClick={changeTheme}
-                  aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-                >
-                  {dark ? <Sun /> : <Moon />}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <span>
-              © {new Date().getFullYear()} {rtl ? 'سبيرا كود (SperaCode)' : 'SperaCode'}.{' '}
-              {rtl ? 'كافة الحقوق محفوظة.' : 'All rights reserved.'}
-            </span>
-            <span>
-              {rtl ? 'صُنع بحرفية وشغف بواسطة سبيرا كود' : 'Designed & engineered by SperaCode'}
-            </span>
-            <a href="#home" onClick={(e) => { e.preventDefault(); scrollToTop() }}>
-              {rtl ? 'العودة للأعلى ↑' : 'Back to top ↑'}
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* Elite Global Footer */}
+      <SiteFooter
+        rtl={rtl}
+        dark={dark}
+        onToggleDark={changeTheme}
+        onToggleLocale={changeLocale}
+        homeHref={homeHref}
+        projectsHref={projectsHref}
+        contactHref={contactHref}
+        servicesHref={servicesHref}
+        aboutHref={aboutHref}
+      />
 
       {/* Floating Action Buttons */}
       <a
