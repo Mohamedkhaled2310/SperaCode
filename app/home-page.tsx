@@ -760,7 +760,7 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
               <p>{t.finalSub}</p>
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <Link className="button button-primary" href={contactHref}>
-                  {rtl ? 'ابدأ محادثة مع فريقنا' : 'Start a conversation'}
+                  {rtl ? 'طلب استشارة ومقترح فني' : 'Request Technical Proposal'}
                   {rtl ? <ArrowLeft /> : <ArrowRight />}
                 </Link>
                 <a
