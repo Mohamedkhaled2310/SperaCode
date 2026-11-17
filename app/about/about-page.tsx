@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowUp,
   ArrowUpRight,
   Award,
   Building2,
@@ -15,6 +16,7 @@ import {
   FileCheck2,
   Globe2,
   HeartHandshake,
+  Home,
   Layers,
   MapPin,
   Menu,
@@ -34,6 +36,7 @@ import {
 import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { CustomerReviews } from '@/components/customer-reviews'
+import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
 
 type Locale = 'ar' | 'en'
 
@@ -47,6 +50,7 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [showBackToTop, setShowBackToTop] = useState(false)
 
   const rtl = locale === 'ar'
   const basePath = rtl ? '' : '/en'
@@ -55,6 +59,10 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
   const projectsHref = `${basePath}/projects`
   const aboutHref = `${basePath}/about`
   const contactHref = `${basePath}/contact`
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('speracode-theme')
@@ -67,6 +75,7 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
     const handleScroll = () => {
       const scrollY = window.scrollY
       setScrolled(scrollY > 20)
+      setShowBackToTop(scrollY > 400)
 
       const winScroll = document.documentElement.scrollTop
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
@@ -347,7 +356,10 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
         <section className="about-hero">
           <div className="container">
             <nav className="breadcrumb" aria-label="Breadcrumb">
-              <Link href={homeHref}>{rtl ? 'الرئيسية' : 'Home'}</Link>
+              <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <Home size={14} />
+                <span>{rtl ? 'الرئيسية' : 'Home'}</span>
+              </Link>
               <span aria-hidden="true">/</span>
               <span>{rtl ? 'من نحن وعن الشركة' : 'About SperaCode'}</span>
             </nav>
@@ -565,6 +577,19 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
         servicesHref={servicesHref}
         aboutHref={aboutHref}
       />
+
+      {/* Animated Floating WhatsApp Widget */}
+      <WhatsAppFloatingButton rtl={rtl} />
+
+      {/* Floating Back To Top Button */}
+      <button
+        type="button"
+        className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label={rtl ? 'العودة إلى أعلى الصفحة' : 'Back to top'}
+      >
+        <ArrowUp />
+      </button>
     </div>
   )
 }

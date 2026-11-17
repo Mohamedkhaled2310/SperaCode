@@ -27,6 +27,7 @@ import {
 import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { SiteFooter } from '@/components/site-footer'
+import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
 import { projects } from './projects/project-data'
 import { homeFaqs } from './seo-data'
 
@@ -793,22 +794,8 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
         aboutHref={aboutHref}
       />
 
-      {/* Floating Action Buttons */}
-      <a
-        className="whatsapp-float"
-        href={`https://wa.me/?text=${encodeURIComponent(
-          rtl ? 'مرحبًا SperaCode، أود الاستفسار عن خدماتكم.' : 'Hello SperaCode, I would like to inquire about your services.'
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={rtl ? 'تواصل مع SperaCode عبر واتساب' : 'Contact SperaCode on WhatsApp'}
-      >
-        <img
-          className="whatsapp-mark"
-          src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/whatsapp/default.svg"
-          alt=""
-        />
-      </a>
+      {/* Animated Floating WhatsApp Widget */}
+      <WhatsAppFloatingButton rtl={rtl} />
 
       <button
         type="button"

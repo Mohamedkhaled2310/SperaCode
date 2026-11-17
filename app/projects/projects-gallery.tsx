@@ -10,6 +10,7 @@ import {
   ArrowUp,
   ArrowUpRight,
   Check,
+  Home,
   Menu,
   Moon,
   Search,
@@ -19,6 +20,7 @@ import {
 import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { SiteFooter } from '@/components/site-footer'
+import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
 import { PageHeroVisual } from '../page-hero-visual'
 import { projects } from './project-data'
 
@@ -286,9 +288,14 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
           <div className="container projects-hero-inner">
             <div className="projects-hero-layout">
               <div className="projects-hero-copy">
-                <Link className="breadcrumb" href={homeHref}>
-                  {labels.breadcrumb} {rtl ? <ArrowLeft size={14} /> : <ArrowRight size={14} />} {labels.work}
-                </Link>
+                <div className="breadcrumb" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                    <Home size={14} />
+                    <span>{labels.breadcrumb}</span>
+                  </Link>
+                  <span aria-hidden="true">/</span>
+                  <span>{labels.work}</span>
+                </div>
 
                 <span className="section-kicker">{labels.heroTop}</span>
                 <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.2rem)', fontWeight: 800, margin: '14px 0', lineHeight: 1.15 }}>
@@ -528,22 +535,8 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         aboutHref={aboutHref}
       />
 
-      {/* Floating Action Buttons */}
-      <a
-        className="whatsapp-float"
-        href={`https://wa.me/?text=${encodeURIComponent(
-          rtl ? 'مرحبًا SperaCode، استعرضت سابقة أعمالكم وأود استشارتكم.' : 'Hello SperaCode, I reviewed your work and would like to consult with you.'
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={rtl ? 'تواصل معنا عبر واتساب' : 'Contact on WhatsApp'}
-      >
-        <img
-          className="whatsapp-mark"
-          src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/whatsapp/default.svg"
-          alt=""
-        />
-      </a>
+      {/* Animated Floating WhatsApp Widget */}
+      <WhatsAppFloatingButton rtl={rtl} />
 
       <button
         type="button"
