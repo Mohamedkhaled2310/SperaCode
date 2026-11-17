@@ -14,6 +14,7 @@ import {
   Sun,
 } from 'lucide-react'
 import { SperaLogo } from './spera-logo'
+import { buildWhatsAppUrl } from '@/app/site-config'
 
 interface SiteFooterProps {
   rtl: boolean
@@ -76,7 +77,7 @@ export function SiteFooter({
     { ar: 'الأسئلة الشائعة التقنية', en: 'Technical FAQs', href: `${defaultHome}#faq` },
   ]
 
-  const whatsappMessage = encodeURIComponent(
+  const whatsappUrl = buildWhatsAppUrl(
     rtl
       ? 'مرحبًا SperaCode، أود الاستفسار عن خدماتكم والبدء في مشروع جديد.'
       : 'Hello SperaCode, I would like to inquire about your services and discuss a project.'
@@ -106,19 +107,19 @@ export function SiteFooter({
           </div>
 
           <div className="footer-cta-actions">
-            <Link className="button button-primary footer-action-btn" href={defaultContact}>
-              {rtl ? 'ابدأ مشروعك الآن' : 'Start Your Project'}
-              <ArrowUpRight aria-hidden="true" size={16} />
-            </Link>
             <a
-              className="button button-secondary footer-action-btn"
-              href={`https://wa.me/?text=${whatsappMessage}`}
+              className="button button-primary footer-action-btn"
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {rtl ? 'محادثة فورية على واتساب' : 'Chat on WhatsApp'}
+              {rtl ? 'ابدأ مشروعك عبر واتساب' : 'Start on WhatsApp'}
               <ArrowUpRight aria-hidden="true" size={16} />
             </a>
+            <Link className="button button-secondary footer-action-btn" href={defaultContact}>
+              {rtl ? 'طلب عرض سعر واستشارة' : 'Request Proposal'}
+              <ArrowUpRight aria-hidden="true" size={16} />
+            </Link>
           </div>
         </div>
       </div>
@@ -161,7 +162,7 @@ export function SiteFooter({
                 <span>contact@speracode.com</span>
               </a>
               <a
-                href={`https://wa.me/?text=${whatsappMessage}`}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-contact-link"

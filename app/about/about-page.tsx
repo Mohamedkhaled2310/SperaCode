@@ -37,6 +37,7 @@ import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { buildWhatsAppUrl } from '@/app/site-config'
 
 type Locale = 'ar' | 'en'
 
@@ -551,10 +552,19 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
                   : 'Connect with our solution architects today for a complimentary discovery session and tailored technical proposal.'}
               </p>
               <div className="about-cta-actions">
-                <Link className="button button-primary" href={contactHref}>
-                  {rtl ? 'تواصل معنا الآن' : 'Contact Our Team'}
+                <a
+                  className="button button-primary"
+                  href={buildWhatsAppUrl(
+                    rtl
+                      ? 'مرحبًا SperaCode، قرأت عن رؤيتكم وأود استشارتكم لبدء مشروع جديد.'
+                      : 'Hello SperaCode, I would like to consult with your engineering team.'
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {rtl ? 'تحدث معنا عبر واتساب فوراً' : 'Chat on WhatsApp'}
                   <ArrowUpRight size={16} />
-                </Link>
+                </a>
                 <Link className="button button-secondary" href={projectsHref}>
                   {rtl ? 'استعرض سابقة الأعمال' : 'View Portfolio'}
                   <ArrowUpRight size={16} />

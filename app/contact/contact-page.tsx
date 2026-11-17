@@ -34,6 +34,7 @@ import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { CustomSelect } from '@/components/custom-select'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { buildWhatsAppUrl } from '@/app/site-config'
 import { PageHeroVisual } from '../page-hero-visual'
 
 type Locale = 'ar' | 'en'
@@ -216,11 +217,11 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
   const projectsHref = `${basePath}/projects`
   const contactHref = `${basePath}/contact`
 
-  const whatsappDirectUrl = `https://wa.me/?text=${encodeURIComponent(
+  const whatsappDirectUrl = buildWhatsAppUrl(
     rtl
       ? 'مرحبًا SperaCode، أود مناقشة مشروع جديد معكم.'
       : 'Hello SperaCode, I would like to discuss a project with your team.'
-  )}`
+  )
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -326,7 +327,7 @@ ${messageText || '—'}`
 
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    window.open(`https://wa.me/?text=${encodeURIComponent(generatedBrief)}`, '_blank', 'noopener,noreferrer')
+    window.open(buildWhatsAppUrl(generatedBrief), '_blank', 'noopener,noreferrer')
     setSubmitted(true)
   }
 

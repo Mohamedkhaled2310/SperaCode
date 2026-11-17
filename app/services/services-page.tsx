@@ -38,6 +38,7 @@ import {
 import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { buildWhatsAppUrl } from '@/app/site-config'
 
 type Locale = 'ar' | 'en'
 
@@ -618,11 +619,11 @@ export default function ServicesPage({ initialLocale = 'ar' }: ServicesPageProps
               {filteredServices.map((service, index) => {
                 const IconComponent = service.icon
                 const quoteUrl = `${contactHref}?service=${service.contactParam}`
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+                const whatsappUrl = buildWhatsAppUrl(
                   rtl
                     ? `مرحبًا SperaCode، أود الاستفسار وطلب عرض سعر لخدمة: ${service.title}`
                     : `Hello SperaCode, I would like to inquire about: ${service.title}`
-                )}`
+                )
 
                 return (
                   <article
@@ -690,19 +691,19 @@ export default function ServicesPage({ initialLocale = 'ar' }: ServicesPageProps
 
                     {/* Card Actions */}
                     <div className="service-card-footer">
-                      <Link className="button button-primary service-action-btn" href={quoteUrl}>
-                        {rtl ? 'طلب عرض سعر للخدمة' : 'Request Proposal'}
-                        <ArrowUpRight size={16} />
-                      </Link>
                       <a
-                        className="button button-secondary service-action-btn"
+                        className="button button-primary service-action-btn"
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Phone size={15} />
-                        {rtl ? 'محادثة سريعة عبر واتساب' : 'Chat on WhatsApp'}
+                        {rtl ? 'طلب واستفسار عبر واتساب' : 'Inquire on WhatsApp'}
                       </a>
+                      <Link className="button button-secondary service-action-btn" href={quoteUrl}>
+                        {rtl ? 'تخصيص المواصفات' : 'Custom Brief'}
+                        <ArrowUpRight size={15} />
+                      </Link>
                     </div>
                   </article>
                 )

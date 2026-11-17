@@ -28,6 +28,7 @@ import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { buildWhatsAppUrl } from './site-config'
 import { projects } from './projects/project-data'
 import { homeFaqs } from './seo-data'
 
@@ -764,11 +765,11 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
                 </Link>
                 <a
                   className="button button-secondary"
-                  href={`https://wa.me/?text=${encodeURIComponent(
+                  href={buildWhatsAppUrl(
                     rtl
                       ? 'مرحبًا SperaCode، أود مناقشة مشروع جديد معكم.'
                       : 'Hello SperaCode, I would like to discuss a project with your team.'
-                  )}`}
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

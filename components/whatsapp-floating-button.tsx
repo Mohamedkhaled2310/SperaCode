@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { buildWhatsAppUrl } from '@/app/site-config'
 
 interface WhatsAppFloatingButtonProps {
   rtl?: boolean
@@ -39,9 +40,7 @@ export function WhatsAppFloatingButton({
       ? 'مرحبًا SperaCode، أود الاستفسار عن خدماتكم والبدء في مشروع جديد.'
       : 'Hello SperaCode, I would like to inquire about your services and discuss a project.')
 
-  const targetUrl = phoneNumber
-    ? `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-    : `https://wa.me/?text=${encodeURIComponent(message)}`
+  const targetUrl = buildWhatsAppUrl(message, phoneNumber)
 
   return (
     <div
