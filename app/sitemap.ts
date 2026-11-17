@@ -30,6 +30,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: languageAlternates('/', '/en'),
     },
     {
+      url: `${SITE_URL}/services`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+      alternates: languageAlternates('/services', '/en/services'),
+    },
+    {
+      url: `${SITE_URL}/en/services`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+      alternates: languageAlternates('/services', '/en/services'),
+    },
+    {
       url: `${SITE_URL}/projects`,
       lastModified,
       changeFrequency: 'monthly',
@@ -42,6 +56,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
       alternates: languageAlternates('/projects', '/en/projects'),
+    },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+      alternates: languageAlternates('/about', '/en/about'),
+    },
+    {
+      url: `${SITE_URL}/en/about`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+      alternates: languageAlternates('/about', '/en/about'),
     },
     {
       url: `${SITE_URL}/contact`,

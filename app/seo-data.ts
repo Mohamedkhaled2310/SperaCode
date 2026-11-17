@@ -224,6 +224,42 @@ export function createPortfolioPageSchema(locale: 'ar' | 'en') {
   }
 }
 
+export function createServicesPageSchema(locale: 'ar' | 'en') {
+  const path = locale === 'ar' ? '/services' : '/en/services'
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemPage',
+    '@id': `${SITE_URL}${path}#webpage`,
+    url: `${SITE_URL}${path}`,
+    name: locale === 'ar' ? 'خدماتنا التقنية والهندسية | SperaCode' : 'Software Engineering & AI Services | SperaCode',
+    description: locale === 'ar'
+      ? 'استكشف خدمات سبيرا كود الشاملة: تطوير المواقع، تطبيقات الجوال، المنيو الرقمي QR، أنظمة ERP، الذكاء الاصطناعي، وتصميم UI/UX.'
+      : 'Explore SperaCode software engineering services: web platforms, mobile apps, QR menus, custom ERP, AI automation, and UI/UX design.',
+    inLanguage: locale === 'ar' ? 'ar-EG' : 'en',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    mainEntity: { '@id': `${SITE_URL}/#organization` },
+  }
+}
+
+export function createAboutPageSchema(locale: 'ar' | 'en') {
+  const path = locale === 'ar' ? '/about' : '/en/about'
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': `${SITE_URL}${path}#webpage`,
+    url: `${SITE_URL}${path}`,
+    name: locale === 'ar' ? 'من نحن | قصة ومنهجية شركة SperaCode' : 'About SperaCode | Software Engineering House & AI Lab',
+    description: locale === 'ar'
+      ? 'تعرف على سبيرا كود (SperaCode)، رؤيتنا، منهجيتنا في تطوير البرمجيات، وضمانات الملكية 100% والتسليم في الموعد.'
+      : 'Learn about SperaCode, our software development methodology, core engineering values, and 100% IP ownership guarantee.',
+    inLanguage: locale === 'ar' ? 'ar-EG' : 'en',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    mainEntity: { '@id': `${SITE_URL}/#organization` },
+  }
+}
+
 export function createBreadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',

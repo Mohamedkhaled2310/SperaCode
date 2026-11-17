@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
+import { SiteFooter } from '@/components/site-footer'
 import { PageHeroVisual } from '../page-hero-visual'
 import { projects } from './project-data'
 
@@ -41,8 +42,8 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
   const rtl = locale === 'ar'
   const basePath = rtl ? '' : '/en'
   const homeHref = basePath || '/'
-  const servicesHref = `${homeHref}#services`
-  const aboutHref = `${homeHref}#why`
+  const servicesHref = `${basePath}/services`
+  const aboutHref = `${basePath}/about`
   const projectsHref = `${basePath}/projects`
   const contactHref = `${basePath}/contact`
 
@@ -514,56 +515,18 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <SperaLogo footer rtl={rtl} homeHref={homeHref} />
-              <p>{labels.footer}</p>
-            </div>
-
-            <div className="footer-col-nav">
-              <h4>{rtl ? 'التنقل' : 'Navigation'}</h4>
-              <Link href={homeHref}>{labels.home}</Link>
-              <Link href={servicesHref}>{labels.services}</Link>
-              <Link href={projectsHref}>{labels.work}</Link>
-              <Link href={contactHref}>{labels.contact}</Link>
-            </div>
-
-            <div className="footer-col-services">
-              <h4>{rtl ? 'تواصل معنا' : 'Get in touch'}</h4>
-              <Link href={contactHref}>
-                {rtl ? 'طلب عرض سعر واستشارة' : 'Request a Proposal'}
-              </Link>
-              <a
-                href={`https://wa.me/?text=${encodeURIComponent(
-                  rtl ? 'مرحبًا SperaCode' : 'Hello SperaCode'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {rtl ? 'محادثة مباشرة على واتساب' : 'Direct WhatsApp'}
-              </a>
-            </div>
-
-            <div className="footer-col-contact">
-              <h4>{rtl ? 'التخصيص' : 'Preferences'}</h4>
-              <div className="footer-toggles">
-                <button onClick={toggleLocale}>{labels.switch}</button>
-                <button onClick={toggleTheme}>{dark ? <Sun /> : <Moon />}</button>
-              </div>
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <span>© {new Date().getFullYear()} SperaCode.</span>
-            <a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToTop() }}>
-              {rtl ? 'العودة للأعلى ↑' : 'Back to top ↑'}
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* Elite Global Footer */}
+      <SiteFooter
+        rtl={rtl}
+        dark={dark}
+        onToggleDark={toggleTheme}
+        onToggleLocale={toggleLocale}
+        homeHref={homeHref}
+        projectsHref={projectsHref}
+        contactHref={contactHref}
+        servicesHref={servicesHref}
+        aboutHref={aboutHref}
+      />
 
       {/* Floating Action Buttons */}
       <a

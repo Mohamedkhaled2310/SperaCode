@@ -19,6 +19,7 @@ import {
   X,
 } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
+import { SiteFooter } from '@/components/site-footer'
 import { PageHeroVisual } from '../page-hero-visual'
 
 type Locale = 'ar' | 'en'
@@ -195,8 +196,8 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
   const rtl = locale === 'ar'
   const basePath = rtl ? '' : '/en'
   const homeHref = basePath || '/'
-  const servicesHref = `${homeHref}#services`
-  const aboutHref = `${homeHref}#why`
+  const servicesHref = `${basePath}/services`
+  const aboutHref = `${basePath}/about`
   const projectsHref = `${basePath}/projects`
   const contactHref = `${basePath}/contact`
 
@@ -283,7 +284,7 @@ ${messageText || '—'}`
             <Link href={homeHref}>{t.home}</Link>
             <Link href={servicesHref}>{t.services}</Link>
             <Link href={projectsHref}>{t.work}</Link>
-            <Link href={aboutHref}>{rtl ? 'لماذا نحن' : 'About'}</Link>
+            <Link href={aboutHref}>{rtl ? 'من نحن' : 'About'}</Link>
             <Link href={contactHref} aria-current="page">
               {t.page}
             </Link>
@@ -668,19 +669,18 @@ ${messageText || '—'}`
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container contact-footer-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <SperaLogo footer rtl={rtl} homeHref={homeHref} />
-            <p style={{ color: 'var(--muted)', fontSize: '13px', margin: '8px 0 0' }}>{t.footer}</p>
-          </div>
-          <Link className="button button-secondary" href={homeHref}>
-            {t.back}
-            {rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
-          </Link>
-        </div>
-      </footer>
+      {/* Elite Global Footer */}
+      <SiteFooter
+        rtl={rtl}
+        dark={dark}
+        onToggleDark={toggleTheme}
+        onToggleLocale={toggleLocale}
+        homeHref={homeHref}
+        projectsHref={projectsHref}
+        contactHref={contactHref}
+        servicesHref={servicesHref}
+        aboutHref={aboutHref}
+      />
     </div>
   )
 }
