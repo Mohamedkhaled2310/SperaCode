@@ -26,7 +26,10 @@ import {
 } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
+import { AnimatedMarqueeCarousel } from '@/components/animated-marquee-carousel'
 import { SiteFooter } from '@/components/site-footer'
+import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { buildWhatsAppUrl } from './site-config'
 import { projects } from './projects/project-data'
 import { homeFaqs } from './seo-data'
 
@@ -388,6 +391,9 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
             </div>
           </div>
         </section>
+
+        {/* Live Animated Tech & Enterprise Partners Marquee */}
+        <AnimatedMarqueeCarousel rtl={rtl} />
 
         {/* Services Section */}
         <section className="section section-muted" id="services">
@@ -758,16 +764,16 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
               <p>{t.finalSub}</p>
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <Link className="button button-primary" href={contactHref}>
-                  {rtl ? 'ابدأ محادثة مع فريقنا' : 'Start a conversation'}
+                  {rtl ? 'طلب استشارة ومقترح فني' : 'Request Technical Proposal'}
                   {rtl ? <ArrowLeft /> : <ArrowRight />}
                 </Link>
                 <a
                   className="button button-secondary"
-                  href={`https://wa.me/?text=${encodeURIComponent(
+                  href={buildWhatsAppUrl(
                     rtl
                       ? 'مرحبًا SperaCode، أود مناقشة مشروع جديد معكم.'
                       : 'Hello SperaCode, I would like to discuss a project with your team.'
-                  )}`}
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -793,22 +799,8 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
         aboutHref={aboutHref}
       />
 
-      {/* Floating Action Buttons */}
-      <a
-        className="whatsapp-float"
-        href={`https://wa.me/?text=${encodeURIComponent(
-          rtl ? 'مرحبًا SperaCode، أود الاستفسار عن خدماتكم.' : 'Hello SperaCode, I would like to inquire about your services.'
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={rtl ? 'تواصل مع SperaCode عبر واتساب' : 'Contact SperaCode on WhatsApp'}
-      >
-        <img
-          className="whatsapp-mark"
-          src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/whatsapp/default.svg"
-          alt=""
-        />
-      </a>
+      {/* Animated Floating WhatsApp Widget */}
+      <WhatsAppFloatingButton rtl={rtl} />
 
       <button
         type="button"

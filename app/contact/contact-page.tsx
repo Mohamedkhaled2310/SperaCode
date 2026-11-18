@@ -5,21 +5,36 @@ import { FormEvent, useEffect, useState } from 'react'
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowUp,
   ArrowUpLeft,
   ArrowUpRight,
+  Bot,
+  Calendar,
   Check,
   Clock3,
+  Code2,
+  Compass,
   Copy,
+  Globe2,
+  Home,
   Mail,
   Menu,
   MessageCircle,
   Moon,
+  PenTool,
+  QrCode,
   Send,
+  Smartphone,
+  Sparkles,
   Sun,
   X,
+  Zap,
 } from 'lucide-react'
 import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
+import { CustomSelect } from '@/components/custom-select'
+import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { buildWhatsAppUrl } from '@/app/site-config'
 import { PageHeroVisual } from '../page-hero-visual'
 
 type Locale = 'ar' | 'en'
@@ -191,6 +206,7 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
   const [selectedService, setSelectedService] = useState('')
   const [selectedTimeline, setSelectedTimeline] = useState('')
   const [messageText, setMessageText] = useState('')
+  const [showBackToTop, setShowBackToTop] = useState(false)
 
   const t = content[locale]
   const rtl = locale === 'ar'
@@ -201,11 +217,32 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
   const projectsHref = `${basePath}/projects`
   const contactHref = `${basePath}/contact`
 
-  const whatsappDirectUrl = `https://wa.me/?text=${encodeURIComponent(
+  const whatsappDirectUrl = buildWhatsAppUrl(
     rtl
       ? 'مرحبًا SperaCode، أود مناقشة مشروع جديد معكم.'
       : 'Hello SperaCode, I would like to discuss a project with your team.'
-  )}`
+  )
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const serviceOptionsWithIcons = [
+    { value: t.serviceOptions[1], label: t.serviceOptions[1], icon: Globe2 },
+    { value: t.serviceOptions[2], label: t.serviceOptions[2], icon: Smartphone },
+    { value: t.serviceOptions[3], label: t.serviceOptions[3], icon: QrCode },
+    { value: t.serviceOptions[4], label: t.serviceOptions[4], icon: Bot },
+    { value: t.serviceOptions[5], label: t.serviceOptions[5], icon: PenTool },
+    { value: t.serviceOptions[6], label: t.serviceOptions[6], icon: Code2 },
+    { value: t.serviceOptions[7], label: t.serviceOptions[7], icon: Sparkles },
+  ]
+
+  const timelineOptionsWithIcons = [
+    { value: t.timelineOptions[1], label: t.timelineOptions[1], icon: Zap },
+    { value: t.timelineOptions[2], label: t.timelineOptions[2], icon: Clock3 },
+    { value: t.timelineOptions[3], label: t.timelineOptions[3], icon: Calendar },
+    { value: t.timelineOptions[4], label: t.timelineOptions[4], icon: Compass },
+  ]
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('speracode-theme')
@@ -214,6 +251,12 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
     document.documentElement.classList.toggle('dark', nextDark)
     document.documentElement.lang = initialLocale
     document.documentElement.dir = initialLocale === 'ar' ? 'rtl' : 'ltr'
+
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -232,7 +275,32 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
       revealObserver.observe(el)
     })
 
-    return () => revealObserver.disconnect()
+    // Auto-select service if passed in query string (e.g. /contact?service=web)
+    try {
+      const paramService = new URLSearchParams(window.location.search).get('service')
+      if (paramService) {
+        const mapping: Record<string, number> = {
+          web: 1,
+          mobile: 2,
+          qr: 3,
+          ai: 4,
+          uiux: 5,
+          erp: 6,
+          support: 7,
+        }
+        const idx = mapping[paramService.toLowerCase()]
+        if (idx && t.serviceOptions[idx]) {
+          setSelectedService(t.serviceOptions[idx])
+        }
+      }
+    } catch {
+      // Ignore URL parsing errors on old browsers
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      revealObserver.disconnect()
+    }
   }, [initialLocale])
 
   function toggleLocale() {
@@ -259,7 +327,7 @@ ${messageText || '—'}`
 
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    window.open(`https://wa.me/?text=${encodeURIComponent(generatedBrief)}`, '_blank', 'noopener,noreferrer')
+    window.open(buildWhatsAppUrl(generatedBrief), '_blank', 'noopener,noreferrer')
     setSubmitted(true)
   }
 
@@ -333,7 +401,7 @@ ${messageText || '—'}`
               <ArrowUpRight aria-hidden="true" />
             </Link>
             <Link onClick={() => setMenuOpen(false)} href={aboutHref}>
-              {rtl ? 'لماذا نحن' : 'About'}
+              {rtl ? 'من نحن' : 'About'}
               <ArrowUpRight aria-hidden="true" />
             </Link>
             <Link onClick={() => setMenuOpen(false)} href={contactHref}>
@@ -351,6 +419,15 @@ ${messageText || '—'}`
         {/* Contact Hero */}
         <section className="contact-hero container">
           <div className="contact-hero-copy">
+            <nav className="breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: '16px' }}>
+              <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <Home size={14} />
+                <span>{t.home}</span>
+              </Link>
+              <span aria-hidden="true">/</span>
+              <span>{t.page}</span>
+            </nav>
+
             <span className="section-kicker">
               <span className="live-dot" />
               {t.kicker}
@@ -453,6 +530,15 @@ ${messageText || '—'}`
                   <span>
                     {t.service} <b style={{ color: '#ef4444' }}>*</b>
                   </span>
+                  <CustomSelect
+                    name="service"
+                    value={selectedService}
+                    onChange={setSelectedService}
+                    placeholder={t.serviceOptions[0]}
+                    options={serviceOptionsWithIcons}
+                    rtl={rtl}
+                    required
+                  />
                   <div className="service-selector-pills">
                     {t.serviceOptions.slice(1).map((opt) => (
                       <button
@@ -465,11 +551,18 @@ ${messageText || '—'}`
                       </button>
                     ))}
                   </div>
-                  <input type="hidden" name="service" value={selectedService} required />
                 </div>
 
                 <div className="contact-field contact-field-full">
                   <span>{t.timeline}</span>
+                  <CustomSelect
+                    name="timeline"
+                    value={selectedTimeline}
+                    onChange={setSelectedTimeline}
+                    placeholder={t.timelineOptions[0]}
+                    options={timelineOptionsWithIcons}
+                    rtl={rtl}
+                  />
                   <div className="service-selector-pills">
                     {t.timelineOptions.slice(1).map((opt) => (
                       <button
@@ -482,7 +575,6 @@ ${messageText || '—'}`
                       </button>
                     ))}
                   </div>
-                  <input type="hidden" name="timeline" value={selectedTimeline} />
                 </div>
 
                 <label className="contact-field contact-field-full">
@@ -681,6 +773,19 @@ ${messageText || '—'}`
         servicesHref={servicesHref}
         aboutHref={aboutHref}
       />
+
+      {/* Animated Floating WhatsApp Widget */}
+      <WhatsAppFloatingButton rtl={rtl} />
+
+      {/* Floating Back To Top Button */}
+      <button
+        type="button"
+        className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label={rtl ? 'العودة إلى أعلى الصفحة' : 'Back to top'}
+      >
+        <ArrowUp />
+      </button>
     </div>
   )
 }
