@@ -1,21 +1,21 @@
 import type { Metadata, Viewport } from 'next'
-import { Cairo, Montserrat } from 'next/font/google'
+import { IBM_Plex_Sans_Arabic, Plus_Jakarta_Sans } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import { createOrganizationSchema, websiteSchema } from './seo-data'
 import { SITE_NAME, SITE_NAME_AR, SITE_URL } from './site-config'
 
-const cairo = Cairo({
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic', 'latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-cairo',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-ibm-plex-arabic',
   display: 'swap',
 })
 
-const montserrat = Montserrat({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-montserrat',
+  variable: '--font-plus-jakarta',
   display: 'swap',
 })
 
@@ -125,7 +125,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       lang="ar"
       dir="rtl"
       suppressHydrationWarning
-      className={`${cairo.variable} ${montserrat.variable}`}
+      className={`${ibmPlexArabic.variable} ${plusJakarta.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
