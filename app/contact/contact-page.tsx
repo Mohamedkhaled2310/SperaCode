@@ -22,6 +22,7 @@ import {
   MessageCircle,
   Moon,
   PenTool,
+  Phone,
   QrCode,
   Send,
   Smartphone,
@@ -34,7 +35,13 @@ import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { CustomSelect } from '@/components/custom-select'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
-import { buildWhatsAppUrl } from '@/app/site-config'
+import {
+  buildWhatsAppUrl,
+  SITE_EMAIL,
+  SITE_PHONE_LOCAL,
+  SITE_PHONE_INTL,
+  SITE_PHONE_DISPLAY_INTL,
+} from '@/app/site-config'
 import { PageHeroVisual } from '../page-hero-visual'
 
 type Locale = 'ar' | 'en'
@@ -53,7 +60,7 @@ const content = {
     name: 'الاسم الكريم',
     nameHint: 'ما هو اسمك الكريم؟',
     phone: 'رقم الهاتف أو واتساب',
-    phoneHint: '+20 100 000 0000',
+    phoneHint: '01515327087',
     company: 'اسم الشركة أو المشروع (اختياري)',
     companyHint: 'شركتك أو فكرة مشروعك',
     service: 'الخدمة المطلوبة',
@@ -84,9 +91,9 @@ const content = {
     direct: 'تواصل فوري ومباشر',
     directText: 'يمكنك محادثتنا فورًا على واتساب أو التواصل عبر البريد الرسمي.',
     whatsappLabel: 'محادثة فورية على واتساب',
-    whatsappCta: 'تحدث مع مهندسينا الآن',
+    whatsappCta: `${SITE_PHONE_LOCAL} (محادثة مباشرة)`,
     emailLabel: 'البريد الإلكتروني الرسمي',
-    emailCta: 'contact@speracode.com',
+    emailCta: SITE_EMAIL,
     note: 'متوسط سرعة الرد لدينا أقل من ساعتين خلال أوقات العمل.',
     stepsTitle: 'ماذا بعد إرسال رسالتك؟',
     steps: [
@@ -128,7 +135,7 @@ const content = {
     name: 'Your Name',
     nameHint: 'What should we call you?',
     phone: 'Phone or WhatsApp Number',
-    phoneHint: '+20 100 000 0000',
+    phoneHint: '+20 151 532 7087',
     company: 'Company / Organization (Optional)',
     companyHint: 'Your company or project name',
     service: 'Required Service',
@@ -159,9 +166,9 @@ const content = {
     direct: 'Direct Channels',
     directText: 'Prefer instant chat? Reach out directly via WhatsApp or email.',
     whatsappLabel: 'Instant WhatsApp Chat',
-    whatsappCta: 'Chat directly with our team',
+    whatsappCta: `${SITE_PHONE_LOCAL} (Direct Chat)`,
     emailLabel: 'Official Support Email',
-    emailCta: 'contact@speracode.com',
+    emailCta: SITE_EMAIL,
     note: 'Average response time is under 2 hours during active business hours.',
     stepsTitle: 'What happens after sending?',
     steps: [
@@ -664,18 +671,33 @@ ${messageText || '—'}`
                   </span>
                   <span className="contact-channel-text">
                     <small>{t.whatsappLabel}</small>
-                    <strong>{t.whatsappCta}</strong>
+                    <strong>{SITE_PHONE_LOCAL} • {rtl ? 'محادثة فورية' : 'Instant Chat'}</strong>
                   </span>
                   {rtl ? <ArrowUpLeft aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
                 </a>
 
-                <a className="contact-channel" href="mailto:contact@speracode.com">
+                <a
+                  className="contact-channel"
+                  href={`tel:${SITE_PHONE_INTL}`}
+                  title={SITE_PHONE_DISPLAY_INTL}
+                >
+                  <span className="contact-channel-icon">
+                    <Phone aria-hidden="true" />
+                  </span>
+                  <span className="contact-channel-text">
+                    <small>{rtl ? 'الاتصال الهاتفي المباشر' : 'Direct Phone Call'}</small>
+                    <strong dir="ltr">{SITE_PHONE_DISPLAY_INTL}</strong>
+                  </span>
+                  {rtl ? <ArrowUpLeft aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
+                </a>
+
+                <a className="contact-channel" href={`mailto:${SITE_EMAIL}`} title={SITE_EMAIL}>
                   <span className="contact-channel-icon">
                     <Mail aria-hidden="true" />
                   </span>
                   <span className="contact-channel-text">
                     <small>{t.emailLabel}</small>
-                    <strong>{t.emailCta}</strong>
+                    <strong>{SITE_EMAIL}</strong>
                   </span>
                   {rtl ? <ArrowUpLeft aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
                 </a>

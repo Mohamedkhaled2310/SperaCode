@@ -18,7 +18,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { SperaLogo } from './spera-logo'
-import { buildWhatsAppUrl } from '@/app/site-config'
+import { buildWhatsAppUrl, SITE_EMAIL, SITE_PHONE_LOCAL } from '@/app/site-config'
 
 interface SiteFooterProps {
   rtl: boolean
@@ -119,18 +119,18 @@ export function SiteFooter({
               target="_blank"
               rel="noopener noreferrer"
               className="footer-contact-chip"
-              title={rtl ? 'محادثة سريعة عبر واتساب' : 'Chat on WhatsApp'}
+              title={rtl ? `واتساب: ${SITE_PHONE_LOCAL}` : `WhatsApp: ${SITE_PHONE_LOCAL}`}
             >
               <Phone size={13} aria-hidden="true" />
-              <span>{rtl ? 'واتساب الإدارة الهندسية' : 'WhatsApp Desk'}</span>
+              <span>{rtl ? `واتساب (${SITE_PHONE_LOCAL})` : `WhatsApp (${SITE_PHONE_LOCAL})`}</span>
             </a>
             <a
-              href="mailto:contact@speracode.com"
+              href={`mailto:${SITE_EMAIL}`}
               className="footer-contact-chip"
-              title="contact@speracode.com"
+              title={SITE_EMAIL}
             >
               <Mail size={13} aria-hidden="true" />
-              <span>contact@speracode.com</span>
+              <span>{SITE_EMAIL}</span>
             </a>
           </div>
         </div>
