@@ -228,20 +228,20 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
   }
 
   const serviceOptionsWithIcons = [
-    { value: t.serviceOptions[1], label: t.serviceOptions[1], icon: Globe2 },
-    { value: t.serviceOptions[2], label: t.serviceOptions[2], icon: Smartphone },
-    { value: t.serviceOptions[3], label: t.serviceOptions[3], icon: QrCode },
-    { value: t.serviceOptions[4], label: t.serviceOptions[4], icon: Bot },
-    { value: t.serviceOptions[5], label: t.serviceOptions[5], icon: PenTool },
-    { value: t.serviceOptions[6], label: t.serviceOptions[6], icon: Code2 },
-    { value: t.serviceOptions[7], label: t.serviceOptions[7], icon: Sparkles },
+    { value: t.serviceOptions[1], label: t.serviceOptions[1], icon: Globe2, hint: rtl ? 'منصات سحابية فائقة السرعة' : 'Next.js & Cloud' },
+    { value: t.serviceOptions[2], label: t.serviceOptions[2], icon: Smartphone, hint: rtl ? 'iOS & Android هجين وأصيل' : 'Cross-Platform Apps' },
+    { value: t.serviceOptions[3], label: t.serviceOptions[3], icon: QrCode, hint: rtl ? 'طلب فوري ومباشر على واتساب' : 'Interactive QR Menu' },
+    { value: t.serviceOptions[4], label: t.serviceOptions[4], icon: Bot, hint: rtl ? 'أتمتة الأعمال ووكلاء AI' : 'LLMs & AI Agents' },
+    { value: t.serviceOptions[5], label: t.serviceOptions[5], icon: PenTool, hint: rtl ? 'واجهات احترافية وسهلة الاستخدام' : 'Figma & Design Systems' },
+    { value: t.serviceOptions[6], label: t.serviceOptions[6], icon: Code2, hint: rtl ? 'إدارة المخازن والمبيعات' : 'Custom ERP & POS' },
+    { value: t.serviceOptions[7], label: t.serviceOptions[7], icon: Sparkles, hint: rtl ? 'جلسة فنية ودراسة جدوى مجانية' : 'Technical Consultation' },
   ]
 
   const timelineOptionsWithIcons = [
-    { value: t.timelineOptions[1], label: t.timelineOptions[1], icon: Zap },
-    { value: t.timelineOptions[2], label: t.timelineOptions[2], icon: Clock3 },
-    { value: t.timelineOptions[3], label: t.timelineOptions[3], icon: Calendar },
-    { value: t.timelineOptions[4], label: t.timelineOptions[4], icon: Compass },
+    { value: t.timelineOptions[1], label: t.timelineOptions[1], icon: Zap, hint: rtl ? 'مسار سريع ذو أولوية' : 'Fast-Track Priority' },
+    { value: t.timelineOptions[2], label: t.timelineOptions[2], icon: Clock3, hint: rtl ? 'الجدول الهندسي المعتاد' : 'Standard Sprint Cycle' },
+    { value: t.timelineOptions[3], label: t.timelineOptions[3], icon: Calendar, hint: rtl ? 'تطوير وتسليم مرحلي' : 'Phased Milestone Scope' },
+    { value: t.timelineOptions[4], label: t.timelineOptions[4], icon: Compass, hint: rtl ? 'دراسة خيارات وتكلفة' : 'Planning & MVP Estimate' },
   ]
 
   useEffect(() => {
