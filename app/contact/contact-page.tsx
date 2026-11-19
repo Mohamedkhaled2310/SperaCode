@@ -756,11 +756,11 @@ ${messageText || '—'}`
         </section>
 
         {/* Contact FAQ */}
-        <section className="container section" style={{ paddingTop: '64px' }}>
+        <section className="container section" style={{ paddingTop: 'clamp(36px, 6vw, 64px)' }}>
           <div className="faq-layout">
             <div>
               <span className="section-kicker">{rtl ? 'إجابات سريعة' : 'QUICK ANSWERS'}</span>
-              <h2 style={{ fontSize: '28px', fontWeight: 800, margin: '8px 0' }}>{t.faqTitle}</h2>
+              <h2 style={{ fontSize: 'clamp(20px, 4vw, 28px)', fontWeight: 800, margin: '8px 0' }}>{t.faqTitle}</h2>
               <p style={{ color: 'var(--muted)', fontSize: '15px' }}>
                 {rtl
                   ? 'معلومات أساسية حول آلية العمل، الاستشارات المجانية، والتعاقد مع SperaCode.'
