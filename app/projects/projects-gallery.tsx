@@ -21,7 +21,7 @@ import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
-import { PageHeroVisual } from '../page-hero-visual'
+import { ProjectsHeroVisual } from '@/components/hero-visuals/projects-hero-visual'
 import { projects } from './project-data'
 
 type Locale = 'ar' | 'en'
@@ -330,7 +330,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
               </div>
 
               <div className="projects-hero-visual">
-                <PageHeroVisual dark={dark} rtl={rtl} />
+                <ProjectsHeroVisual dark={dark} rtl={rtl} />
               </div>
             </div>
           </div>

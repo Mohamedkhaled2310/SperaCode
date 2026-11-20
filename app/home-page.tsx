@@ -206,9 +206,11 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const categories = ['All', 'Websites', 'Platforms', 'Business systems']
-  const visibleProjects =
-    filter === 'All' ? projects.slice(0, 6) : projects.filter((project) => project.category === filter).slice(0, 6)
+  const featuredHomeProjects = [
+    projects.find((p) => p.title.toLowerCase().includes('fun group')),
+    projects.find((p) => p.title.includes('SchoolQ8') || p.title.includes('الكويتية')),
+    projects.find((p) => p.title.includes('(HZ)') || p.title.includes('حسين غازي')),
+  ].filter(Boolean) as typeof projects
 
   const basePath = locale === 'en' ? '/en' : ''
   const homeHref = basePath || '/'
@@ -454,27 +456,9 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
               subtitle={t.projectsSub}
             />
 
-            {/* Category Filter Pills */}
-            <div
-              className="filter-row"
-              role="group"
-              aria-label={rtl ? 'تصفية المشاريع' : 'Filter projects'}
-            >
-              {categories.map((category, i) => (
-                <button
-                  className={filter === category ? 'filter-chip active' : 'filter-chip'}
-                  key={category}
-                  onClick={() => setFilter(category)}
-                  aria-pressed={filter === category}
-                >
-                  {rtl ? (i === 0 ? t.all : t.category[i - 1]) : category}
-                </button>
-              ))}
-            </div>
-
-            {/* Projects Grid */}
+            {/* Featured 3 Projects Grid */}
             <div className="projects-grid">
-              {visibleProjects.map((project, index) => (
+              {featuredHomeProjects.map((project, index) => (
                 <article
                   className="project-card"
                   key={project.title}

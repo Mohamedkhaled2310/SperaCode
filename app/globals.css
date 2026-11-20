@@ -1960,46 +1960,55 @@ html[lang="en"] .marquee-kicker,
   overflow: hidden;
   width: 100%;
   display: flex;
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  gap: 16px;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
 
 .marquee-track {
   display: flex;
   align-items: center;
   gap: 16px;
-  width: max-content;
+  flex-shrink: 0;
   will-change: transform;
 }
 
-.marquee-track:hover {
+.marquee-track-wrap:hover .marquee-track {
   animation-play-state: paused;
 }
 
-/* Animations */
-.animate-marquee-ltr {
-  animation: marquee-scroll-ltr 42s linear infinite;
+/* Continuous Infinite Marquee Animations */
+.animate-marquee {
+  animation: marquee-infinite 36s linear infinite;
 }
 
-.animate-marquee-rtl {
-  animation: marquee-scroll-rtl 42s linear infinite;
+.animate-marquee-delay {
+  animation-duration: 32s;
 }
 
-@keyframes marquee-scroll-ltr {
-  0% {
+@keyframes marquee-infinite {
+  from {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(-50%);
+  to {
+    transform: translateX(calc(-100% - 16px));
   }
 }
 
-@keyframes marquee-scroll-rtl {
-  0% {
+[dir="rtl"] .animate-marquee {
+  animation: marquee-infinite-rtl 36s linear infinite;
+}
+
+[dir="rtl"] .animate-marquee-delay {
+  animation-duration: 32s;
+}
+
+@keyframes marquee-infinite-rtl {
+  from {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(50%);
+  to {
+    transform: translateX(calc(100% + 16px));
   }
 }
 

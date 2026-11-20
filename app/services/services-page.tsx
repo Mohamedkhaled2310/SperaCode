@@ -38,6 +38,7 @@ import {
 import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { ServicesHeroVisual } from '@/components/hero-visuals/services-hero-visual'
 import { buildWhatsAppUrl } from '@/app/site-config'
 
 type Locale = 'ar' | 'en'
@@ -538,52 +539,58 @@ export default function ServicesPage({ initialLocale = 'ar' }: ServicesPageProps
               <span>{rtl ? 'خدماتنا التقنية' : 'Services'}</span>
             </nav>
 
-            <div className="services-hero-content">
-              <div className="eyebrow">
-                <span className="live-dot" />
-                {rtl ? 'خدمات هندسية وحلول رقمية شاملة' : 'FULL-CYCLE SOFTWARE & AI SOLUTIONS'}
+            <div className="services-hero-grid">
+              <div className="services-hero-content">
+                <div className="eyebrow">
+                  <span className="live-dot" />
+                  {rtl ? 'خدمات هندسية وحلول رقمية شاملة' : 'FULL-CYCLE SOFTWARE & AI SOLUTIONS'}
+                </div>
+
+                <h1>
+                  {rtl ? (
+                    <>
+                      خدمات وحلول برمجية عملية
+                      <br />
+                      <em>تساعدك تكبّر شغلك وتوصل لعملاء أكثر</em>
+                    </>
+                  ) : (
+                    <>
+                      Practical digital solutions
+                      <br />
+                      <em>crafted to grow your sales & audience</em>
+                    </>
+                  )}
+                </h1>
+
+                <p className="services-hero-lead">
+                  {rtl
+                    ? 'من المواقع السريعة وتطبيقات الموبايل إلى المنيو الذكي والرد الآلي، بنبنيلك أدوات عملية وسهلة تخدم زباينك وتكبّر مبيعاتك بكل بساطة.'
+                    : 'From high-speed websites and mobile apps to smart QR menus and automated chatbots, we build simple, reliable tools that delight your clients and scale your business.'}
+                </p>
+
+                {/* Guarantees Strip */}
+                <div className="services-guarantees-strip">
+                  <div className="strip-item">
+                    <CheckCircle2 size={18} className="strip-icon" />
+                    <span>{rtl ? 'ملكية الكود 100%' : '100% Code Ownership'}</span>
+                  </div>
+                  <div className="strip-item">
+                    <CheckCircle2 size={18} className="strip-icon" />
+                    <span>{rtl ? 'ضمان فني مجاني' : 'Free Post-Launch Warranty'}</span>
+                  </div>
+                  <div className="strip-item">
+                    <CheckCircle2 size={18} className="strip-icon" />
+                    <span>{rtl ? 'التزام صارم بالمواعيد' : 'On-Time Delivery'}</span>
+                  </div>
+                  <div className="strip-item">
+                    <CheckCircle2 size={18} className="strip-icon" />
+                    <span>{rtl ? 'دعم فني مستمر SLA' : 'SLA Technical Support'}</span>
+                  </div>
+                </div>
               </div>
 
-              <h1>
-                {rtl ? (
-                  <>
-                    خدمات وحلول برمجية عملية
-                    <br />
-                    <em>تساعدك تكبّر شغلك وتوصل لعملاء أكثر</em>
-                  </>
-                ) : (
-                  <>
-                    Practical digital solutions
-                    <br />
-                    <em>crafted to grow your sales & audience</em>
-                  </>
-                )}
-              </h1>
-
-              <p className="services-hero-lead">
-                {rtl
-                  ? 'من المواقع السريعة وتطبيقات الموبايل إلى المنيو الذكي والرد الآلي، بنبنيلك أدوات عملية وسهلة تخدم زباينك وتكبّر مبيعاتك بكل بساطة.'
-                  : 'From high-speed websites and mobile apps to smart QR menus and automated chatbots, we build simple, reliable tools that delight your clients and scale your business.'}
-              </p>
-
-              {/* Guarantees Strip */}
-              <div className="services-guarantees-strip">
-                <div className="strip-item">
-                  <CheckCircle2 size={18} className="strip-icon" />
-                  <span>{rtl ? 'ملكية الكود 100%' : '100% Code Ownership'}</span>
-                </div>
-                <div className="strip-item">
-                  <CheckCircle2 size={18} className="strip-icon" />
-                  <span>{rtl ? 'ضمان فني مجاني' : 'Free Post-Launch Warranty'}</span>
-                </div>
-                <div className="strip-item">
-                  <CheckCircle2 size={18} className="strip-icon" />
-                  <span>{rtl ? 'التزام صارم بالمواعيد' : 'On-Time Delivery'}</span>
-                </div>
-                <div className="strip-item">
-                  <CheckCircle2 size={18} className="strip-icon" />
-                  <span>{rtl ? 'دعم فني مستمر SLA' : 'SLA Technical Support'}</span>
-                </div>
+              <div className="services-hero-visual">
+                <ServicesHeroVisual dark={dark} rtl={rtl} />
               </div>
             </div>
           </div>

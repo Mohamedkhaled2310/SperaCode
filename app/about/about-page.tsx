@@ -37,6 +37,7 @@ import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { AboutHeroVisual } from '@/components/hero-visuals/about-hero-visual'
 import { buildWhatsAppUrl } from '@/app/site-config'
 
 type Locale = 'ar' | 'en'
@@ -365,33 +366,39 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
               <span>{rtl ? 'من نحن وعن الشركة' : 'About SperaCode'}</span>
             </nav>
 
-            <div className="about-hero-content">
-              <div className="eyebrow">
-                <span className="live-dot" />
-                {rtl ? 'عن سبيرا كود (SperaCode)' : 'ABOUT SPERACODE'}
+            <div className="about-hero-grid">
+              <div className="about-hero-content">
+                <div className="eyebrow">
+                  <span className="live-dot" />
+                  {rtl ? 'عن سبيرا كود (SperaCode)' : 'ABOUT SPERACODE'}
+                </div>
+
+                <h1>
+                  {rtl ? (
+                    <>
+                      نبني برمجيات تصنع الفارق
+                      <br />
+                      <em>وتنقل أعمالك نحو الريادة والمستقبل</em>
+                    </>
+                  ) : (
+                    <>
+                      Engineering world-class software
+                      <br />
+                      <em>that accelerates ambitious companies</em>
+                    </>
+                  )}
+                </h1>
+
+                <p className="about-hero-lead">
+                  {rtl
+                    ? 'سبيرا كود (SperaCode) شركة برمجيات متخصصة في مساعدة الشركات وأصحاب الأعمال على تحويل أفكارهم لمواقع سريعة، تطبيقات موبايل سهلة، ومنيو إلكتروني ذكي يخدم زباينهم.. بنسلّمك شغلك في ميعاده وبأعلى جودة تفيدك في شغلك وتكبّر مبيعاتك.'
+                    : 'SperaCode turns ideas into high-speed websites, intuitive mobile apps, digital QR menus, and tailored software solutions—delivered on time with zero hassle and full long-term support across Egypt, the Gulf, and globally.'}
+                </p>
               </div>
 
-              <h1>
-                {rtl ? (
-                  <>
-                    نبني برمجيات تصنع الفارق
-                    <br />
-                    <em>وتنقل أعمالك نحو الريادة والمستقبل</em>
-                  </>
-                ) : (
-                  <>
-                    Engineering world-class software
-                    <br />
-                    <em>that accelerates ambitious companies</em>
-                  </>
-                )}
-              </h1>
-
-              <p className="about-hero-lead">
-                {rtl
-                  ? 'سبيرا كود (SperaCode) شركة برمجيات متخصصة في مساعدة الشركات وأصحاب الأعمال على تحويل أفكارهم لمواقع سريعة، تطبيقات موبايل سهلة، ومنيو إلكتروني ذكي يخدم زباينهم.. بنسلّمك شغلك في ميعاده وبأعلى جودة تفيدك في شغلك وتكبّر مبيعاتك.'
-                  : 'SperaCode turns ideas into high-speed websites, intuitive mobile apps, digital QR menus, and tailored software solutions—delivered on time with zero hassle and full long-term support across Egypt, the Gulf, and globally.'}
-              </p>
+              <div className="about-hero-visual">
+                <AboutHeroVisual dark={dark} rtl={rtl} />
+              </div>
             </div>
 
             {/* Stats Grid */}

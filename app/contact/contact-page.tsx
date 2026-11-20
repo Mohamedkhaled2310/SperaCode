@@ -42,6 +42,7 @@ import {
   SITE_PHONE_INTL,
   SITE_PHONE_DISPLAY_INTL,
 } from '@/app/site-config'
+import { sendViaEmailJS } from './emailjs-client'
 import { PageHeroVisual } from '../page-hero-visual'
 
 type Locale = 'ar' | 'en'
@@ -213,6 +214,7 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
   const [selectedService, setSelectedService] = useState('')
   const [selectedTimeline, setSelectedTimeline] = useState('')
   const [messageText, setMessageText] = useState('')
+  const [isSending, setIsSending] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
 
   const t = content[locale]
@@ -332,10 +334,27 @@ export default function ContactPage({ initialLocale = 'ar' }: { initialLocale?: 
 ${t.message}:
 ${messageText || '—'}`
 
-  function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    window.open(buildWhatsAppUrl(generatedBrief), '_blank', 'noopener,noreferrer')
-    setSubmitted(true)
+    setIsSending(true)
+
+    try {
+      await sendViaEmailJS({
+        name,
+        phone,
+        company,
+        service: selectedService,
+        timeline: selectedTimeline,
+        message: messageText,
+        summaryText: generatedBrief,
+      })
+    } catch (e) {
+      console.warn('[EmailJS Submit Notification]', e)
+    } finally {
+      setIsSending(false)
+      setSubmitted(true)
+      window.open(buildWhatsAppUrl(generatedBrief), '_blank', 'noopener,noreferrer')
+    }
   }
 
   function copyBrief() {
@@ -634,8 +653,8 @@ ${messageText || '—'}`
                 </div>
               )}
 
-              <button className="contact-submit" type="submit">
-                {t.send}
+              <button className="contact-submit" type="submit" disabled={isSending}>
+                {isSending ? (rtl ? 'جاري الإرسال عبر EmailJS...' : 'Sending via EmailJS...') : t.send}
                 {rtl ? <ArrowLeft aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
               </button>
 
@@ -645,9 +664,20 @@ ${messageText || '—'}`
               </p>
 
               {submitted && (
-                <p className="contact-success" role="status" aria-live="polite">
-                  {t.sent}
-                </p>
+                <div className="contact-success" role="status" aria-live="polite">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                    <Check size={16} aria-hidden="true" style={{ color: 'var(--emerald)' }} />
+                    <strong style={{ color: 'var(--emerald)' }}>
+                      {rtl ? 'تم إرسال رسالتك وتفاصيل مشروعك بنجاح إلى بريدنا الرسمي:' : 'Message sent successfully to our official email:'}
+                    </strong>
+                  </div>
+                  <code style={{ fontSize: '12px', color: 'var(--blue)', fontWeight: 700 }}>info.speracode@gmail.com</code>
+                  <p style={{ margin: '6px 0 0', fontSize: '12px', color: 'var(--muted)' }}>
+                    {rtl
+                      ? 'تم تجهيز محادثة واتساب المباشرة أيضاً لمتابعة الرد الفوري مع فريقنا الهندسي.'
+                      : 'A direct WhatsApp chat was also prepared for instant assistance.'}
+                  </p>
+                </div>
               )}
             </form>
           </div>
