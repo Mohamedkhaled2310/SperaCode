@@ -128,7 +128,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         contact: 'اتصل بنا',
         start: 'ابدأ مشروعك',
         breadcrumb: 'الرئيسية',
-        heroTop: 'SPERACODE / سابقة الأعمال',
+        heroTop: 'معرض المشاريع وسابقة الأعمال',
         heroTitle: (
           <>
             أفكار تتحوّل إلى
@@ -166,7 +166,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         contact: 'Contact',
         start: 'Start a project',
         breadcrumb: 'Home',
-        heroTop: 'SPERACODE / PORTFOLIO',
+        heroTop: 'FEATURED PORTFOLIO',
         heroTitle: (
           <>
             Vision turned into
@@ -351,16 +351,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
             </div>
 
             {/* Search and Filters Bar */}
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                gap: '16px',
-                marginBottom: '28px',
-              }}
-            >
+            <div className="portfolio-toolbar">
               <div className="portfolio-filters" role="group" aria-label="Filter categories">
                 {categories.map((category, index) => {
                   const label = categoryLabels[locale][index]
@@ -384,40 +375,17 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
               </div>
 
               {/* Instant Search Bar */}
-              <div
-                style={{
-                  position: 'relative',
-                  width: 'min(100%, 320px)',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
+              <div className="portfolio-search-box">
                 <Search
                   size={16}
-                  style={{
-                    position: 'absolute',
-                    insetInlineStart: '14px',
-                    color: 'var(--muted)',
-                    pointerEvents: 'none',
-                  }}
+                  className="portfolio-search-icon"
                 />
                 <input
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={labels.searchPlaceholder}
-                  style={{
-                    width: '100%',
-                    height: '42px',
-                    paddingInlineStart: '40px',
-                    paddingInlineEnd: '14px',
-                    border: '1px solid var(--border)',
-                    borderRadius: '999px',
-                    background: 'var(--surface-card)',
-                    color: 'var(--ink)',
-                    fontSize: '13px',
-                    outline: 'none',
-                  }}
+                  className="portfolio-search-input"
                 />
               </div>
             </div>
@@ -459,9 +427,11 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
 
                   <div className="portfolio-card-content">
                     <div className="portfolio-card-heading">
-                      <span className="portfolio-index">{String(index + 1).padStart(2, '0')}</span>
-                      <h3>{project.title}</h3>
-                      <ArrowUpRight aria-hidden="true" style={{ color: 'var(--blue)' }} />
+                      <div className="portfolio-title-group">
+                        <span className="portfolio-index">{String(index + 1).padStart(2, '0')}</span>
+                        <h3>{project.title}</h3>
+                      </div>
+                      <ArrowUpRight aria-hidden="true" className="portfolio-heading-arrow" />
                     </div>
 
                     <p>{rtl ? project.arDescription : project.description}</p>

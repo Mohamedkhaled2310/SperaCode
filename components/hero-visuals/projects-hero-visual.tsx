@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { ExternalLink, CheckCircle2, Globe2, Sparkles, FolderGit2 } from 'lucide-react'
+import { FolderGit2, Globe2, CheckCircle2 } from 'lucide-react'
 
 interface ProjectsHeroVisualProps {
   dark: boolean
@@ -10,59 +10,59 @@ interface ProjectsHeroVisualProps {
 
 export function ProjectsHeroVisual({ dark, rtl }: ProjectsHeroVisualProps) {
   return (
-    <div className="page-hero-art-wrapper projects-art-wrapper">
+    <div className="projects-showcase-container">
       <div className="art-ambient-glow" aria-hidden="true" />
 
-      {/* Main layered visual showing real client projects */}
-      <div className="art-main-device animated-hero-float">
+      {/* Main floating device showcase */}
+      <div className="projects-device-frame animated-hero-float">
         <Image
-          src="/projects/fun-group.png"
-          alt={rtl ? 'معاينة مشاريع وسابقة أعمال سبيرا كود' : 'SperaCode featured portfolio projects'}
+          src={dark ? '/hero-devices-dark.png' : '/hero-devices-light.png'}
+          alt={
+            rtl
+              ? 'معاينة نماذج ومشاريع سبيرا كود على الحاسوب والهاتف'
+              : 'SperaCode portfolio preview across laptop and smartphone'
+          }
           width={720}
           height={460}
-          className="art-device-img"
+          className="projects-device-img"
           priority
         />
         <div className="art-glass-overlay" />
-        
-        {/* Inset preview card for SchoolQ8 */}
-        <div className="projects-floating-preview animated-chip-float-delay">
-          <Image
-            src="/projects/schoolq8.png"
-            alt="SchoolQ8 project"
-            width={200}
-            height={130}
-            className="preview-mini-thumb"
-          />
-          <div className="preview-mini-info">
-            <span className="live-status-pill">
-              <span className="live-dot" />
-              {rtl ? 'موقع نشط ويعمل' : 'Live in Production'}
-            </span>
-            <strong>{rtl ? 'مدرستنا الكويتية' : 'SchoolQ8 Platform'}</strong>
+      </div>
+
+      {/* 3 Core Highlights Strip Directly Underneath */}
+      <div className="projects-features-strip" role="list">
+        {/* Highlight 1: Delivered Projects */}
+        <div className="project-highlight-card" role="listitem">
+          <div className="highlight-icon icon-blue">
+            <FolderGit2 size={18} />
+          </div>
+          <div className="highlight-info">
+            <strong>{rtl ? '+24 مشروعاً منجزاً' : '+24 Live Projects'}</strong>
+            <p>{rtl ? 'جاهزة ومسلمة بالكامل' : 'Delivered on time'}</p>
           </div>
         </div>
-      </div>
 
-      {/* Floating Animated Badge 1: Delivered Projects */}
-      <div className="floating-hero-chip chip-top-start animated-chip-float">
-        <span className="chip-icon-circle chip-blue">
-          <FolderGit2 size={16} />
-        </span>
-        <div className="chip-text-group">
-          <strong>{rtl ? '+24 مشروعاً منجزاً' : '+24 Live Projects'}</strong>
-          <small>{rtl ? 'جاهزة ومسلمة بالكامل' : 'Delivered on time'}</small>
+        {/* Highlight 2: Regional Reach */}
+        <div className="project-highlight-card" role="listitem">
+          <div className="highlight-icon icon-cyan">
+            <Globe2 size={18} />
+          </div>
+          <div className="highlight-info">
+            <strong>{rtl ? 'مصر • السعودية • الخليج' : 'Egypt • KSA • Gulf'}</strong>
+            <p>{rtl ? 'عملاء يثقون في أعمالنا' : 'Trusted by regional clients'}</p>
+          </div>
         </div>
-      </div>
 
-      {/* Floating Animated Badge 2: Regional Reach */}
-      <div className="floating-hero-chip chip-bottom-center animated-chip-float-alt">
-        <span className="chip-icon-circle chip-emerald">
-          <Globe2 size={16} />
-        </span>
-        <div className="chip-text-group">
-          <strong>{rtl ? 'مصر • السعودية • الكويت • الإمارات' : 'Egypt • KSA • Kuwait • UAE'}</strong>
-          <small>{rtl ? 'عملاء يثقون في أعمالنا' : 'Trusted by regional leaders'}</small>
+        {/* Highlight 3: Live Demos */}
+        <div className="project-highlight-card" role="listitem">
+          <div className="highlight-icon icon-emerald">
+            <CheckCircle2 size={18} />
+          </div>
+          <div className="highlight-info">
+            <strong>{rtl ? 'معاينة حية ومباشرة' : '100% Live Demos'}</strong>
+            <p>{rtl ? 'جرّب كل نظام بنفسك' : 'Test every solution live'}</p>
+          </div>
         </div>
       </div>
     </div>

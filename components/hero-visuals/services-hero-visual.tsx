@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Globe2, Smartphone, QrCode, Bot, Sparkles, CheckCircle2 } from 'lucide-react'
+import { Globe2, Smartphone, QrCode } from 'lucide-react'
 
 interface ServicesHeroVisualProps {
   dark: boolean
@@ -10,52 +10,59 @@ interface ServicesHeroVisualProps {
 
 export function ServicesHeroVisual({ dark, rtl }: ServicesHeroVisualProps) {
   return (
-    <div className="page-hero-art-wrapper services-art-wrapper">
+    <div className="services-showcase-container">
       <div className="art-ambient-glow" aria-hidden="true" />
 
-      {/* Main floating device showcase */}
-      <div className="art-main-device animated-hero-float">
+      {/* Main floating device showcase with SperaCode devices */}
+      <div className="services-device-frame animated-hero-float">
         <Image
-          src="/project-savora.png"
-          alt={rtl ? 'معاينة الخدمات والمتاجر والتطبيقات' : 'Services and applications preview'}
+          src={dark ? '/hero-devices-dark.png' : '/hero-devices-light.png'}
+          alt={
+            rtl
+              ? 'واجهات وتطبيقات ومتاجر سبيرا كود على شاشات الحاسوب والموبايل'
+              : 'SperaCode web applications and mobile apps preview'
+          }
           width={720}
           height={460}
-          className="art-device-img"
+          className="services-device-img"
           priority
         />
         <div className="art-glass-overlay" />
       </div>
 
-      {/* Floating Animated Badge 1: Web & E-Commerce */}
-      <div className="floating-hero-chip chip-top-start animated-chip-float">
-        <span className="chip-icon-circle chip-blue">
-          <Globe2 size={16} />
-        </span>
-        <div className="chip-text-group">
-          <strong>{rtl ? 'مواقع سريعة ومتاجر' : 'Fast Websites & E-Commerce'}</strong>
-          <small>{rtl ? 'تفتح في ثانية وتجلب عملاء' : 'Sub-second load speed'}</small>
+      {/* 3 Core Services Featured Strip Directly Underneath */}
+      <div className="services-features-strip" role="list">
+        {/* Service 1: Web & E-Commerce */}
+        <div className="service-mini-card" role="listitem">
+          <div className="service-mini-icon icon-blue">
+            <Globe2 size={18} />
+          </div>
+          <div className="service-mini-info">
+            <strong>{rtl ? 'مواقع سريعة ومتاجر' : 'Fast Websites & Stores'}</strong>
+            <p>{rtl ? 'تفتح في ثانية وتجلب عملاء' : 'Sub-second load & SEO ready'}</p>
+          </div>
         </div>
-      </div>
 
-      {/* Floating Animated Badge 2: Mobile Apps */}
-      <div className="floating-hero-chip chip-top-end animated-chip-float-delay">
-        <span className="chip-icon-circle chip-cyan">
-          <Smartphone size={16} />
-        </span>
-        <div className="chip-text-group">
-          <strong>{rtl ? 'تطبيقات iOS & Android' : 'iOS & Android Apps'}</strong>
-          <small>{rtl ? 'خفيفة وسهلة للزبون' : 'Smooth native feel'}</small>
+        {/* Service 2: Mobile Apps */}
+        <div className="service-mini-card" role="listitem">
+          <div className="service-mini-icon icon-cyan">
+            <Smartphone size={18} />
+          </div>
+          <div className="service-mini-info">
+            <strong>{rtl ? 'تطبيقات iOS & Android' : 'iOS & Android Apps'}</strong>
+            <p>{rtl ? 'خفيفة وسهلة للزبون' : 'Fluid native experience'}</p>
+          </div>
         </div>
-      </div>
 
-      {/* Floating Animated Badge 3: QR Menu & AI */}
-      <div className="floating-hero-chip chip-bottom-center animated-chip-float-alt">
-        <span className="chip-icon-circle chip-emerald">
-          <QrCode size={16} />
-        </span>
-        <div className="chip-text-group">
-          <strong>{rtl ? 'منيو QR ورد آلي ذكي' : 'QR Menu & AI Chatbots'}</strong>
-          <small>{rtl ? 'يوفر مصاريف الطباعة ويسرع الطلب' : 'Direct WhatsApp orders'}</small>
+        {/* Service 3: QR Menu & AI */}
+        <div className="service-mini-card" role="listitem">
+          <div className="service-mini-icon icon-emerald">
+            <QrCode size={18} />
+          </div>
+          <div className="service-mini-info">
+            <strong>{rtl ? 'منيو QR ورد آلي ذكي' : 'QR Menu & AI Chatbots'}</strong>
+            <p>{rtl ? 'يوفر مصاريف الطباعة ويسرع الطلب' : 'Direct WhatsApp orders'}</p>
+          </div>
         </div>
       </div>
     </div>

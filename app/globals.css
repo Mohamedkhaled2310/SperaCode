@@ -5077,3 +5077,489 @@ select option {
     display: none;
   }
 }
+
+/* ==========================================================================
+   Page Hero Showcases, Services Strip & Portfolio Enhancements
+   ========================================================================== */
+
+/* Hero Grids */
+.services-hero-grid,
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.services-hero-visual,
+.about-hero-visual,
+.projects-hero-visual,
+.contact-hero-visual {
+  position: relative;
+  width: 100%;
+}
+
+/* Showcase Containers */
+.services-showcase-container,
+.projects-showcase-container,
+.page-hero-art-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.art-ambient-glow {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.16) 0%, rgba(6, 182, 212, 0.1) 45%, transparent 70%);
+  filter: blur(48px);
+  pointer-events: none;
+  z-index: 0;
+  animation: ambient-glow-pulse 8s ease-in-out infinite alternate;
+}
+
+.dark .art-ambient-glow {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, rgba(37, 99, 235, 0.22) 50%, transparent 75%);
+}
+
+/* Device Frames */
+.services-device-frame,
+.projects-device-frame,
+.art-main-device {
+  position: relative;
+  z-index: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px rgba(11, 19, 41, 0.14), 0 0 0 1px var(--border);
+  background: var(--surface-card);
+  transition: transform 0.3s ease;
+}
+
+.dark .services-device-frame,
+.dark .projects-device-frame,
+.dark .art-main-device {
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.services-device-img,
+.projects-device-img,
+.art-device-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.art-glass-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.06) 100%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Services Hero Strip: مواقع سريعة، تطبيقات جوال، منيو QR
+   -------------------------------------------------------------------------- */
+.services-features-strip,
+.projects-features-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  margin-top: 4px;
+}
+
+.service-mini-card,
+.project-highlight-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(11, 19, 41, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-mini-card:hover,
+.project-highlight-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue);
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.15);
+}
+
+.service-mini-icon,
+.highlight-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-blue {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+.dark .icon-blue {
+  background: rgba(59, 130, 246, 0.18);
+  color: #60a5fa;
+}
+
+.icon-cyan {
+  background: rgba(6, 182, 212, 0.1);
+  color: #0891b2;
+}
+.dark .icon-cyan {
+  background: rgba(6, 182, 212, 0.18);
+  color: #22d3ee;
+}
+
+.icon-emerald {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+.dark .icon-emerald {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+}
+
+.service-mini-info,
+.highlight-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.service-mini-info strong,
+.highlight-info strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service-mini-info p,
+.highlight-info p {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Floating Badges for About and Contact Pages */
+.floating-hero-chip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50px;
+  box-shadow: 0 12px 28px -6px rgba(11, 19, 41, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  white-space: nowrap;
+}
+
+.dark .floating-hero-chip {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.contact-chip-clickable {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.contact-chip-clickable:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px -6px rgba(37, 99, 235, 0.24);
+}
+
+.chip-icon-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chip-blue {
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+}
+.dark .chip-blue {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+.chip-cyan {
+  background: rgba(6, 182, 212, 0.12);
+  color: #0891b2;
+}
+.dark .chip-cyan {
+  background: rgba(6, 182, 212, 0.2);
+  color: #22d3ee;
+}
+
+.chip-emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+.dark .chip-emerald {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+.chip-whatsapp {
+  background: rgba(37, 211, 102, 0.14);
+  color: #128c7e;
+}
+.dark .chip-whatsapp {
+  background: rgba(37, 211, 102, 0.22);
+  color: #25d366;
+}
+
+.chip-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.chip-text-group strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.chip-text-group small {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.chip-header-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chip-top-start {
+  top: -14px;
+  inset-inline-start: -14px;
+}
+
+.chip-top-end {
+  top: 14%;
+  inset-inline-end: -18px;
+}
+
+.chip-bottom-center {
+  bottom: -16px;
+  inset-inline-start: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Portfolio Toolbar, Search, and Cards Polish
+   -------------------------------------------------------------------------- */
+.portfolio-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.portfolio-toolbar .portfolio-filters {
+  margin-block-end: 0;
+}
+
+.portfolio-search-box {
+  position: relative;
+  width: min(100%, 320px);
+  display: flex;
+  align-items: center;
+}
+
+.portfolio-search-icon {
+  position: absolute;
+  inset-inline-start: 14px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.portfolio-search-input {
+  width: 100%;
+  height: 42px;
+  padding-inline-start: 40px;
+  padding-inline-end: 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-card);
+  color: var(--ink);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.portfolio-search-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.portfolio-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.portfolio-heading-arrow {
+  color: var(--blue);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.portfolio-card:hover .portfolio-heading-arrow {
+  transform: translate(-3px, -3px);
+}
+
+[dir="ltr"] .portfolio-card:hover .portfolio-heading-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Animations */
+.animated-hero-float {
+  animation: hero-smooth-levitate 6s ease-in-out infinite alternate;
+}
+
+.animated-chip-float {
+  animation: chip-subtle-bounce 4.5s ease-in-out infinite alternate;
+}
+
+.animated-chip-float-delay {
+  animation: chip-subtle-bounce 5.2s ease-in-out 0.8s infinite alternate;
+}
+
+.animated-chip-float-alt {
+  animation: chip-subtle-bounce 4.8s ease-in-out 1.5s infinite alternate;
+}
+
+@keyframes hero-smooth-levitate {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes chip-subtle-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes ambient-glow-pulse {
+  0% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+  .services-hero-grid,
+  .about-hero-grid,
+  .projects-hero-layout,
+  .contact-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .services-showcase-container,
+  .projects-showcase-container,
+  .page-hero-art-wrapper {
+    max-width: 520px;
+    margin-block-start: 16px;
+  }
+  .services-features-strip,
+  .projects-features-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .service-mini-card,
+  .project-highlight-card {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-features-strip,
+  .projects-features-strip {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .service-mini-info p,
+  .highlight-info p {
+    white-space: normal;
+  }
+  .portfolio-intro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .portfolio-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .portfolio-search-box {
+    width: 100%;
+  }
+  .portfolio-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .portfolio-filter {
+    flex-shrink: 0;
+  }
+}
+
