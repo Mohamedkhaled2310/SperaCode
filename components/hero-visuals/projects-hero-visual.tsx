@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { FolderGit2, Globe2, CheckCircle2 } from 'lucide-react'
+import { ShieldCheck, Globe2, Sparkles } from 'lucide-react'
 
 interface ProjectsHeroVisualProps {
   dark: boolean
@@ -30,16 +30,16 @@ export function ProjectsHeroVisual({ dark, rtl }: ProjectsHeroVisualProps) {
         <div className="art-glass-overlay" />
       </div>
 
-      {/* 3 Core Highlights Strip Directly Underneath */}
+      {/* 3 Value Highlights Strip Directly Underneath */}
       <div className="projects-features-strip" role="list">
-        {/* Highlight 1: Delivered Projects */}
+        {/* Highlight 1: Tailored Architecture */}
         <div className="project-highlight-card" role="listitem">
           <div className="highlight-icon icon-blue">
-            <FolderGit2 size={18} />
+            <ShieldCheck size={18} />
           </div>
           <div className="highlight-info">
-            <strong>{rtl ? '+24 مشروعاً منجزاً' : '+24 Live Projects'}</strong>
-            <p>{rtl ? 'جاهزة ومسلمة بالكامل' : 'Delivered on time'}</p>
+            <strong>{rtl ? 'ملكية الكود 100%' : 'Full IP Ownership'}</strong>
+            <p>{rtl ? 'بدون أي اشتراكات متكررة' : 'Zero recurring license fees'}</p>
           </div>
         </div>
 
@@ -50,18 +50,18 @@ export function ProjectsHeroVisual({ dark, rtl }: ProjectsHeroVisualProps) {
           </div>
           <div className="highlight-info">
             <strong>{rtl ? 'مصر • السعودية • الخليج' : 'Egypt • KSA • Gulf'}</strong>
-            <p>{rtl ? 'عملاء يثقون في أعمالنا' : 'Trusted by regional clients'}</p>
+            <p>{rtl ? 'ثقة واسعة من كبرى الشركات' : 'Trusted regional delivery'}</p>
           </div>
         </div>
 
-        {/* Highlight 3: Live Demos */}
+        {/* Highlight 3: Warranty */}
         <div className="project-highlight-card" role="listitem">
           <div className="highlight-icon icon-emerald">
-            <CheckCircle2 size={18} />
+            <Sparkles size={18} />
           </div>
           <div className="highlight-info">
-            <strong>{rtl ? 'معاينة حية ومباشرة' : '100% Live Demos'}</strong>
-            <p>{rtl ? 'جرّب كل نظام بنفسك' : 'Test every solution live'}</p>
+            <strong>{rtl ? 'ضمان ودعم فني' : 'Technical Warranty'}</strong>
+            <p>{rtl ? 'متابعة مستمرة بعد الإطلاق' : 'Continuous post-launch care'}</p>
           </div>
         </div>
       </div>

@@ -5457,6 +5457,73 @@ select option {
   transform: translate(3px, -3px);
 }
 
+.portfolio-image-static {
+  cursor: default;
+}
+
+.portfolio-status-chip {
+  position: absolute;
+  bottom: 12px;
+  inset-inline-end: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-status-chip.is-live {
+  background: rgba(16, 185, 129, 0.92);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark .portfolio-status-chip.is-live {
+  background: rgba(6, 78, 59, 0.92);
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+.portfolio-status-chip.is-delivered {
+  background: rgba(15, 23, 42, 0.88);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .portfolio-status-chip.is-delivered {
+  background: rgba(30, 41, 59, 0.92);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.portfolio-delivered-pill {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--ink-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  user-select: none;
+  width: 100%;
+}
+
+.dark .portfolio-delivered-pill {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+}
+
 /* Animations */
 .animated-hero-float {
   animation: hero-smooth-levitate 6s ease-in-out infinite alternate;
