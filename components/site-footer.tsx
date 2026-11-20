@@ -56,12 +56,12 @@ export function SiteFooter({
   const currentYear = new Date().getFullYear()
 
   const services = [
-    { ar: 'تطوير المواقع والمنصات السحابية', en: 'Web & Cloud Platforms', href: `${defaultServices}#web` },
+    { ar: 'تصميم المواقع والمتاجر الإلكترونية', en: 'Websites & E-Commerce', href: `${defaultServices}#web` },
     { ar: 'تطبيقات الجوال (iOS & Android)', en: 'Mobile Apps (iOS & Android)', href: `${defaultServices}#mobile` },
-    { ar: 'أنظمة الأعمال المخصصة والـ ERP', en: 'Custom ERP & Business Systems', href: `${defaultServices}#erp` },
-    { ar: 'حلول الذكاء الاصطناعي والأتمتة', en: 'AI Solutions & Automation', href: `${defaultServices}#ai` },
-    { ar: 'المنيو الرقمي التفاعلي QR', en: 'Interactive Digital QR Menus', href: `${defaultServices}#qr` },
-    { ar: 'تصميم واجهات UI/UX', en: 'UI/UX Interface Design', href: `${defaultServices}#uiux` },
+    { ar: 'برامج إدارة ومخازن وفواتير مخصصة', en: 'Custom Management Software', href: `${defaultServices}#erp` },
+    { ar: 'مساعد ذكي ورد آلي 24 ساعة', en: 'AI Assistant & Automation', href: `${defaultServices}#ai` },
+    { ar: 'المنيو الرقمي بالباركود QR', en: 'Interactive Digital QR Menus', href: `${defaultServices}#qr` },
+    { ar: 'تصميم واجهات وتجربة المستخدم', en: 'UI/UX Interface Design', href: `${defaultServices}#uiux` },
   ]
 
   const portfolioHighlights = [
@@ -74,11 +74,11 @@ export function SiteFooter({
   ]
 
   const companyLinks = [
-    { ar: 'من نحن ورؤية سبيرا كود', en: 'About SperaCode', href: defaultAbout },
-    { ar: 'منهجية العمل (5 مراحل)', en: '5-Phase Methodology', href: `${defaultAbout}#methodology` },
+    { ar: 'من نحن وقصة سبيرا كود', en: 'About SperaCode', href: defaultAbout },
+    { ar: 'خطوات العمل بكل بساطة', en: 'How We Work (5 Steps)', href: `${defaultAbout}#methodology` },
     { ar: 'الضمانات وحقوق الملكية 100%', en: 'Guarantees & 100% IP', href: `${defaultAbout}#guarantees` },
-    { ar: 'الأسئلة الشائعة التقنية', en: 'Technical FAQs', href: `${defaultHome}#faq` },
-    { ar: 'تواصل وطلب استشارة', en: 'Contact & Consultation', href: defaultContact },
+    { ar: 'الأسئلة الأكثر شيوعاً', en: 'Frequently Asked Questions', href: `${defaultHome}#faq` },
+    { ar: 'تواصل واطلب استشارة مجانية', en: 'Contact & Free Consultation', href: defaultContact },
   ]
 
   const techBadges = [
@@ -145,8 +145,8 @@ export function SiteFooter({
 
             <p className="footer-brand-desc">
               {rtl
-                ? 'سبيرا كود (SperaCode) شركة برمجيات متخصصة في هندسة المنصات السحابية، تطبيقات الجوال، والذكاء الاصطناعي للمؤسسات والشركات الطموحة.'
-                : 'SperaCode crafts resilient, scalable digital products, cloud platforms, mobile apps, and enterprise AI systems for ambitious organizations.'}
+                ? 'سبيرا كود (SperaCode) شركة برمجيات متخصصة في تطوير المواقع السريعة، تطبيقات الموبايل، والمنيو الإلكتروني QR لمساعدتك على تكبير شغلك والوصول لعملاء أكثر.'
+                : 'SperaCode builds fast websites, intuitive mobile apps, and interactive QR menus designed to grow your business and delight your customers.'}
             </p>
 
             {/* Tech Stack Badges */}
