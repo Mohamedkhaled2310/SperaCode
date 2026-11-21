@@ -364,14 +364,14 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
               <div className="hero-radar-ripple" aria-hidden="true" />
               <Image
                 className="home-hero-image"
-                src={dark ? '/home-hero-dark.png' : '/home-hero-light.png'}
+                src="/illustrations/hero-home-3d.jpg"
                 alt={
                   rtl
-                    ? 'تصميم متجر وتطبيقات ذكية على شاشات الحاسوب والهاتف لشركة SperaCode'
-                    : 'Interactive digital store and mobile interface designed by SperaCode'
+                    ? 'مهندس برمجيات سبيرا كود مع شاشات تفاعلية وانطلاق مشروع رقمي'
+                    : 'SperaCode software engineer with futuristic interactive dashboard and rocket launch'
                 }
-                width={1312}
-                height={816}
+                width={1200}
+                height={800}
                 priority
                 sizes="(max-width: 768px) 100vw, 650px"
               />

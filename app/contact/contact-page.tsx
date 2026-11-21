@@ -43,7 +43,7 @@ import {
   SITE_PHONE_DISPLAY_INTL,
 } from '@/app/site-config'
 import { sendViaEmailJS } from './emailjs-client'
-import { PageHeroVisual } from '../page-hero-visual'
+import { ContactHeroVisual } from '@/components/hero-visuals/contact-hero-visual'
 
 type Locale = 'ar' | 'en'
 
@@ -445,18 +445,20 @@ ${messageText || '—'}`
         {/* Contact Hero */}
         <section className="contact-hero container">
           <div className="contact-hero-copy">
-            <nav className="breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: '18px' }}>
-              <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <Home size={14} />
-                <span>{t.home}</span>
-              </Link>
-              <span aria-hidden="true">/</span>
-              <span>{t.page}</span>
-            </nav>
+            <div className="hero-kicker-stack">
+              <nav className="breadcrumb" aria-label="Breadcrumb">
+                <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  <Home size={14} />
+                  <span>{t.home}</span>
+                </Link>
+                <span aria-hidden="true">/</span>
+                <span>{t.page}</span>
+              </nav>
 
-            <div className="eyebrow" style={{ marginBottom: '16px' }}>
-              <span className="live-dot" />
-              {t.kicker}
+              <div className="eyebrow">
+                <span className="live-dot" />
+                {t.kicker}
+              </div>
             </div>
             <h1>{t.title}</h1>
             <p>{t.intro}</p>
@@ -494,7 +496,7 @@ ${messageText || '—'}`
           </div>
 
           <div className="contact-hero-visual">
-            <PageHeroVisual dark={dark} rtl={rtl} />
+            <ContactHeroVisual dark={dark} rtl={rtl} />
           </div>
         </section>
 

@@ -530,20 +530,22 @@ export default function ServicesPage({ initialLocale = 'ar' }: ServicesPageProps
         {/* Hero Section */}
         <section className="services-hero">
           <div className="container">
-            <nav className="breadcrumb" aria-label="Breadcrumb">
-              <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <Home size={14} />
-                <span>{rtl ? 'الرئيسية' : 'Home'}</span>
-              </Link>
-              <span aria-hidden="true">/</span>
-              <span>{rtl ? 'خدماتنا التقنية' : 'Services'}</span>
-            </nav>
-
             <div className="services-hero-grid">
               <div className="services-hero-content">
-                <div className="eyebrow">
-                  <span className="live-dot" />
-                  {rtl ? 'خدمات هندسية وحلول رقمية شاملة' : 'FULL-CYCLE SOFTWARE & AI SOLUTIONS'}
+                <div className="hero-kicker-stack">
+                  <nav className="breadcrumb" aria-label="Breadcrumb">
+                    <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <Home size={14} />
+                      <span>{rtl ? 'الرئيسية' : 'Home'}</span>
+                    </Link>
+                    <span aria-hidden="true">/</span>
+                    <span>{rtl ? 'خدماتنا التقنية' : 'Services'}</span>
+                  </nav>
+
+                  <div className="eyebrow">
+                    <span className="live-dot" />
+                    {rtl ? 'خدمات هندسية وحلول رقمية شاملة' : 'FULL-CYCLE SOFTWARE & AI SOLUTIONS'}
+                  </div>
                 </div>
 
                 <h1>

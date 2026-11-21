@@ -16,10 +16,14 @@ export function AboutHeroVisual({ dark, rtl }: AboutHeroVisualProps) {
       {/* Main branded hero visual */}
       <div className="art-main-device animated-hero-float">
         <Image
-          src={dark ? '/hero-devices-dark.png' : '/hero-devices-light.png'}
-          alt={rtl ? 'فريق سبيرا كود للحلول البرمجية' : 'SperaCode engineering team and digital products'}
+          src="/illustrations/hero-about-3d.jpg"
+          alt={
+            rtl
+              ? 'فريق هندسي وتقني ثلاثي الأبعاد يتعاون حول طاولة تخطيط رقمية'
+              : 'Collaborative 3D cartoon engineering team working around an interactive tech planning table'
+          }
           width={720}
-          height={460}
+          height={480}
           className="art-device-img"
           priority
         />

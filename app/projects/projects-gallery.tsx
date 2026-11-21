@@ -285,18 +285,20 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
           <div className="container projects-hero-inner">
             <div className="projects-hero-layout">
               <div className="projects-hero-copy">
-                <nav className="breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: '18px' }}>
-                  <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                    <Home size={14} />
-                    <span>{labels.breadcrumb}</span>
-                  </Link>
-                  <span aria-hidden="true">/</span>
-                  <span>{labels.work}</span>
-                </nav>
+                <div className="hero-kicker-stack">
+                  <nav className="breadcrumb" aria-label="Breadcrumb">
+                    <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <Home size={14} />
+                      <span>{labels.breadcrumb}</span>
+                    </Link>
+                    <span aria-hidden="true">/</span>
+                    <span>{labels.work}</span>
+                  </nav>
 
-                <div className="eyebrow" style={{ marginBottom: '16px' }}>
-                  <span className="live-dot" />
-                  {labels.heroTop}
+                  <div className="eyebrow">
+                    <span className="live-dot" />
+                    {labels.heroTop}
+                  </div>
                 </div>
                 <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.2rem)', fontWeight: 800, margin: '14px 0', lineHeight: 1.15 }}>
                   {labels.heroTitle}

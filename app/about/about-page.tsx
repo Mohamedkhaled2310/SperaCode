@@ -357,20 +357,22 @@ export default function AboutPage({ initialLocale = 'ar' }: AboutPageProps) {
         {/* Hero Section */}
         <section className="about-hero">
           <div className="container">
-            <nav className="breadcrumb" aria-label="Breadcrumb">
-              <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <Home size={14} />
-                <span>{rtl ? 'الرئيسية' : 'Home'}</span>
-              </Link>
-              <span aria-hidden="true">/</span>
-              <span>{rtl ? 'من نحن وعن الشركة' : 'About SperaCode'}</span>
-            </nav>
-
             <div className="about-hero-grid">
               <div className="about-hero-content">
-                <div className="eyebrow">
-                  <span className="live-dot" />
-                  {rtl ? 'عن سبيرا كود (SperaCode)' : 'ABOUT SPERACODE'}
+                <div className="hero-kicker-stack">
+                  <nav className="breadcrumb" aria-label="Breadcrumb">
+                    <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <Home size={14} />
+                      <span>{rtl ? 'الرئيسية' : 'Home'}</span>
+                    </Link>
+                    <span aria-hidden="true">/</span>
+                    <span>{rtl ? 'من نحن وعن الشركة' : 'About SperaCode'}</span>
+                  </nav>
+
+                  <div className="eyebrow">
+                    <span className="live-dot" />
+                    {rtl ? 'عن سبيرا كود (SperaCode)' : 'ABOUT SPERACODE'}
+                  </div>
                 </div>
 
                 <h1>

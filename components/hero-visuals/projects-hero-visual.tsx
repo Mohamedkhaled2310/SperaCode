@@ -16,14 +16,14 @@ export function ProjectsHeroVisual({ dark, rtl }: ProjectsHeroVisualProps) {
       {/* Main floating device showcase */}
       <div className="projects-device-frame animated-hero-float">
         <Image
-          src={dark ? '/hero-devices-dark.png' : '/hero-devices-light.png'}
+          src="/illustrations/hero-projects-3d.jpg"
           alt={
             rtl
-              ? 'معاينة نماذج ومشاريع سبيرا كود على الحاسوب والهاتف'
-              : 'SperaCode portfolio preview across laptop and smartphone'
+              ? 'معرض مشاريع رقمية ثلاثي الأبعاد مع ملفات مضيئة ونجوم تميز'
+              : '3D isometric portfolio showcase with illuminated project blueprints and golden star awards'
           }
           width={720}
-          height={460}
+          height={480}
           className="projects-device-img"
           priority
         />

@@ -16,14 +16,14 @@ export function ContactHeroVisual({ dark, rtl }: ContactHeroVisualProps) {
       {/* Main floating device showcase with scan beam */}
       <div className="contact-device-frame animated-hero-float">
         <Image
-          src={dark ? '/hero-devices-dark.png' : '/hero-devices-light.png'}
+          src="/illustrations/hero-contact-3d.jpg"
           alt={
             rtl
-              ? 'تواصل مع فريق سبيرا كود واستلم استشارتك الفنية وعرض السعر'
-              : 'Connect with SperaCode engineering team'
+              ? 'مستشار تقني ثلاثي الأبعاد يرحب بك مع رسائل واتساب تفاعلية'
+              : 'Friendly 3D cartoon technical specialist waving hello with interactive WhatsApp chat bubbles'
           }
           width={720}
-          height={460}
+          height={480}
           className="contact-device-img"
           priority
         />

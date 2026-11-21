@@ -625,12 +625,15 @@ html[lang="en"] .eyebrow,
   position: relative;
   isolation: isolate;
   width: 100%;
-  aspect-ratio: 1.6078;
-  overflow: visible;
+  aspect-ratio: 1.5;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px -12px rgba(11, 19, 41, 0.2), 0 0 0 1px var(--border);
   filter: drop-shadow(0 25px 45px rgba(11, 19, 41, 0.12));
 }
 
 .dark .home-hero-art {
+  box-shadow: 0 28px 60px -14px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
   filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
 }
 
@@ -639,7 +642,8 @@ html[lang="en"] .eyebrow,
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 20px;
   animation: hero-subtle-float 7s ease-in-out infinite;
 }
 
@@ -2884,18 +2888,45 @@ html[lang="en"] .marquee-kicker,
   gap: 48px;
 }
 
-.breadcrumb {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 600;
-  margin-block-end: 20px;
+.hero-kicker-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin-block-end: 18px !important;
 }
 
+.hero-kicker-stack .breadcrumb,
+.breadcrumb {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 6px 14px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 999px !important;
+  color: var(--muted) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  width: fit-content !important;
+  margin-block-end: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s ease !important;
+}
+
+.hero-kicker-stack .breadcrumb:hover,
 .breadcrumb:hover {
-  color: var(--blue);
+  color: var(--blue) !important;
+  border-color: color-mix(in srgb, var(--blue) 40%, var(--border)) !important;
+}
+
+.hero-kicker-stack .eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  width: fit-content !important;
 }
 
 .projects-hero-stats {
@@ -3290,11 +3321,22 @@ html[lang="en"] .marquee-kicker,
   .contact-hero {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding-block: 28px 36px;
+    padding-block: 24px 28px;
+  }
+  .projects-hero {
+    padding-block: 28px 20px;
+  }
+  .projects-hero-inner {
+    padding-block: 10px 16px;
   }
   .contact-hero-visual,
-  .projects-hero-visual {
-    display: none;
+  .projects-hero-visual,
+  .services-hero-visual,
+  .about-hero-visual {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    margin: 16px auto 0;
   }
   .contact-workspace {
     grid-template-columns: 1fr;
@@ -5072,19 +5114,30 @@ select option {
 /* Mobile adjustments */
 @media (max-width: 640px) {
   .whatsapp-widget-wrap {
-    bottom: 20px;
-    inset-inline-end: 18px;
+    bottom: 14px;
+    inset-inline-end: 14px;
+    z-index: 40;
   }
   .whatsapp-floating-btn {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
+  }
+  .whatsapp-pulse-ring,
+  .whatsapp-pulse-ring-second {
+    inset: -6px;
   }
   .whatsapp-svg-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
   .whatsapp-chat-bubble {
     display: none;
+  }
+  .contact-workspace {
+    padding-bottom: 76px;
+  }
+  .contact-form {
+    padding-bottom: 24px;
   }
 }
 

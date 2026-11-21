@@ -16,14 +16,14 @@ export function ServicesHeroVisual({ dark, rtl }: ServicesHeroVisualProps) {
       {/* Main floating device showcase with SperaCode devices */}
       <div className="services-device-frame animated-hero-float">
         <Image
-          src={dark ? '/hero-devices-dark.png' : '/hero-devices-light.png'}
+          src="/illustrations/hero-services-3d.jpg"
           alt={
             rtl
-              ? 'واجهات وتطبيقات ومتاجر سبيرا كود على شاشات الحاسوب والموبايل'
-              : 'SperaCode web applications and mobile apps preview'
+              ? 'مساعد رقمي ثلاثي الأبعاد وتطبيقات ذكية ومنيو تفاعلي'
+              : '3D cartoon AI robot, interactive digital store, and QR menu solution'
           }
           width={720}
-          height={460}
+          height={480}
           className="services-device-img"
           priority
         />
