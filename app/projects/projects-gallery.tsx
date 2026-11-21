@@ -15,6 +15,7 @@ import {
   Menu,
   Moon,
   Search,
+  Sparkles,
   Sun,
   X,
 } from 'lucide-react'
@@ -23,7 +24,8 @@ import { CustomerReviews } from '@/components/customer-reviews'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
 import { ProjectsHeroVisual } from '@/components/hero-visuals/projects-hero-visual'
-import { projects } from './project-data'
+import { CaseStudyModal } from '@/components/case-study-modal'
+import { projects, type PortfolioProject } from './project-data'
 
 type Locale = 'ar' | 'en'
 const categories = ['All', 'Websites', 'Platforms', 'Business systems'] as const
@@ -41,6 +43,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const [activeCaseStudy, setActiveCaseStudy] = useState<PortfolioProject | null>(null)
 
   const rtl = locale === 'ar'
   const basePath = rtl ? '' : '/en'
@@ -476,6 +479,15 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
                           <span>{labels.completed}</span>
                         </div>
                       )}
+
+                      <button
+                        type="button"
+                        className="portfolio-case-study-btn"
+                        onClick={() => setActiveCaseStudy(project)}
+                      >
+                        <Sparkles size={14} />
+                        <span>{rtl ? 'تفاصيل ودراسة حالة المشروع' : 'Case study & details'}</span>
+                      </button>
                     </div>
                   </article>
                 )
@@ -516,6 +528,13 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
             </div>
           </div>
         </section>
+
+        {/* Case Study Modal */}
+        <CaseStudyModal
+          project={activeCaseStudy}
+          onClose={() => setActiveCaseStudy(null)}
+          rtl={rtl}
+        />
       </main>
 
       {/* Elite Global Footer */}

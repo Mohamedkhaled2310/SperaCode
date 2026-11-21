@@ -85,5 +85,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
       alternates: languageAlternates('/contact', '/en/contact'),
     },
+    {
+      url: `${SITE_URL}/llms.txt`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
   ]
 }

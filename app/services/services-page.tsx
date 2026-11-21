@@ -39,6 +39,7 @@ import { SperaLogo } from '@/components/spera-logo'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
 import { ServicesHeroVisual } from '@/components/hero-visuals/services-hero-visual'
+import { CostEstimator } from '@/components/cost-estimator'
 import { buildWhatsAppUrl } from '@/app/site-config'
 
 type Locale = 'ar' | 'en'
@@ -718,6 +719,13 @@ export default function ServicesPage({ initialLocale = 'ar' }: ServicesPageProps
                 )
               })}
             </div>
+          </div>
+        </section>
+
+        {/* Interactive Scope & Cost Estimator */}
+        <section className="section" id="estimate">
+          <div className="container">
+            <CostEstimator rtl={rtl} />
           </div>
         </section>
 

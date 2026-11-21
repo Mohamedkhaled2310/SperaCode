@@ -29,6 +29,9 @@ import { CustomerReviews } from '@/components/customer-reviews'
 import { AnimatedMarqueeCarousel } from '@/components/animated-marquee-carousel'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
+import { AnimatedCounter } from '@/components/animated-counter'
+import { CostEstimator } from '@/components/cost-estimator'
+import { ComparisonSection } from '@/components/comparison-section'
 import { buildWhatsAppUrl } from './site-config'
 import { projects } from './projects/project-data'
 import { homeFaqs } from './seo-data'
@@ -388,7 +391,9 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
             >
               {['50+', '45+', '6+', '24/7'].map((num, i) => (
                 <div className="stat" key={num}>
-                  <strong>{num}</strong>
+                  <strong>
+                    <AnimatedCounter value={num} />
+                  </strong>
                   <span>{t.stats[i]}</span>
                 </div>
               ))}
@@ -647,6 +652,9 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
           </div>
         </section>
 
+        {/* Transparent Value Comparison Section */}
+        <ComparisonSection rtl={rtl} />
+
         {/* Verified Customer Reviews Carousel */}
         <CustomerReviews rtl={rtl} />
 
@@ -703,6 +711,13 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
                 <span key={tech}>{tech}</span>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Interactive Scope & Cost Estimator */}
+        <section className="section" id="estimate">
+          <div className="container">
+            <CostEstimator rtl={rtl} />
           </div>
         </section>
 
