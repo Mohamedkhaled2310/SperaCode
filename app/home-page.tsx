@@ -361,6 +361,7 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
             </div>
 
             <div className="home-hero-art">
+              <div className="hero-radar-ripple" aria-hidden="true" />
               <Image
                 className="home-hero-image"
                 src={dark ? '/home-hero-dark.png' : '/home-hero-light.png'}
@@ -374,6 +375,7 @@ export default function HomePage({ initialLocale = 'ar' }: { initialLocale?: Loc
                 priority
                 sizes="(max-width: 768px) 100vw, 650px"
               />
+              <div className="hero-scan-beam" aria-hidden="true" />
             </div>
           </div>
 

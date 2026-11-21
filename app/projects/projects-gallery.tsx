@@ -285,16 +285,19 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
           <div className="container projects-hero-inner">
             <div className="projects-hero-layout">
               <div className="projects-hero-copy">
-                <div className="breadcrumb" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                <nav className="breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: '18px' }}>
+                  <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                     <Home size={14} />
                     <span>{labels.breadcrumb}</span>
                   </Link>
                   <span aria-hidden="true">/</span>
                   <span>{labels.work}</span>
-                </div>
+                </nav>
 
-                <span className="section-kicker">{labels.heroTop}</span>
+                <div className="eyebrow" style={{ marginBottom: '16px' }}>
+                  <span className="live-dot" />
+                  {labels.heroTop}
+                </div>
                 <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.2rem)', fontWeight: 800, margin: '14px 0', lineHeight: 1.15 }}>
                   {labels.heroTitle}
                 </h1>
@@ -326,13 +329,13 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
           <div className="container">
             <div className="portfolio-intro" data-reveal>
               <div>
-                <span className="section-kicker">{labels.intro}</span>
+                <div className="eyebrow" style={{ marginBottom: '12px' }}>
+                  <span className="live-dot" />
+                  {labels.intro}
+                </div>
                 <h2>{labels.heading}</h2>
                 <p>{labels.introText}</p>
               </div>
-              <span className="portfolio-count">
-                {String(filtered.length).padStart(2, '0')} <span>{labels.projectCount}</span>
-              </span>
             </div>
 
             {/* Search and Filters Bar */}

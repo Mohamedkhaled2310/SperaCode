@@ -27,6 +27,7 @@ export function ServicesHeroVisual({ dark, rtl }: ServicesHeroVisualProps) {
           className="services-device-img"
           priority
         />
+        <div className="hero-scan-beam" aria-hidden="true" />
         <div className="art-glass-overlay" />
       </div>
 

@@ -27,6 +27,7 @@ export function ProjectsHeroVisual({ dark, rtl }: ProjectsHeroVisualProps) {
           className="projects-device-img"
           priority
         />
+        <div className="hero-scan-beam" aria-hidden="true" />
         <div className="art-glass-overlay" />
       </div>
 

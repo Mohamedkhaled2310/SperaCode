@@ -4,18 +4,14 @@ import Link from 'next/link'
 import {
   ArrowUp,
   ArrowUpRight,
-  CheckCircle2,
   Clock,
-  Code2,
-  Cpu,
   Globe,
   Mail,
   Moon,
   Phone,
   ShieldCheck,
-  Sparkles,
   Sun,
-  Zap,
+  CheckCircle2,
 } from 'lucide-react'
 import { SperaLogo } from './spera-logo'
 import { buildWhatsAppUrl, SITE_EMAIL, SITE_PHONE_LOCAL } from '@/app/site-config'
@@ -55,43 +51,24 @@ export function SiteFooter({
 
   const currentYear = new Date().getFullYear()
 
-  const services = [
-    { ar: 'تصميم المواقع والمتاجر الإلكترونية', en: 'Websites & E-Commerce', href: `${defaultServices}#web` },
-    { ar: 'تطبيقات الجوال (iOS & Android)', en: 'Mobile Apps (iOS & Android)', href: `${defaultServices}#mobile` },
-    { ar: 'برامج إدارة ومخازن وفواتير مخصصة', en: 'Custom Management Software', href: `${defaultServices}#erp` },
-    { ar: 'مساعد ذكي ورد آلي 24 ساعة', en: 'AI Assistant & Automation', href: `${defaultServices}#ai` },
-    { ar: 'المنيو الرقمي بالباركود QR', en: 'Interactive Digital QR Menus', href: `${defaultServices}#qr` },
-    { ar: 'تصميم واجهات وتجربة المستخدم', en: 'UI/UX Interface Design', href: `${defaultServices}#uiux` },
+  const navLinks = [
+    { ar: 'الرئيسية', en: 'Home', href: defaultHome },
+    { ar: 'خدماتنا التقنية', en: 'Services', href: defaultServices },
+    { ar: 'سابقة أعمالنا', en: 'Portfolio', href: defaultProjects },
+    { ar: 'من نحن وقصتنا', en: 'About Us', href: defaultAbout },
+    { ar: 'تواصل معنا الآن', en: 'Contact Us', href: defaultContact },
   ]
 
-  const portfolioHighlights = [
-    { ar: 'منصة مشاريع التخرج (Saudi GradHub)', en: 'Saudi GradHub Platform', href: defaultProjects },
-    { ar: 'أنظمة الرصد والسلامة الذكية', en: 'Field Safety & Compliance', href: defaultProjects },
-    { ar: 'منصة النوخذة للتعلم الذكي', en: 'Al Nowkhaza AI Agent', href: defaultProjects },
-    { ar: 'نظام تشفير الرسائل (CryptoGuard)', en: 'CryptoGuard Encryption', href: defaultProjects },
-    { ar: 'نظام إدارة الصيدليات (PharmaSync)', en: 'PharmaSync POS & ERP', href: defaultProjects },
-    { ar: 'استعراض كافة الأعمال (+24 مشروع)', en: 'Explore All Work (+24)', href: defaultProjects, isHighlight: true },
-  ]
-
-  const companyLinks = [
-    { ar: 'من نحن وقصة سبيرا كود', en: 'About SperaCode', href: defaultAbout },
-    { ar: 'خطوات العمل بكل بساطة', en: 'How We Work (5 Steps)', href: `${defaultAbout}#methodology` },
-    { ar: 'الضمانات وحقوق الملكية 100%', en: 'Guarantees & 100% IP', href: `${defaultAbout}#guarantees` },
-    { ar: 'الأسئلة الأكثر شيوعاً', en: 'Frequently Asked Questions', href: `${defaultHome}#faq` },
-    { ar: 'تواصل واطلب استشارة مجانية', en: 'Contact & Free Consultation', href: defaultContact },
-  ]
-
-  const techBadges = [
-    'Next.js 16',
-    'React 19',
-    'TypeScript',
-    'Edge Cloud',
-    'Cloudflare Security',
+  const guarantees = [
+    { ar: 'ملكية الكود والتصميم بنسبة 100%', en: '100% Full IP & Code Ownership' },
+    { ar: 'تسليم في الموعد بدون تأخير', en: 'Strict On-Time Delivery' },
+    { ar: 'فترة ضمان ودعم فني مجانية', en: 'Free Post-Launch Warranty' },
+    { ar: 'استشارة فنية وعرض سعر مجاني', en: 'Free Consultation & Quote' },
   ]
 
   const whatsappDirect = buildWhatsAppUrl(
     rtl
-      ? 'مرحبًا SperaCode، أود الاستفسار عن خدماتكم التقنية وبدء مشروع جديد.'
+      ? 'مرحبًا SperaCode، أود الاستفسار عن خدماتكم وبدء مشروع جديد.'
       : 'Hello SperaCode, I would like to inquire about your software engineering services.'
   )
 
@@ -136,80 +113,47 @@ export function SiteFooter({
         </div>
       </div>
 
-      {/* Main Multi-Column Directory */}
+      {/* Main Directory */}
       <div className="container footer-main-content">
-        <div className="footer-elite-grid">
-          {/* Brand & Organization Column */}
+        <div className="footer-elite-grid footer-compact-grid">
+          {/* Brand Column */}
           <div className="footer-col-brand">
             <SperaLogo footer rtl={rtl} homeHref={defaultHome} />
 
             <p className="footer-brand-desc">
               {rtl
-                ? 'سبيرا كود (SperaCode) شركة برمجيات متخصصة في تطوير المواقع السريعة، تطبيقات الموبايل، والمنيو الإلكتروني QR لمساعدتك على تكبير شغلك والوصول لعملاء أكثر.'
-                : 'SperaCode builds fast websites, intuitive mobile apps, and interactive QR menus designed to grow your business and delight your customers.'}
+                ? 'سبيرا كود (SperaCode) شركة برمجيات متخصصة في تطوير المواقع السريعة، تطبيقات الموبايل، والمنيو الإلكتروني الذكي لمساعدتك على تكبير عملك وجلب عملاء أكثر.'
+                : 'SperaCode engineers fast websites, intuitive mobile apps, and interactive QR menus designed to grow your business and delight your customers.'}
             </p>
-
-            {/* Tech Stack Badges */}
-            <div className="footer-tech-stack" aria-label="Tech Stack">
-              {techBadges.map((badge) => (
-                <span key={badge} className="footer-tech-chip">
-                  <Code2 size={11} aria-hidden="true" />
-                  {badge}
-                </span>
-              ))}
-            </div>
-
-            {/* Coverage Markets Tag */}
-            <div className="footer-markets-tag">
-              <Globe size={13} aria-hidden="true" />
-              <span>
-                {rtl
-                  ? 'مقرنا مصر 🇪🇬 • تسليم متكامل للسعودية 🇸🇦 والإمارات 🇦🇪 والكويت 🇰🇼 والخليج والعالم 🌍'
-                  : 'HQ in Egypt 🇪🇬 • Serving KSA 🇸🇦, UAE 🇦🇪, Kuwait 🇰🇼 & Global 🌍'}
-              </span>
-            </div>
           </div>
 
-          {/* Column 2: Services */}
+          {/* Quick Nav Links */}
           <div className="footer-col-nav">
-            <h4>{rtl ? 'الخدمات والحلول' : 'Services & Solutions'}</h4>
+            <h4>{rtl ? 'روابط سريعة' : 'Quick Navigation'}</h4>
             <ul className="footer-links-list">
-              {services.map((s) => (
-                <li key={s.en}>
-                  <Link href={s.href}>{rtl ? s.ar : s.en}</Link>
+              {navLinks.map((link) => (
+                <li key={link.en}>
+                  <Link href={link.href}>{rtl ? link.ar : link.en}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Portfolio Highlights */}
-          <div className="footer-col-portfolio">
-            <h4>{rtl ? 'سابقة الأعمال' : 'Featured Work'}</h4>
-            <ul className="footer-links-list">
-              {portfolioHighlights.map((p) => (
-                <li key={p.en}>
-                  <Link href={p.href} className={p.isHighlight ? 'footer-link-highlight' : ''}>
-                    {rtl ? p.ar : p.en}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Company & Guarantees */}
+          {/* Guarantees & Values */}
           <div className="footer-col-company">
-            <h4>{rtl ? 'الشركة والضمانات' : 'Company & SLA'}</h4>
-            <ul className="footer-links-list">
-              {companyLinks.map((c) => (
-                <li key={c.en}>
-                  <Link href={c.href}>{rtl ? c.ar : c.en}</Link>
+            <h4>{rtl ? 'التزامنا وضماناتنا' : 'Our Guarantees'}</h4>
+            <ul className="footer-links-list footer-guarantees-list">
+              {guarantees.map((g) => (
+                <li key={g.en}>
+                  <CheckCircle2 size={14} className="footer-check-icon" aria-hidden="true" />
+                  <span>{rtl ? g.ar : g.en}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Legal, Security & Preferences Bottom Bar */}
+        {/* Legal & Preferences Bottom Bar */}
         <div className="footer-elite-bottom">
           <div className="footer-copyright-group">
             <span>

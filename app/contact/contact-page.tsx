@@ -445,7 +445,7 @@ ${messageText || '—'}`
         {/* Contact Hero */}
         <section className="contact-hero container">
           <div className="contact-hero-copy">
-            <nav className="breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: '16px' }}>
+            <nav className="breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: '18px' }}>
               <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                 <Home size={14} />
                 <span>{t.home}</span>
@@ -454,10 +454,10 @@ ${messageText || '—'}`
               <span>{t.page}</span>
             </nav>
 
-            <span className="section-kicker">
+            <div className="eyebrow" style={{ marginBottom: '16px' }}>
               <span className="live-dot" />
               {t.kicker}
-            </span>
+            </div>
             <h1>{t.title}</h1>
             <p>{t.intro}</p>
 
