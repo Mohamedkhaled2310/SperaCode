@@ -205,7 +205,7 @@ html[dir="rtl"] .scroll-progress-bar {
   width: 100%;
   z-index: 60;
   border-bottom: 1px solid transparent;
-  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  background: color-mix(in srgb, var(--bg) 95%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
@@ -214,7 +214,7 @@ html[dir="rtl"] .scroll-progress-bar {
 .navbar.scrolled {
   border-color: var(--border);
   box-shadow: 0 4px 20px rgba(11, 19, 41, 0.06);
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  background: color-mix(in srgb, var(--bg) 98%, transparent);
 }
 
 .dark .navbar.scrolled {
@@ -2559,9 +2559,15 @@ html[lang="en"] .marquee-kicker,
   grid-template-columns: minmax(0, 1.25fr) minmax(290px, 0.75fr);
   align-items: start;
   gap: 24px;
+  scroll-margin-top: 100px;
+}
+
+#contact-form {
+  scroll-margin-top: 100px;
 }
 
 .contact-form-card,
+.contact-sidebar-card,
 .contact-direct-card,
 .contact-process-card {
   border: 1px solid var(--border);
@@ -2769,6 +2775,11 @@ html[lang="en"] .marquee-kicker,
 
 .contact-direct-card,
 .contact-process-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
   padding: 26px;
 }
 
@@ -3482,9 +3493,9 @@ html[lang="en"] .marquee-kicker,
     overflow: hidden;
   }
   .footer-elite-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px 12px !important;
-    padding-bottom: 20px;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    padding-bottom: 24px;
   }
   .footer-col-brand {
     grid-column: 1 / -1 !important;
@@ -3507,26 +3518,63 @@ html[lang="en"] .marquee-kicker,
     line-height: 1.4;
   }
   .footer-elite-grid h4 {
-    margin: 0 0 8px;
-    font-size: 12.5px;
+    margin: 0 0 10px;
+    font-size: 13.5px;
+    font-weight: 800;
+  }
+  .footer-col-nav {
+    grid-column: 1 / -1 !important;
+  }
+  .footer-col-nav .footer-links-list {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  .footer-col-nav .footer-links-list li {
+    display: inline-flex !important;
+  }
+  .footer-col-nav .footer-links-list li a {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 7px 14px !important;
+    background: var(--surface-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 999px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--ink) !important;
+    line-height: 1 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.2s ease !important;
+  }
+  .footer-col-nav .footer-links-list li a:hover {
+    border-color: var(--blue) !important;
+    color: var(--blue) !important;
+    background: color-mix(in srgb, var(--blue) 8%, var(--surface-card)) !important;
+    transform: translateY(-1px) !important;
   }
   .footer-col-company {
     grid-column: 1 / -1 !important;
-    padding-top: 12px;
+    padding-top: 14px;
     border-top: 1px dashed var(--border);
   }
   .footer-col-company .footer-links-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .footer-col-company .footer-links-list li {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+    color: var(--muted) !important;
+    line-height: 1.45 !important;
+    white-space: normal !important;
   }
   .footer-links-list {
     gap: 5px;
-  }
-  .footer-links-list li a {
-    font-size: 11.5px;
-    padding-block: 1px;
-    line-height: 1.35;
   }
   .footer-elite-bottom {
     flex-direction: column;
@@ -3596,11 +3644,14 @@ html[lang="en"] .marquee-kicker,
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   }
   .contact-workspace {
-    gap: 20px;
+    gap: 24px;
+    padding-bottom: 96px !important;
+    scroll-margin-top: 100px !important;
   }
   .contact-form-card {
-    padding: 20px 14px;
+    padding: 22px 16px;
     border-radius: var(--radius-md);
+    margin-bottom: 12px;
   }
   .contact-card-heading {
     gap: 12px;
@@ -3640,16 +3691,7 @@ html[lang="en"] .marquee-kicker,
     min-height: 100px;
   }
   .service-selector-pills {
-    gap: 6px;
-    margin-top: 8px;
-  }
-  .service-pill-btn {
-    padding: 6px 11px;
-    font-size: 11.5px;
-    line-height: 1.35;
-    white-space: normal;
-    text-align: start;
-    word-break: break-word;
+    display: none !important;
   }
   .live-message-preview {
     margin-top: 14px;
@@ -3668,22 +3710,33 @@ html[lang="en"] .marquee-kicker,
     padding-inline: 16px;
   }
   .contact-sidebar {
-    gap: 16px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
   }
+  .contact-sidebar-card,
   .contact-direct-card,
   .contact-process-card {
-    padding: 18px 14px;
-    border-radius: var(--radius-md);
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px 16px !important;
+    border-radius: var(--radius-md) !important;
   }
   .contact-direct-card h2,
   .contact-process-card h2 {
-    font-size: 17.5px;
-    margin-bottom: 6px;
+    font-size: 18px !important;
+    margin-bottom: 6px !important;
+    word-break: normal !important;
   }
   .contact-direct-card p,
   .contact-process-card p {
-    font-size: 12.5px;
-    line-height: 1.6;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    word-break: normal !important;
   }
   .contact-channel {
     padding: 11px 12px;
@@ -5865,7 +5918,7 @@ select option {
   margin-top: 4px;
 }
 
-.contact-direct-card {
+.contact-hero-direct-card {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -5879,16 +5932,16 @@ select option {
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.contact-direct-card:hover {
+.contact-hero-direct-card:hover {
   transform: translateY(-2px);
   border-color: var(--blue);
   box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.15);
 }
 
-.contact-direct-card-static {
+.contact-hero-direct-card-static {
   cursor: default;
 }
-.contact-direct-card-static:hover {
+.contact-hero-direct-card-static:hover {
   transform: none;
   border-color: var(--border);
   box-shadow: 0 4px 12px rgba(11, 19, 41, 0.04);
@@ -5971,7 +6024,7 @@ select option {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
   }
-  .contact-direct-card {
+  .contact-hero-direct-card {
     padding: 10px 12px;
   }
 }

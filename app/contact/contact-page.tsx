@@ -686,7 +686,7 @@ ${messageText || '—'}`
 
           {/* Sidebar */}
           <aside className="contact-sidebar">
-            <div className="contact-direct-card">
+            <div className="contact-sidebar-card contact-direct-card">
               <span className="section-kicker">{rtl ? 'قنوات مباشرة' : 'DIRECT CONTACT'}</span>
               <h2>{t.direct}</h2>
               <p>{t.directText}</p>
@@ -750,7 +750,7 @@ ${messageText || '—'}`
               </div>
             </div>
 
-            <div className="contact-process-card">
+            <div className="contact-sidebar-card contact-process-card">
               <span className="section-kicker">{rtl ? 'الخطوات القادمة' : 'NEXT MILESTONES'}</span>
               <h2>{t.stepsTitle}</h2>
               <ol style={{ padding: 0, margin: '18px 0 0', listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '16px' }}>

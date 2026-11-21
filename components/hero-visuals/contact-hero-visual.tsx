@@ -58,7 +58,7 @@ export function ContactHeroVisual({ dark, rtl }: ContactHeroVisualProps) {
           href="https://wa.me/201515327087"
           target="_blank"
           rel="noopener noreferrer"
-          className="contact-direct-card"
+          className="contact-hero-direct-card"
         >
           <div className="contact-direct-icon icon-whatsapp">
             <MessageCircle size={18} />
@@ -74,7 +74,7 @@ export function ContactHeroVisual({ dark, rtl }: ContactHeroVisualProps) {
 
         <a
           href="mailto:info.speracode@gmail.com"
-          className="contact-direct-card"
+          className="contact-hero-direct-card"
         >
           <div className="contact-direct-icon icon-blue">
             <Mail size={18} />
@@ -85,7 +85,7 @@ export function ContactHeroVisual({ dark, rtl }: ContactHeroVisualProps) {
           </div>
         </a>
 
-        <div className="contact-direct-card contact-direct-card-static">
+        <div className="contact-hero-direct-card contact-hero-direct-card-static">
           <div className="contact-direct-icon icon-emerald">
             <Clock size={18} />
           </div>

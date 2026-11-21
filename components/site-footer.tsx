@@ -60,7 +60,7 @@ export function SiteFooter({
   ]
 
   const guarantees = [
-    { ar: 'ملكية الكود والتصميم بنسبة 100%', en: '100% Full IP & Code Ownership' },
+    { ar: 'ملكية تامة للكود والتصميم 100%', en: '100% Full IP & Code Ownership' },
     { ar: 'تسليم في الموعد بدون تأخير', en: 'Strict On-Time Delivery' },
     { ar: 'فترة ضمان ودعم فني مجانية', en: 'Free Post-Launch Warranty' },
     { ar: 'استشارة فنية وعرض سعر مجاني', en: 'Free Consultation & Quote' },
