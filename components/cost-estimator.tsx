@@ -338,7 +338,7 @@ Please advise on the fixed quotation and onboarding steps.`
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>{rtl ? 'إرسال هذه المواصفات واستلام عرض السعر عبر واتساب' : 'Send Scope & Get Detailed Quote on WhatsApp'}</span>
+            <span>{rtl ? 'إرسال المواصفات وعرض السعر عبر واتساب 🚀' : 'Send Scope & Get Quote on WhatsApp 🚀'}</span>
             <MessageCircle size={18} />
           </a>
           <span className="estimator-trust-note">
