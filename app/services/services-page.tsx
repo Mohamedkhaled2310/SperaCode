@@ -370,7 +370,7 @@ export default function ServicesPage({ initialLocale = 'ar' }: ServicesPageProps
       icon: ShieldCheck,
       title: rtl ? 'ملكية الكود والأصول 100%' : '100% IP & Code Ownership',
       desc: rtl
-        ? 'تنتقل إليك كافة حقوق الشيفرة المصدرية والتصاميم بالكامل دون أي قيود أو اشتراكات مخفية.'
+        ? 'تنتقل إليك كافة حقوق الكود المصدري (Source Code) والتصاميم بالكامل دون أي قيود أو اشتراكات مخفية.'
         : 'All intellectual property, source code, and design files transfer entirely to you upon completion.',
     },
     {
@@ -384,7 +384,7 @@ export default function ServicesPage({ initialLocale = 'ar' }: ServicesPageProps
       icon: Sparkles,
       title: rtl ? 'ضمان فني ودعم بعد الإطلاق' : 'Post-Launch Technical Warranty',
       desc: rtl
-        ? 'فترة ضمان مجانية مشمولة مع كل مشروع لضمان استقرار الأداء وخلو الشيفرة من أي أعطال.'
+        ? 'فترة ضمان مجانية مشمولة مع كل مشروع لضمان استقرار الأداء وخلو الكود والبرمجيات من أي أخطاء أو أعطال.'
         : 'Complimentary post-launch warranty included with every delivery to guarantee peak stability.',
     },
     {

@@ -8,7 +8,7 @@ type ComparisonSectionProps = {
 
 const COMPARISON_ROWS = [
   {
-    featureAr: 'ملكية الكود والشيفرة البرمجية',
+    featureAr: 'ملكية الكود المصدري والتصاميم بالكامل (Source Code)',
     featureEn: 'Code & IP Ownership',
     speraAr: 'ملكية تامة 100% لك مع ملفات المشروع، بدون أي اشتراكات متكررة.',
     speraEn: '100% full intellectual property and source code ownership forever.',

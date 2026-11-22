@@ -42,7 +42,7 @@ export const homeFaqs = [
     questionEn: 'Who retains the intellectual property and code ownership?',
     answerEn: 'You do. Full source code, graphic assets, and intellectual property transfer 100% to you upon final settlement.',
     questionAr: 'لمن تعود ملكية الكود والتصميم بعد التسليم؟',
-    answerAr: 'تعود الملكية الفكرية وحقوق الشيفرة البرمجية (Source Code) والتصاميم كاملة بنسبة 100% إلى العميل فور الانتهاء من السداد النهائي.',
+    answerAr: 'تعود الملكية الفكرية وحقوق الكود المصدري (Source Code) والتصاميم كاملة بنسبة 100% إلى العميل فور الانتهاء من السداد النهائي.',
   },
   {
     questionEn: 'Can you upgrade or optimize an existing website or application?',
