@@ -77,7 +77,12 @@ export function createOrganizationSchema() {
     name: SITE_NAME,
     alternateName: [SITE_NAME_AR, 'SperaCode Software', 'سبيرا كود للبرمجيات'],
     url: SITE_URL,
-    logo: `${SITE_URL}/speracode-mark.png`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/favicon-512x512.png`,
+      width: 512,
+      height: 512,
+    },
     image: `${SITE_URL}/home-hero-dark.png`,
     description: 'SperaCode (سبيرا كود) is a premier software development house in Egypt providing custom websites, iOS & Android mobile apps, digital QR menus, AI integrations, and UI/UX design across MENA and globally.',
     priceRange: '$$',
