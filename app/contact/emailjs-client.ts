@@ -6,11 +6,13 @@
 export interface ContactEmailPayload {
   name: string
   phone: string
+  email?: string
   company?: string
-  service: string
+  service?: string
   timeline?: string
   message: string
   summaryText?: string
+  sourcePage?: string
 }
 
 export async function sendViaEmailJS(payload: ContactEmailPayload): Promise<{ success: boolean; error?: string }> {
@@ -23,7 +25,7 @@ export async function sendViaEmailJS(payload: ContactEmailPayload): Promise<{ su
   if (!publicKey) {
     if (typeof window !== 'undefined') {
       console.info(
-        '[EmailJS] Target: info.speracode@gmail.com\nNotice: Set NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in environment variables to enable live EmailJS dispatch.',
+        '[EmailJS] Target: info.speracode@gmail.com\nNotice: Set NEXT_PUBLIC_EMAILJS_PUBLIC_KEY, NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID in environment variables to enable live EmailJS dispatch.',
         payload
       )
     }
@@ -43,12 +45,14 @@ export async function sendViaEmailJS(payload: ContactEmailPayload): Promise<{ su
         template_params: {
           to_email: 'info.speracode@gmail.com',
           from_name: payload.name,
-          reply_to: 'info.speracode@gmail.com',
+          reply_to: payload.email || 'info.speracode@gmail.com',
+          client_email: payload.email || '—',
           phone_number: payload.phone,
           company_name: payload.company || '—',
-          selected_service: payload.service,
+          selected_service: payload.service || '—',
           timeline: payload.timeline || '—',
           message: payload.message,
+          source_page: payload.sourcePage || 'Website Form',
           brief_summary: payload.summaryText || '',
         },
       }),

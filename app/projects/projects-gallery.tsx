@@ -25,6 +25,7 @@ import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
 import { ProjectsHeroVisual } from '@/components/hero-visuals/projects-hero-visual'
 import { CaseStudyModal } from '@/components/case-study-modal'
+import { PortfolioRequestForm } from '@/components/portfolio-request-form'
 import { projects, type PortfolioProject } from './project-data'
 
 type Locale = 'ar' | 'en'
@@ -514,20 +515,8 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         {/* Customer Reviews on Projects Page */}
         <CustomerReviews rtl={rtl} />
 
-        {/* Bottom CTA Card */}
-        <section className="section" style={{ paddingTop: '0' }}>
-          <div className="container">
-            <div className="portfolio-cta-card" data-reveal>
-              <span className="section-kicker">{labels.next}</span>
-              <h2>{labels.cta}</h2>
-              <p>{labels.ctaText}</p>
-              <Link className="button button-primary" href={contactHref}>
-                {labels.start}
-                <ArrowUpRight />
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* Interactive Demo Request Form */}
+        <PortfolioRequestForm rtl={rtl} />
 
         {/* Case Study Modal */}
         <CaseStudyModal
