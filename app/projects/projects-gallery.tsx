@@ -10,10 +10,12 @@ import {
   ArrowUp,
   ArrowUpRight,
   Check,
+  CheckCircle2,
   Home,
   Menu,
   Moon,
   Search,
+  Sparkles,
   Sun,
   X,
 } from 'lucide-react'
@@ -21,8 +23,10 @@ import { SperaLogo } from '@/components/spera-logo'
 import { CustomerReviews } from '@/components/customer-reviews'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsAppFloatingButton } from '@/components/whatsapp-floating-button'
-import { PageHeroVisual } from '../page-hero-visual'
-import { projects } from './project-data'
+import { ProjectsHeroVisual } from '@/components/hero-visuals/projects-hero-visual'
+import { CaseStudyModal } from '@/components/case-study-modal'
+import { PortfolioRequestForm } from '@/components/portfolio-request-form'
+import { projects, type PortfolioProject } from './project-data'
 
 type Locale = 'ar' | 'en'
 const categories = ['All', 'Websites', 'Platforms', 'Business systems'] as const
@@ -40,6 +44,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const [activeCaseStudy, setActiveCaseStudy] = useState<PortfolioProject | null>(null)
 
   const rtl = locale === 'ar'
   const basePath = rtl ? '' : '/en'
@@ -128,7 +133,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         contact: 'اتصل بنا',
         start: 'ابدأ مشروعك',
         breadcrumb: 'الرئيسية',
-        heroTop: 'SPERACODE / سابقة الأعمال',
+        heroTop: 'سابقة أعمالنا',
         heroTitle: (
           <>
             أفكار تتحوّل إلى
@@ -139,16 +144,14 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         heroDesc:
           'استكشف نماذج حقيقية من المواقع والمنصات وتطبيقات الويب وأنظمة إدارة الأعمال التي صممناها وطورناها لعملائنا في مصر والخليج.',
         explore: 'استعرض المشاريع',
-        count: 'مشروعًا منجزًا',
-        categories: 'تصنيفات رئيسية',
-        links: 'روابط وصول حية',
-        intro: 'المعرض الكامل',
-        heading: 'مشاريع تم تسليمها بنجاح',
-        introText: 'شاهد تصاميم حقيقية من واجهات الأنظمة والمواقع، مع إمكانية زيارة وتجربة النسخة الحية لكل مشروع.',
-        projectCount: 'مشاريع مطابقة',
+        intro: 'سجل الأعمال',
+        heading: 'مشاريع تم تنفيذها وتسليمها',
+        introText: 'استعرض نماذج حقيقية من مشاريعنا، مع إمكانية تجربة المواقع النشطة واستكشاف تفاصيل الأنظمة المنفذة.',
+        projectCount: 'مشروعاً في المعرض',
         open: 'زيارة الموقع الحي',
+        completed: 'مشروع تم تنفيذه وتسليمه',
         searchPlaceholder: 'ابحث باسم المشروع أو المجال (مثال: مقاولات، تعليم، متجر)...',
-        note: 'جميع الصور تمثل واجهات حقيقية من مشاريع تم تسليمها لعملائنا. قد تتطلب بعض الأنظمة الإدارية تسجيل دخول.',
+        note: 'جميع الصور تمثل واجهات حقيقية من مشروعات قمنا بتطويرها لعملائنا في مصر والخليج.',
         next: 'مشروعك التالي معنا',
         cta: 'هل لديك فكرة أو متطلب مشابه؟',
         ctaText: 'شاركنا متطلباتك، وسنساعدك في بناء حل رقمي فائق الجودة يخدم أهدافك بدقة.',
@@ -166,7 +169,7 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         contact: 'Contact',
         start: 'Start a project',
         breadcrumb: 'Home',
-        heroTop: 'SPERACODE / PORTFOLIO',
+        heroTop: 'FEATURED PORTFOLIO',
         heroTitle: (
           <>
             Vision turned into
@@ -176,17 +179,15 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         ),
         heroDesc:
           'Explore selected web applications, enterprise platforms, and digital products engineered by SperaCode for market-leading enterprises.',
-        explore: 'Explore gallery',
-        count: 'delivered projects',
-        categories: 'core categories',
-        links: 'live direct demos',
-        intro: 'Portfolio Showcase',
-        heading: 'Commercial projects delivered',
-        introText: 'View authentic interface captures and explore the live websites and demo deployments.',
+        explore: 'Explore portfolio',
+        intro: 'PORTFOLIO SHOWCASE',
+        heading: 'Delivered commercial products',
+        introText: 'Authentic captures from our delivered portfolio, featuring live client websites and specialized enterprise systems.',
         projectCount: 'matching projects',
         open: 'Visit live project',
+        completed: 'Successfully Delivered Solution',
         searchPlaceholder: 'Search by project name or technology (e.g., e-commerce, portal, React)...',
-        note: 'Screenshots depict real commercial deployments. Internal dashboards may require authentication.',
+        note: 'Screenshots depict authentic systems engineered and delivered for our clients.',
         next: 'Your Next Milestone',
         cta: 'Ready to build something exceptional?',
         ctaText: 'Tell us about your upcoming project and let our engineering team shape the optimal software solution.',
@@ -288,16 +289,21 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
           <div className="container projects-hero-inner">
             <div className="projects-hero-layout">
               <div className="projects-hero-copy">
-                <div className="breadcrumb" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                    <Home size={14} />
-                    <span>{labels.breadcrumb}</span>
-                  </Link>
-                  <span aria-hidden="true">/</span>
-                  <span>{labels.work}</span>
-                </div>
+                <div className="hero-kicker-stack">
+                  <nav className="breadcrumb" aria-label="Breadcrumb">
+                    <Link href={homeHref} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <Home size={14} />
+                      <span>{labels.breadcrumb}</span>
+                    </Link>
+                    <span aria-hidden="true">/</span>
+                    <span>{labels.work}</span>
+                  </nav>
 
-                <span className="section-kicker">{labels.heroTop}</span>
+                  <div className="eyebrow">
+                    <span className="live-dot" />
+                    {labels.heroTop}
+                  </div>
+                </div>
                 <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.2rem)', fontWeight: 800, margin: '14px 0', lineHeight: 1.15 }}>
                   {labels.heroTitle}
                 </h1>
@@ -315,22 +321,10 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
                     <ArrowDown aria-hidden="true" />
                   </a>
                 </div>
-
-                <div className="projects-hero-stats">
-                  <span>
-                    <b>{String(projects.length).padStart(2, '0')}+</b> {labels.count}
-                  </span>
-                  <span>
-                    <b>03</b> {labels.categories}
-                  </span>
-                  <span>
-                    <b>100%</b> {labels.links}
-                  </span>
-                </div>
               </div>
 
               <div className="projects-hero-visual">
-                <PageHeroVisual dark={dark} rtl={rtl} />
+                <ProjectsHeroVisual dark={dark} rtl={rtl} />
               </div>
             </div>
           </div>
@@ -341,26 +335,17 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
           <div className="container">
             <div className="portfolio-intro" data-reveal>
               <div>
-                <span className="section-kicker">{labels.intro}</span>
+                <div className="eyebrow" style={{ marginBottom: '12px' }}>
+                  <span className="live-dot" />
+                  {labels.intro}
+                </div>
                 <h2>{labels.heading}</h2>
                 <p>{labels.introText}</p>
               </div>
-              <span className="portfolio-count">
-                {String(filtered.length).padStart(2, '0')} <span>{labels.projectCount}</span>
-              </span>
             </div>
 
             {/* Search and Filters Bar */}
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                gap: '16px',
-                marginBottom: '28px',
-              }}
-            >
+            <div className="portfolio-toolbar">
               <div className="portfolio-filters" role="group" aria-label="Filter categories">
                 {categories.map((category, index) => {
                   const label = categoryLabels[locale][index]
@@ -384,106 +369,130 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
               </div>
 
               {/* Instant Search Bar */}
-              <div
-                style={{
-                  position: 'relative',
-                  width: 'min(100%, 320px)',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
+              <div className="portfolio-search-box">
                 <Search
                   size={16}
-                  style={{
-                    position: 'absolute',
-                    insetInlineStart: '14px',
-                    color: 'var(--muted)',
-                    pointerEvents: 'none',
-                  }}
+                  className="portfolio-search-icon"
                 />
                 <input
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={labels.searchPlaceholder}
-                  style={{
-                    width: '100%',
-                    height: '42px',
-                    paddingInlineStart: '40px',
-                    paddingInlineEnd: '14px',
-                    border: '1px solid var(--border)',
-                    borderRadius: '999px',
-                    background: 'var(--surface-card)',
-                    color: 'var(--ink)',
-                    fontSize: '13px',
-                    outline: 'none',
-                  }}
+                  className="portfolio-search-input"
                 />
               </div>
             </div>
 
             {/* Portfolio Grid */}
             <div className="projects-grid">
-              {filtered.map((project, index) => (
-                <article
-                  className="portfolio-card"
-                  data-reveal
-                  key={project.title}
-                  style={{ '--reveal-delay': `${(index % 3) * 80}ms` } as React.CSSProperties}
-                >
-                  <a
-                    className="portfolio-image"
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${labels.open}: ${project.title}`}
+              {filtered.map((project, index) => {
+                const isLive = Boolean(project.isLive && project.demoUrl)
+                return (
+                  <article
+                    className="portfolio-card"
+                    data-reveal
+                    key={project.title}
+                    style={{ '--reveal-delay': `${(index % 3) * 80}ms` } as React.CSSProperties}
                   >
-                    <Image
-                      src={project.image}
-                      alt={rtl ? project.imageAlt : project.imageAltEn}
-                      width={1000}
-                      height={650}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1050px) 50vw, 380px"
-                      loading="lazy"
-                    />
-                    <span className="portfolio-image-overlay">
-                      <span>
-                        {labels.open}
-                        <ArrowUpRight aria-hidden="true" />
-                      </span>
-                    </span>
-                    <span className="portfolio-type">
-                      {rtl ? project.arCategory : project.category}
-                    </span>
-                  </a>
+                    {isLive ? (
+                      <a
+                        className="portfolio-image"
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${labels.open}: ${project.title}`}
+                      >
+                        <Image
+                          src={project.image}
+                          alt={rtl ? project.imageAlt : project.imageAltEn}
+                          width={1000}
+                          height={650}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1050px) 50vw, 380px"
+                          loading="lazy"
+                        />
+                        <span className="portfolio-image-overlay">
+                          <span>
+                            {labels.open}
+                            <ArrowUpRight aria-hidden="true" />
+                          </span>
+                        </span>
+                        <span className="portfolio-type">
+                          {rtl ? project.arCategory : project.category}
+                        </span>
+                        <span className="portfolio-status-chip is-live">
+                          <span className="live-dot" />
+                          {rtl ? 'موقع نشط' : 'Live site'}
+                        </span>
+                      </a>
+                    ) : (
+                      <div className="portfolio-image portfolio-image-static">
+                        <Image
+                          src={project.image}
+                          alt={rtl ? project.imageAlt : project.imageAltEn}
+                          width={1000}
+                          height={650}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1050px) 50vw, 380px"
+                          loading="lazy"
+                        />
+                        <span className="portfolio-type">
+                          {rtl ? project.arCategory : project.category}
+                        </span>
+                        <span className="portfolio-status-chip is-delivered">
+                          <CheckCircle2 size={13} />
+                          {rtl ? 'مشروع تم تنفيذه' : 'Delivered'}
+                        </span>
+                      </div>
+                    )}
 
-                  <div className="portfolio-card-content">
-                    <div className="portfolio-card-heading">
-                      <span className="portfolio-index">{String(index + 1).padStart(2, '0')}</span>
-                      <h3>{project.title}</h3>
-                      <ArrowUpRight aria-hidden="true" style={{ color: 'var(--blue)' }} />
+                    <div className="portfolio-card-content">
+                      <div className="portfolio-card-heading">
+                        <div className="portfolio-title-group">
+                          <span className="portfolio-index">{String(index + 1).padStart(2, '0')}</span>
+                          <h3>{project.title}</h3>
+                        </div>
+                        {isLive && (
+                          <ArrowUpRight aria-hidden="true" className="portfolio-heading-arrow" />
+                        )}
+                      </div>
+
+                      <p>{rtl ? project.arDescription : project.description}</p>
+
+                      <div className="portfolio-tags">
+                        {project.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+
+                      {isLive ? (
+                        <a
+                          className="portfolio-demo-link"
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {labels.open}
+                          <ArrowUpRight aria-hidden="true" />
+                        </a>
+                      ) : (
+                        <div className="portfolio-delivered-pill">
+                          <CheckCircle2 size={14} />
+                          <span>{labels.completed}</span>
+                        </div>
+                      )}
+
+                      <button
+                        type="button"
+                        className="portfolio-case-study-btn"
+                        onClick={() => setActiveCaseStudy(project)}
+                      >
+                        <Sparkles size={14} />
+                        <span>{rtl ? 'تفاصيل ودراسة حالة المشروع' : 'Case study & details'}</span>
+                      </button>
                     </div>
-
-                    <p>{rtl ? project.arDescription : project.description}</p>
-
-                    <div className="portfolio-tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
-
-                    <a
-                      className="portfolio-demo-link"
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {labels.open}
-                      <ArrowUpRight aria-hidden="true" />
-                    </a>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                )
+              })}
             </div>
 
             <div
@@ -506,20 +515,15 @@ export default function ProjectsGallery({ initialLocale = 'ar' }: { initialLocal
         {/* Customer Reviews on Projects Page */}
         <CustomerReviews rtl={rtl} />
 
-        {/* Bottom CTA Card */}
-        <section className="section" style={{ paddingTop: '0' }}>
-          <div className="container">
-            <div className="portfolio-cta-card" data-reveal>
-              <span className="section-kicker">{labels.next}</span>
-              <h2>{labels.cta}</h2>
-              <p>{labels.ctaText}</p>
-              <Link className="button button-primary" href={contactHref}>
-                {labels.start}
-                <ArrowUpRight />
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* Interactive Demo Request Form */}
+        <PortfolioRequestForm rtl={rtl} />
+
+        {/* Case Study Modal */}
+        <CaseStudyModal
+          project={activeCaseStudy}
+          onClose={() => setActiveCaseStudy(null)}
+          rtl={rtl}
+        />
       </main>
 
       {/* Elite Global Footer */}

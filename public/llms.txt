@@ -1,67 +1,40 @@
 # SperaCode (سبيرا كود)
+> Software Development House & Digital Studio — Egypt & GCC (Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, Oman).
+> Official Domain: https://speracode.com
+> Email: info.speracode@gmail.com
+> Phone & WhatsApp: +201515327087 (Local: 01515327087)
 
-> SperaCode (سبيرا كود) is a premier Egypt-based software development agency and digital product studio. The company specializes in building high-performance web applications, iOS and Android mobile apps, interactive digital QR menus for hospitality, custom AI and chatbot integrations, and human-centered UI/UX design. SperaCode operates remotely, serving businesses and startups across Egypt, Saudi Arabia, the United Arab Emirates, Kuwait, Qatar, the MENA region, and globally in both Arabic and English.
+SperaCode is an elite software engineering company based in Egypt, delivering custom web applications, cross-platform mobile apps (iOS & Android), interactive digital QR menus for restaurants, and business automation / AI agents for forward-thinking enterprises across Egypt and the GCC.
 
-## Primary Official Links
-- [Arabic Homepage (الرئيسية)](/): Complete overview of services, methodology, client testimonials, FAQ, and project initiation.
-- [English Homepage](/en): Complete company overview and services in English.
-- [Arabic Portfolio (أعمالنا)](/projects): Curated collection of delivered commercial web applications, platforms, and client systems with live demo links.
-- [English Portfolio](/en/projects): Selected portfolio with live links, technology stacks, and case studies.
-- [Contact & WhatsApp Inquiry (اتصل بنا)](/contact): Direct project inquiry interface with WhatsApp instant message generator.
-- [English Contact](/en/contact): International project consultation and contact form.
-- [Full LLM Knowledge Base](/llms-full.txt): Comprehensive technical specifications, entity facts, and Q&A context.
-- [XML Sitemap](/sitemap.xml): Search engine and crawler index.
+## Core Guarantees & Philosophy
+- **100% Full IP & Source Code Ownership**: Clients receive complete source code and commercial rights upon project completion. No recurring vendor lock-in or licensing fees.
+- **Strict On-Time Delivery**: Engineered with agile sprints, transparent milestone reporting, and dedicated project management.
+- **Sub-Second Performance**: Next.js, React, Node.js, and cloud architectures optimized for speed (<1s load times) and high Core Web Vitals.
+- **Post-Launch Warranty**: Complimentary post-launch technical warranty and rapid ongoing support via direct WhatsApp and phone.
 
-## Verified Company Facts
-- **Official Name**: SperaCode
-- **Arabic Name**: سبيرا كود (سبيرا كود للبرمجيات)
-- **Headquarters**: Egypt (operates remotely across the Middle East and worldwide)
-- **Official Languages**: Arabic (العربية) and English
-- **Canonical Website**: https://speracode.com
-- **Public Figures**: 50+ projects delivered, 45+ enterprise & SME clients served, 6+ years of specialized industry experience.
-- **Client Satisfaction**: 4.9/5 average rating based on verified customer reviews.
-- **Client Ownership**: 100% intellectual property and full source code ownership transfers to the client upon final settlement.
-- **Support Policy**: Complimentary post-launch warranty and technical support included with every project, with optional monthly/annual SLA maintenance agreements.
+## Primary Services
+- **Custom Web Platforms & Web Apps**: High-speed Next.js platforms, SaaS applications, e-commerce stores, and customer portals.
+- **Mobile App Development**: Native and hybrid iOS & Android applications using modern cross-platform engineering (React Native / Flutter).
+- **Interactive QR Menu (المنيو الرقمي التفاعلي)**: Zero-app QR digital menu with real-time dish updates, high-res photos, and instant WhatsApp ordering for restaurants and cafés.
+- **AI Agents & Business Automation**: Custom AI customer support chatbots, LLM integration, automated workflows, and internal tooling.
+- **UI/UX Product Design**: Figma design systems, interactive prototypes, and human-centric user journeys optimized for conversions.
+- **Custom ERP, POS & Inventory Systems**: Tailored business management platforms engineered to match company workflows.
 
-## Core Services & Capabilities
+## Key Portfolio Projects
+- **Fun Group**: Comprehensive modern platform for sports, leisure, and event management.
+- **Al-Madrasa Al-Kuwaitia (المدرسة الكويتية)**: Educational institution portal with interactive schedules, student resources, and announcements.
+- **HZ Hub**: Commercial business operations system with streamlined management workflows.
 
-### 1. Web Development (تطوير المواقع والمنصات)
-- Custom corporate websites, landing pages, and web portals.
-- Modern e-commerce platforms with fast checkout, payment gateway integrations, and product management.
-- Scalable SaaS applications and internal management dashboards.
-- Tech stack: Next.js (React 19), TypeScript, Node.js, Tailwind CSS, PostgreSQL, Supabase, Firebase.
+## Geographic Coverage
+- **Egypt**: Cairo, Alexandria, Giza, and all governorates.
+- **GCC**: Saudi Arabia (Riyadh, Jeddah, Dammam), United Arab Emirates (Dubai, Abu Dhabi), Kuwait, Qatar, Bahrain, Oman.
+- **International**: Remote delivery worldwide via English and Arabic communication channels.
 
-### 2. Mobile Applications (تطبيقات الجوال)
-- Native-grade mobile applications for iOS (iPhone/iPad) and Android.
-- Cross-platform development using Flutter and React Native for unified performance and faster time-to-market.
-- Real-time notifications, location services, offline capabilities, and secure API synchronization.
-
-### 3. Digital QR Menus for Restaurants & Cafés (المنيو الرقمي QR)
-- Interactive, responsive digital restaurant menus accessed via QR code scans without downloading any app.
-- Full bilingual Arabic & English support with real-time price and item management.
-- Direct-to-WhatsApp ordering system that minimizes printing overhead and wait times.
-
-### 4. Artificial Intelligence & Automation Solutions (حلول الذكاء الاصطناعي والأتمتة)
-- Custom AI chatbots for 24/7 customer support trained on company knowledge.
-- Business process automation, CRM synchronization, and LLM API integrations (OpenAI, Gemini, Anthropic).
-- Intelligent document processing and generative assistants.
-
-### 5. UI/UX Product Design (تصميم واجهات وتجربة المستخدم)
-- Human-centered research, user journey mapping, and wireframing.
-- Modern high-fidelity UI design in Figma with interactive clickable prototypes and comprehensive design systems.
-- Accessibility-compliant, responsive interfaces tailored for conversion.
-
-### 6. Maintenance, Support & Cloud Infrastructure
-- Continuous monitoring, bug triage, security audits, and speed optimization.
-- Corporate email setup, domain registration, SSL certificates, and cloud hosting management (Vercel, AWS, Cloudflare).
-
-## Typical Project Timeline & Pricing Model
-- **Corporate & Portfolio Websites**: 1–3 weeks.
-- **Custom Web Platforms & E-Commerce**: 4–8 weeks.
-- **Mobile Applications**: 6–10 weeks.
-- **Digital QR Menus**: 2–5 days deployment.
-- **Pricing**: Transparent, milestone-based quotes provided upfront after technical discovery, without hidden charges.
-
-## Contact & Direct Channels
-- Inquiries can be initiated through the website contact form which automatically formats a detailed project brief for WhatsApp.
-- International remote collaboration is supported across all time zones.
+## Quick Links
+- Homepage (Arabic): https://speracode.com
+- Homepage (English): https://speracode.com/en
+- Services (خدماتنا): https://speracode.com/services
+- Portfolio (سابقة أعمالنا): https://speracode.com/projects
+- About SperaCode (من نحن): https://speracode.com/about
+- Contact & Instant Brief (تواصل معنا): https://speracode.com/contact
+- Full LLM Knowledge Base: https://speracode.com/llms-full.txt

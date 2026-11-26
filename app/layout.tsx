@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { IBM_Plex_Sans_Arabic, Plus_Jakarta_Sans } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import { createOrganizationSchema, websiteSchema } from './seo-data'
+import { createOrganizationSchema, websiteSchema, createFaqPageSchema } from './seo-data'
 import { SITE_NAME, SITE_NAME_AR, SITE_URL } from './site-config'
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
@@ -95,11 +95,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon-light-32x32.png', sizes: '32x32', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', sizes: '32x32', media: '(prefers-color-scheme: dark)' },
     ],
-    apple: '/apple-icon.png',
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   other: {
     'ai-content-declaration': 'author-verified, production software agency',
@@ -119,6 +124,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const organization = createOrganizationSchema()
+  const faqSchema = createFaqPageSchema('ar')
 
   return (
     <html
@@ -129,6 +135,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       data-scroll-behavior="smooth"
     >
       <head>
+        <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Knowledge Base" />
         <Script
           id="theme-init"
           strategy="beforeInteractive"
@@ -143,7 +150,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@graph': [organization, websiteSchema],
+              '@graph': [organization, websiteSchema, faqSchema],
             }),
           }}
         />

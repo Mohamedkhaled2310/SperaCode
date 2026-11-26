@@ -1,5 +1,5 @@
 import { projects } from './projects/project-data'
-import { SITE_NAME, SITE_NAME_AR, SITE_URL } from './site-config'
+import { SITE_NAME, SITE_NAME_AR, SITE_URL, SITE_EMAIL, SITE_PHONE_INTL } from './site-config'
 
 export const homeFaqs = [
   {
@@ -42,7 +42,7 @@ export const homeFaqs = [
     questionEn: 'Who retains the intellectual property and code ownership?',
     answerEn: 'You do. Full source code, graphic assets, and intellectual property transfer 100% to you upon final settlement.',
     questionAr: 'لمن تعود ملكية الكود والتصميم بعد التسليم؟',
-    answerAr: 'تعود الملكية الفكرية وحقوق الشيفرة البرمجية (Source Code) والتصاميم كاملة بنسبة 100% إلى العميل فور الانتهاء من السداد النهائي.',
+    answerAr: 'تعود الملكية الفكرية وحقوق الكود المصدري (Source Code) والتصاميم كاملة بنسبة 100% إلى العميل فور الانتهاء من السداد النهائي.',
   },
   {
     questionEn: 'Can you upgrade or optimize an existing website or application?',
@@ -77,12 +77,17 @@ export function createOrganizationSchema() {
     name: SITE_NAME,
     alternateName: [SITE_NAME_AR, 'SperaCode Software', 'سبيرا كود للبرمجيات'],
     url: SITE_URL,
-    logo: `${SITE_URL}/speracode-mark.png`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/favicon-512x512.png`,
+      width: 512,
+      height: 512,
+    },
     image: `${SITE_URL}/home-hero-dark.png`,
     description: 'SperaCode (سبيرا كود) is a premier software development house in Egypt providing custom websites, iOS & Android mobile apps, digital QR menus, AI integrations, and UI/UX design across MENA and globally.',
     priceRange: '$$',
-    telephone: '+201000000000',
-    email: 'contact@speracode.com',
+    telephone: SITE_PHONE_INTL,
+    email: SITE_EMAIL,
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'EG',
